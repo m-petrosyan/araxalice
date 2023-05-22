@@ -1,15 +1,37 @@
 <template>
   <main>
-    <header>
-      <div class="header-animation" ref="flicker">
+    <div class="header-animation" ref="flicker">
+      <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
         <img class="animation item2" :src="item2" alt="">
         <img class="animation item3" :src="item3" alt="">
         <img class="animation item4" :src="item4" alt="">
         <img class="animation item5" :src="item5" alt="">
         <img class="animation item6" :src="item6" alt="">
+        <img class="animation item7" :src="item7" alt="">
+        <img class="animation item8" :src="item8" alt="">
+        <img class="animation item9" :src="item9" alt="">
+        <img class="animation item10" :src="item10" alt="">
+        <img class="animation item11" :src="item11" alt="">
+        <img class="animation item12" :src="item12" alt="">
+        <img class="animation item13" :src="item13" alt="">
       </div>
-    </header>
+      <div class="left-side">
+        <img class="animation item1" :src="item1" alt="">
+        <img class="animation item2" :src="item2" alt="">
+        <img class="animation item3" :src="item3" alt="">
+        <img class="animation item4" :src="item4" alt="">
+        <img class="animation item5" :src="item5" alt="">
+        <img class="animation item6" :src="item6" alt="">
+        <img class="animation item7" :src="item7" alt="">
+        <img class="animation item8" :src="item8" alt="">
+        <img class="animation item9" :src="item9" alt="">
+        <img class="animation item10" :src="item10" alt="">
+        <img class="animation item11" :src="item11" alt="">
+        <img class="animation item12" :src="item12" alt="">
+        <img class="animation item13" :src="item13" alt="">
+      </div>
+    </div>
     <div class="content">
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
         ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
@@ -92,9 +114,11 @@ import item10 from '@/assets/images/header_animation/item10.png'
 import item11 from '@/assets/images/header_animation/item11.png'
 import item12 from '@/assets/images/header_animation/item12.png'
 import item13 from '@/assets/images/header_animation/item13.png'
-import item14 from '@/assets/images/header_animation/item14.png'
 
 export default {
+  props: {
+    scroll: Number
+  },
   data() {
     return {
       arax: arax,
@@ -111,20 +135,19 @@ export default {
       item11: item11,
       item12: item12,
       item13: item13,
-      item14: item14,
-      scroll: false
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
     setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3500)
   },
   methods: {
-    handleScroll() {
-      if (window.top.scrollY > 300) this.animation()
-    },
     animation() {
       this.$refs.animation.classList.add('start')
+    }
+  },
+  watch: {
+    scroll(val) {
+      if (val > 300) this.animation()
     }
   },
 }
@@ -285,76 +308,197 @@ main {
     .animation {
       position: absolute;
       //transform: scale(0);
-
-      &.item1 {
-        top: 346px;
-        right: 268px;
-        animation: zoom-transform 3s 6s both;
-        transition: all 3s;
-      }
-
-      &.item2 {
-        top: 402px;
-        right: 296px;
-        animation: zoom-transform 3s 7s both;
-        transition: all 3s;
-      }
-
-      &.item3 {
-        top: 388px;
-        right: 213px;
-        animation: zoom-transform 3s 8s both;
-        transition: all 3s;
-      }
-
-      &.item4 {
-        top: 216px;
-        right: 154px;
-        animation: zoom-transform 3s 8.5s both;
-        transition: all 3s;
-      }
-
-      &.item5 {
-        top: 291px;
-        right: 134px;
-        animation: zoom-transform 4s 7s both;
-        transition: all 3s;
-      }
-
-      &.item6 {
-        top: 225px;
-        right: 250px;
-        animation: zoom-transform 4s 8s both;
-        transition: all 3s;
-      }
-
-
-      @keyframes zoom-transform {
-        0% {
-          transform: scale(0);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-      //&.rotate-r {
-      //  animation: rotate-r 3s 10s infinite;
-      //}
-
-      //@keyframes rotate-r {
-      //  0% {
-      //    transform: rotate(0deg);
-      //  }
-      //  50% {
-      //    transform: rotate(90deg);
-      //  }
-      //  100% {
-      //    transform: rotate(0deg);
-      //  }
-      //}
     }
 
+    .left-side {
+      .item1 {
+        top: 346px;
+        left: 274px;
+        animation: zoom-transform-left 6s 7s both;
+      }
 
+      .item2 {
+        top: 402px;
+        left: 296px;
+        animation: zoom-transform-left 6s 8s both;
+      }
+
+      .item3 {
+        top: 404px;
+        left: 213px;
+        animation: zoom-transform-left 6s 8s both;
+      }
+
+      .item4 {
+        top: 216px;
+        left: 154px;
+        animation: zoom-transform-left 6s 6s both;
+      }
+
+      .item5 {
+        top: 291px;
+        left: 134px;
+        animation: zoom-transform-left 6s 9s both;
+      }
+
+      .item6 {
+        top: 225px;
+        left: 250px;
+        animation: zoom-transform-left 6s 6s both;
+      }
+
+      .item7 {
+        top: 164px;
+        left: 284px;
+        animation: zoom-transform-left 6s 8s both;
+      }
+
+      .item8 {
+        top: 500px;
+        left: 397px;
+        animation: zoom-transform-left 6s 7s both;
+      }
+
+      .item9 {
+        top: 345px;
+        left: 198px;
+        animation: zoom-transform-left 6s 6s both;
+      }
+
+      .item10 {
+        top: 361px;
+        left: 234px;
+        animation: zoom-transform-left 6s 9s both;
+      }
+
+      .item11 {
+        top: 260px;
+        left: 199px;
+        animation: zoom-transform-left 6s 7s both;
+      }
+
+      .item12 {
+        top: 242px;
+        left: 243px;
+        animation: zoom-transform-left 6s 8s both;
+      }
+
+      .item13 {
+        top: 191px;
+        left: 204px;
+        animation: zoom-transform-left 6s 9s both;
+      }
+    }
+
+    .right-side {
+
+      .item1 {
+        top: 346px;
+        right: 260px;
+        animation: zoom-transform-right 6s 6s both;
+      }
+
+      .item2 {
+        top: 402px;
+        right: 296px;
+        animation: zoom-transform-right 6s 7s both;
+      }
+
+      .item3 {
+        top: 404px;
+        right: 213px;
+        animation: zoom-transform-right 6s 8s both;
+      }
+
+      .item4 {
+        top: 216px;
+        right: 154px;
+        animation: zoom-transform-right 6s 8.5s both;
+      }
+
+      .item5 {
+        top: 291px;
+        right: 134px;
+        animation: zoom-transform-right 6s 7s both;
+      }
+
+      .item6 {
+        top: 225px;
+        right: 250px;
+        animation: zoom-transform-right 6s 8s both;
+      }
+
+      .item7 {
+        top: 164px;
+        right: 284px;
+        animation: zoom-transform-right 6s 9s both;
+      }
+
+      .item8 {
+        top: 500px;
+        right: 397px;
+        animation: zoom-transform-right 6s 8s both;
+      }
+
+      .item9 {
+        top: 345px;
+        right: 198px;
+        animation: zoom-transform-right 6s 8s both;
+      }
+
+      .item10 {
+        top: 361px;
+        right: 234px;
+        animation: zoom-transform-right 6s 8s both;
+      }
+
+      .item11 {
+        top: 260px;
+        right: 199px;
+        animation: zoom-transform-right 6s 6s both;
+      }
+
+      .item12 {
+        top: 242px;
+        right: 243px;
+        animation: zoom-transform-right 6s 9s both;
+      }
+
+      .item13 {
+        top: 191px;
+        right: 204px;
+        animation: zoom-transform-right 6s 7s both;
+      }
+    }
+
+    @keyframes zoom-transform-left {
+      0% {
+        transform: scale(0);
+      }
+      70% {
+        transform: scaleX(-1);
+      }
+      80% {
+        transform: scaleX(1);
+      }
+      100% {
+        transform: scaleX(-1);
+      }
+    }
+    @keyframes zoom-transform-right {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1);
+      }
+      80% {
+        transform: scaleX(-1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
   }
 
   .content {
