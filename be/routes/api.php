@@ -11,8 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Api\PortfolioController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:api',])->group(function () {

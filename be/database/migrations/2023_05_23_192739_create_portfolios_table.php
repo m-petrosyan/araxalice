@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->text('file');
-            $table->string('title');
+            $table->string('file');
+            $table->string('title')->nullable();
             $table->timestamps();
         });
     }
