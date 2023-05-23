@@ -147,7 +147,7 @@ export default {
   },
   watch: {
     scroll(val) {
-      if (val > 300) this.animation()
+      if (val > 500) this.animation()
     }
   },
 }

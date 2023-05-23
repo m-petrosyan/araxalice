@@ -1,4 +1,47 @@
-@import 'vars.css';
+@import 'vars.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  /*font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,*/
+  font-family: 'Sdfortimburtondemo', Roboto, Oxygen, Ubuntu,
+  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: var(--m);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+body::-webkit-scrollbar {
+  width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--vt-c-black);
+  border-radius: 100px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vt-c-indigo);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--vt-c-black-mute);
+
+}
 
 #app {
   margin: 0 auto;
@@ -66,7 +109,6 @@
 
   #main-content {
 
-
     &:after {
       content: '';
       width: 105%;
@@ -92,8 +134,11 @@
     section {
       min-height: calc(100vh - var(--navbar-size));
       z-index: 1;
-      max-width: 1280px;
+      width: var(--lg);
       margin: 50px auto auto auto;
+      @media (width <= $lg) {
+        width: var(--md);
+      }
     }
   }
 }
