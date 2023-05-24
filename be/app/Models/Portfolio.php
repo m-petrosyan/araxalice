@@ -24,11 +24,15 @@ class Portfolio extends Model
     }
 
     /**
-     * @param $value
      * @return string
      */
     public function getImageAttribute(): string
     {
-        return asset('portfolio/'.$this->file);
+        return asset($this->file);
+    }
+
+    public function getFileAttribute($value): string
+    {
+        return 'portfolio/'.$value;
     }
 }
