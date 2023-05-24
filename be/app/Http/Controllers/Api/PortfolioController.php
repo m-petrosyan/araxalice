@@ -38,11 +38,13 @@ class PortfolioController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  PortfolioCreateRequest  $request
-     * @return void
+     * @return Response
      */
-    public function store(PortfolioCreateRequest $request): void
+    public function store(PortfolioCreateRequest $request): Response
     {
         $this->portfolioService->create($request->validated());
+
+        return response()->noContent();
     }
 
     /**
@@ -68,7 +70,7 @@ class PortfolioController extends Controller
     public function destroy(Portfolio $portfolio): Response
     {
         $this->portfolioService->destroy($portfolio);
-        
+
         return response()->noContent();
     }
 }

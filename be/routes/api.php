@@ -11,12 +11,16 @@
 |
 */
 
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\PortfolioController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('portfolio', [PortfolioController::class, 'index']);
+Route::post('contact', [ContactController::class, 'store']);
+
 Route::middleware(['auth:api',])->group(function () {
     Route::get('user', [UserController::class, 'auth']);
     Route::put('user', [UserController::class, 'update']);
-    Route::resource('portfolio', PortfolioController::class)->only('index', 'store', 'update', 'destroy');
+    Route::resource('portfolio', PortfolioController::class)->only('store', 'update', 'destroy');
 });
