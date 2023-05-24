@@ -1,15 +1,12 @@
-import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from "@/views/AboutView.vue";
-import NotFound from "@/views/NotFound.vue";
-import ContactView from "@/views/ContactView.vue";
+import {createRouter, createWebHistory} from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 import PortfolioView from "@/views/PortfolioView.vue";
-
-const baseUrl = import.meta.env.BASE_URL
-const history = import.meta.env.SSR ? createMemoryHistory(baseUrl) : createWebHistory(baseUrl)
+import AboutView from "@/views/AboutView.vue";
+import ContactView from "@/views/ContactView.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const router = createRouter({
-    history,
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',

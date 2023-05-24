@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\PortfolioCreateRequest;
+use App\Http\Requests\Portfolio\PortfolioGetRequest;
+use App\Http\Requests\Portfolio\PortfolioUpdateRequest;
+use App\Http\Resources\Portfolio\PortfolioCollection;
 use App\Models\Portfolio;
 use App\Services\PortfolioService;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PortfolioController extends Controller
 {
@@ -19,10 +22,16 @@ class PortfolioController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @param  PortfolioGetRequest  $request
+     * @return PortfolioCollection
      */
-    public function index()
+    public function index(PortfolioGetRequest $request): PortfolioCollection
     {
-        //
+        return new PortfolioCollection(
+            Portfolio::orderBy('id', 'desc')
+                ->paginate($request->validated()['limit'] ?? 20)
+        );
     }
 
     /**
@@ -37,26 +46,29 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
+     *
+     * @param  PortfolioUpdateRequest  $request
+     * @param  Portfolio  $portfolio
+     * @return Response
      */
-    public function update(Request $request, Portfolio $portfolio)
+    public function update(PortfolioUpdateRequest $request, Portfolio $portfolio): Response
     {
-        //
+        $this->portfolioService->update($portfolio, $request->validated());
+
+        return response()->noContent();
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  Portfolio  $portfolio
+     * @return Response
      */
-    public function destroy(Portfolio $portfolio)
+    public function destroy(Portfolio $portfolio): Response
     {
-        //
+        $this->portfolioService->destroy($portfolio);
+        
+        return response()->noContent();
     }
 }

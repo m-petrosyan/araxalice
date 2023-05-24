@@ -136,6 +136,7 @@
       <path value="$PROJECT_DIR$/be/vendor/league/uri-interfaces" />
       <path value="$PROJECT_DIR$/be/vendor/psr/clock" />
       <path value="$PROJECT_DIR$/be/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/be/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

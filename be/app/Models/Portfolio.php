@@ -22,4 +22,13 @@ class Portfolio extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getImageAttribute(): string
+    {
+        return asset('portfolio/'.$this->file);
+    }
 }

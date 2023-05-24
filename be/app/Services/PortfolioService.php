@@ -50,4 +50,25 @@ class PortfolioService
             $constraint->upsize();
         });
     }
+
+    /**
+     * @param $portfolio
+     * @param $attributes
+     * @return void
+     */
+    public function update($portfolio, $attributes): void
+    {
+        $portfolio->update($attributes);
+    }
+
+    /**
+     * @param $portfolio
+     * @return void
+     */
+    public function destroy($portfolio): void
+    {
+        Storage::disk('public')->delete('portfolio/'.$portfolio->file);
+
+        $portfolio->delete();
+    }
 }
