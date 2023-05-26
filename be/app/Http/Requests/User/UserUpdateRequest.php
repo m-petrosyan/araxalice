@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -25,7 +26,16 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['nullable', 'min:2'],
             'email' => ['nullable', 'email', 'unique:users,email,'.auth()->id(), 'max:100'],
-            'password' => ['nullable', 'min:8'],
+            'password_current' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if (!Hash::check($value, auth()->user()->password)) {
+                        $fail('Current Password is Wrong');
+                    }
+                },
+            ],
+            'password' => ['required_with:password_current', 'min:8'],
+            'password_re' => ['required_with:password_current', 'same:password'],
         ];
     }
 }

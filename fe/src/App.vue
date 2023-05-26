@@ -1,10 +1,5 @@
 <template>
-  <div id="main-content">
-    <TopNavbar :scroll="scroll"/>
-    <section>
-      <RouterView :scroll="scroll"/>
-    </section>
-  </div>
+  <RouterView :scroll="scroll"/>
 </template>
 
 <script>

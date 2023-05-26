@@ -10,6 +10,8 @@ class UserService
      */
     public function update(array $attributes): void
     {
+        unset($attributes['password_current'], $attributes['password_re']);
+
         auth()->user()->update($attributes);
     }
 }
