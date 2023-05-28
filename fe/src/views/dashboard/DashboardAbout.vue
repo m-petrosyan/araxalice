@@ -1,8 +1,8 @@
 <template>
   <div class="db-about">
     <medium-editor
-        v-model="content"
-        :prefill="content"
+        v-model="about"
+        :prefill="about.text"
         :options="options"
         :onChange="onChange"
         :hideImage="true"
@@ -27,11 +27,9 @@ export default {
             'bold',
             'italic',
             'underline',
-            'quote',
             'h4',
             'h5',
             'h6',
-            'pre',
             'unorderedlist',
           ]
         }
@@ -41,6 +39,14 @@ export default {
   methods: {
     onChange(val) {
       console.log(val)
+    }
+  },
+  created() {
+    this.$store.dispatch('getAbout')
+  },
+  computed: {
+    about() {
+      return this.$store.getters.getAbout
     }
   },
   components: {
@@ -56,8 +62,14 @@ export default {
     color: white;
     font-size: var(--size-m);
     padding: 15px !important;
+    min-width: 200px;
+    min-height: 200px;
 
     .editor {
+      &:focus {
+        outline: none;
+      }
+
       b {
         font-weight: bold;
       }
