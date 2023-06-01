@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\About;
+namespace App\Http\Resources\Portfolio;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AboutResource extends JsonResource
+class PortfolioCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,9 @@ class AboutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'text' => $this->text ?? '',
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
         ];
     }
 }

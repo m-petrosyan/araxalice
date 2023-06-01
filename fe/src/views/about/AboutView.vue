@@ -1,8 +1,8 @@
 <template>
-  <div class="about">
+  <section class="about">
     <h1>This is an about page</h1>
     <div v-html="about?.text"/>
-  </div>
+  </section>
 </template>
 <script>
 export default {

@@ -8,6 +8,7 @@ use App\Http\Requests\Portfolio\PortfolioGetRequest;
 use App\Http\Requests\Portfolio\PortfolioUpdateRequest;
 use App\Http\Resources\Portfolio\PortfolioCollection;
 use App\Models\Portfolio;
+use App\Models\PortfolioCategory;
 use App\Services\PortfolioService;
 use Illuminate\Http\Response;
 
@@ -38,11 +39,12 @@ class PortfolioController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  PortfolioCreateRequest  $request
+     * @param  PortfolioCategory  $portfolioCategory
      * @return Response
      */
-    public function store(PortfolioCreateRequest $request): Response
+    public function store(PortfolioCreateRequest $request, PortfolioCategory $portfolioCategory): Response
     {
-        $this->portfolioService->create($request->validated());
+        $this->portfolioService->create($portfolioCategory->id, $request->validated());
 
         return response()->noContent();
     }

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/other/logo.png'
 
 export default {
   name: "TopNavbar",

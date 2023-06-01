@@ -11,6 +11,7 @@ class Portfolio extends Model
     use HasFactory;
 
     protected $fillable = [
+        'portfolio_id',
         'title',
         'file',
     ];

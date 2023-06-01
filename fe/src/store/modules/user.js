@@ -14,7 +14,7 @@ export default {
             sessionStorage.setItem('token', data)
         },
         setAuthError(state, data) {
-            state.userError = data
+            state.authError = data
         },
         setAuth(state, data) {
             state.auth = data
@@ -30,10 +30,13 @@ export default {
                 client_secret: import.meta.env.VITE_APP_CLIENT_SECRET
             })
                 .then(response => commit("setToken", response.access_token))
-                .catch(error => Promise.reject(error));
+                .catch(error => {
+                    commit('setAuthError', error.message)
+                    return Promise.reject(error)
+                });
         },
         auth({commit}) {
-            return getRequest('/user/auth', '')
+            return getRequest('/user', '')
                 .then(response => commit("setAuth", response.data))
                 .catch(error => {
                     sessionStorage.removeItem('token')

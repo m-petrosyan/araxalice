@@ -1,25 +1,30 @@
 <template>
-  <div class="db-about">
-    <medium-editor
-        v-model="about"
-        :prefill="about.text"
-        :options="options"
-        :onChange="onChange"
-        :hideImage="true"
-        :hideGist="true"
-        :hideVideo="true"
-    />
-    <button class="block mx-auto submit" @click="save" :disabled="loading">Login</button>
+  <div class="db-about" v-if="about">
+    <div v-if="!loading" class="form">
+      <medium-editor
+          v-model="about"
+          :prefill="about.text"
+          :options="options"
+          :onChange="onChange"
+          :hideImage="true"
+          :hideGist="true"
+          :hideVideo="true"
+      />
+      <button class="block mx-auto submit" @click="save" :disabled="loading">save</button>
+    </div>
+    <PreloaderComponent v-else/>
   </div>
 </template>
 
 <script>
 import Editor from 'vuejs-medium-editor'
+import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 
 export default {
   name: "DashboardAbout",
   data() {
     return {
+      loading: false,
       content: 'lorem sssssssssssssssssss',
       options: {
         toolbar: {
@@ -50,6 +55,7 @@ export default {
     }
   },
   components: {
+    PreloaderComponent,
     'medium-editor': Editor,
   },
 }

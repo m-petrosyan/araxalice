@@ -12,10 +12,11 @@ class PortfolioService
     protected string $dir = 'portfolio/';
 
     /**
+     * @param  int  $categoryId
      * @param  array  $attribues
      * @return void
      */
-    public function create(array $attribues): void
+    public function create(int $categoryId, array $attribues): void
     {
         $items = $attribues;
 
@@ -35,7 +36,8 @@ class PortfolioService
 
             Storage::disk('public')->put($this->dir.$filename, $originalImage->encode());
 
-            auth()->user()->portfolio()->create(['title' => $title, 'file' => $filename,]);
+            auth()->user()->portfolio()->create(['title' => $title, 'file' => $filename, 'portfolio_id' => $categoryId]
+            );
         }
     }
 

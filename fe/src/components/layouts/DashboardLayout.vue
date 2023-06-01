@@ -1,7 +1,9 @@
 <template>
   <div class="dashboard">
     <DashboardNavbar/>
-    <RouterView/>
+    <main>
+      <RouterView/>
+    </main>
   </div>
 </template>
 

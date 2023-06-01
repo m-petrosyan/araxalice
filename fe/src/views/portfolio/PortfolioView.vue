@@ -1,86 +1,10 @@
 <template>
-  <div class="grid">
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-5"
-         style="background-image: url()"></div>
-    <div class="card c-2"
-         style="background-image: url()"></div>
-    <div class="card c-5"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-5"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-1"
-         style="background-image: url()"></div>
-    <div class="card square c-3"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-2"
-         style="background-image: url()"></div>
-    <div class="card c-5"
-         style="background-image: url()"></div>
-    <div class="card c-2"
-         style="background-image: url()"></div>
-    <div class="card c-3"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card square c-3"
-         style="background-image: url()"></div>
-    <div class="card c-3"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-1"
-         style="background-image: url()"></div>
-    <div class="card c-1"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-5"
-         style="background-image: url()"></div>
-    <div class="card c-5"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-1"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-1"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card square c-2"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card square c-4"
-         style="background-image: url()"></div>
-    <div class="card square c-5"
-         style="background-image: url()"></div>
-    <div class="card square c-2"
-         style="background-image: url()"></div>
-    <div class="card c-3"
-         style="background-image: url()"></div>
-    <div class="card c-5"
-         style="background-image: url()"></div>
-    <div class="card c-4"
-         style="background-image: url()"></div>
-    <div class="card square c-1"
-         style="background-image: url()"></div>
-    <div class="card c-1"
-         style="background-image: url()"></div>
-    <div class="card rectangle c-2"
-         style="background-image: url()"></div>
+  <div class="wrapper">
+    <div class="img" v-for="item in images" :key="item">
+      <img :src="item" alt="img">
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -96,6 +20,29 @@ export default {
     return {
       images: [
         image1,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        image4,
+        image5,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        image1,
         image2,
         image3,
         image4,
@@ -108,50 +55,19 @@ export default {
 
 <style scoped lang="scss">
 
-.grid {
+.wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  grid-gap: 2px;
-  grid-auto-rows: min-max(80px, auto);
-  grid-auto-flow: dense;
+  gap: 10px;
+  grid-template-columns: auto auto auto auto;
 
-  .c-1 {
-    background: #1e3136;
-  }
+  .img {
+    height: 300px;
 
-  .c-2 {
-    background: #60584e;
-  }
-
-  .c-3 {
-    background: #313131;
-  }
-
-  .c-4 {
-    background: #60584e;
-  }
-
-  .c-5 {
-    background: #545454;
-  }
-
-  .card {
-    min-height: 100px;
-    background-size: cover;
-    background-position: 50% 50%;
-  }
-
-  .square {
-    grid-column-end: span 2;
-    grid-row-end: span 2;
-    min-height: 200px;
-  }
-
-  .rectangle {
-    grid-column-end: span 3;
-    grid-row-end: span 3;
-    min-height: 400px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 }
-
 </style>

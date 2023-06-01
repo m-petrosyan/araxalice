@@ -1,10 +1,9 @@
 <template>
   <div id="main-content">
     <TopNavbar :scroll="scroll"/>
-
-    <section>
+    <main>
       <RouterView :scroll="scroll"/>
-    </section>
+    </main>
   </div>
 </template>
 

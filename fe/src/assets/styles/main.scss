@@ -57,7 +57,7 @@ body::-webkit-scrollbar-thumb {
       left: 0;
       padding-left: 100px;
       opacity: .08;
-      background: url('@/assets/images/scratch.png') repeat center center;
+      background: url('@/assets/images/other/scratch.png') repeat center center;
       animation: scratch 0.45s steps(1) infinite;
 
       @keyframes scratch {
@@ -115,7 +115,7 @@ body::-webkit-scrollbar-thumb {
       top: 0;
       left: -5%;
       opacity: .11;
-      background: url('@/assets/images/grain.jpg') repeat repeat;
+      background: url('@/assets/images/other/grain.jpg') repeat repeat;
       background-size: 100%;
       animation: grain 2s steps(1) infinite;
 
@@ -129,7 +129,7 @@ body::-webkit-scrollbar-thumb {
       }
     }
 
-    section {
+    main {
       min-height: calc(100vh - var(--navbar-size) - var(--section-top));
       z-index: 1;
       width: var(--lg);
@@ -153,14 +153,35 @@ a {
   }
 }
 
-input[type=submit] {
-  cursor: pointer;
-}
 
-.submit {
-  border: none;
-  color: #636464;
-  height: 40px;
-  width: 150px;
-  background-color: var(--vt-gray-black);
+.form-group {
+  &:not(:first-child) {
+    margin-top: 30px;
+  }
+
+  input, textarea {
+    background-color: var(--vt-gray-black);
+    border: none;
+    width: 100%;
+    min-height: 40px;
+    padding-left: 10px;
+    resize: vertical;
+    color: white;
+  }
+
+  textarea {
+    padding-top: 10px;
+  }
+
+  input[type=submit] {
+    cursor: pointer;
+  }
+
+  .submit {
+    border: none;
+    color: #636464;
+    height: 40px;
+    min-width: 150px;
+    background-color: var(--vt-gray-black);
+  }
 }

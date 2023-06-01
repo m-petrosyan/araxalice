@@ -59,9 +59,9 @@ $sm: 428px;
 
   --navbar-size: 60px;
 
-  --lg: 1280px;
-  --md: 720px;
-  --sm: 428px;
+  --lg: #{$lg};
+  --md: #{$md};
+  --sm: #{$sm};
 
   --color-background: var(--vt-c-black);
   --color-background-soft: var(--vt-c-black-soft);

@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 export default {
   name: "ErrorMessages",
   props: {
@@ -27,5 +28,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.messages {
+  border: 2px solid #dd4c39;
+  color: #dd4c39;
+  display: inline-block;
+  padding: 10px;
+}
 </style>

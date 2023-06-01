@@ -11,6 +11,10 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', () => this.scroll = window.top.scrollY);
+
+    if (sessionStorage.getItem('token')) {
+      this.$store.dispatch('auth').catch(() => this.$router.push({name: 'auth'}))
+    }
   },
   methods: {}
 }
@@ -18,5 +22,3 @@ export default {
 <style lang="scss">
 
 </style>
-<script setup>
-import TopNavbar from "@/components/nav/TopNavbar.vue";</script>

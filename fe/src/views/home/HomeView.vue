@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <section>
     <div class="header-animation" ref="flicker">
       <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
@@ -96,7 +96,7 @@
       </p>
     </div>
     <img class="scrol-animation an1" ref="animation" :src="item6" alt="">
-  </main>
+  </section>
 </template>
 
 <script>
@@ -153,7 +153,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-main {
+section {
   position: relative;
 
   .header-animation {

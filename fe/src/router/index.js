@@ -9,6 +9,7 @@ import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
 import ClientLayout from "@/components/layouts/ClientLayout.vue";
 import DashboardSettings from "@/views/dashboard/DashboardSettings.vue";
 import DashboardAbout from "@/views/dashboard/DashboardAbout.vue";
+import AuthPage from "@/views/auth/AuthPage.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
                     component: ContactView
                 },
                 {
+                    path: '/login',
+                    name: 'auth',
+                    component: AuthPage
+                },
+                {
                     path: '/:pathMatch(.*)*',
                     name: '404',
                     component: NotFound
@@ -47,6 +53,7 @@ const router = createRouter({
         {
             path: '/dashboard',
             component: DashboardLayout,
+            meta: {requiresAuth: true},
             children: [
                 {
                     path: 'portfolio',
@@ -67,5 +74,24 @@ const router = createRouter({
         },
     ]
 })
+router.beforeEach((to, from, next) => {
 
+    console.log(to, from, next)
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // check if the user is authenticated
+        if (!sessionStorage.getItem('token')) {
+            // redirect to the login page if not authenticated
+            next({
+                name: 'auth',
+                query: {redirect: to.fullPath}
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+
+})
 export default router

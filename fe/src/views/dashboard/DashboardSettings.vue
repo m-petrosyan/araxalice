@@ -18,7 +18,7 @@
         <input type="password" v-model="form.password_re" placeholder="repeat password">
       </div>
       <div class="form-group">
-        <button class="block mx-auto submit" @click="save" :disabled="loading">Login</button>
+        <button class="block mx-auto submit" @click="save" :disabled="loading">Save</button>
       </div>
     </form>
   </div>
@@ -92,24 +92,8 @@ export default {
   width: 320px;
   margin-top: 50px;
 
-  .form-group {
-    &:not(:first-child) {
-      margin-top: 30px;
-    }
-
-    input, textarea {
-      background-color: var(--vt-gray-black);
-      border: none;
-      width: 100%;
-      min-height: 40px;
-      padding-left: 10px;
-      resize: vertical;
-      color: white;
-    }
-
-    textarea {
-      padding-top: 10px;
-    }
+  .submit {
+    width: 100%;
   }
 }
 </style>

@@ -48,6 +48,14 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
+    public function portfolioCategory(): HasMany
+    {
+        return $this->hasMany(PortfolioCategory::class);
+    }
+
+    /**
+     * @return HasMany
+     */
     public function portfolio(): HasMany
     {
         return $this->hasMany(Portfolio::class);
