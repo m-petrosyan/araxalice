@@ -10,6 +10,13 @@
         <router-link :to="{name:'portfolio'}">
           Portfolio
         </router-link>
+        <ul class="sub-menu">
+          <li v-for="item in categories" :key="item.id">
+            <router-link :to="{name:'portfolio-category',params:{id: item.id}}">
+              {{ item.name }}
+            </router-link>
+          </li>
+        </ul>
       </li>
       <li class="item">
         <router-link :to="{name:'home'}">
@@ -49,6 +56,14 @@ export default {
       val > this.transformLimit ? this.$refs.menu.classList.add('scroll') : this.$refs.menu.classList.remove('scroll')
     }
   },
+  created() {
+    this.$store.dispatch('getPortfolioCategories')
+  },
+  computed: {
+    categories() {
+      return this.$store.getters.getPortfolioCategories
+    }
+  }
 }
 </script>
 
@@ -63,6 +78,13 @@ nav {
   &.scroll {
     background-color: #22222294;
     font-size: var(--size-xl);
+
+    .item {
+      .sub-menu {
+        background-color: #22222294;
+        backdrop-filter: blur(5px);
+      }
+    }
 
     .logo {
       transform: rotate(180deg);
@@ -82,6 +104,24 @@ nav {
       width: 20%;
       text-align: center;
       list-style: none;
+
+      &:hover {
+        .sub-menu {
+          opacity: 1;
+          visibility: visible;
+          height: auto;
+        }
+      }
+
+      .sub-menu {
+        overflow: hidden;
+        transition: 1s;
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        list-style: none;
+        padding-left: 0;
+      }
 
       a {
         transition: .5s;
@@ -118,7 +158,6 @@ nav {
           opacity: 1;
         }
       }
-
     }
   }
 }

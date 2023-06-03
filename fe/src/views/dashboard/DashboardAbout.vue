@@ -1,8 +1,9 @@
 <template>
   <div class="db-about" v-if="about">
+    <ErrorMessages :serverError="error"/>
     <div v-if="!loading" class="form">
       <medium-editor
-          v-model="about"
+          v-model="content"
           :prefill="about.text"
           :options="options"
           :onChange="onChange"
@@ -10,7 +11,9 @@
           :hideGist="true"
           :hideVideo="true"
       />
-      <button class="block mx-auto submit" @click="save" :disabled="loading">save</button>
+      <div class="form-group">
+        <button class="block mx-auto submit" @click="save" :disabled="loading">save</button>
+      </div>
     </div>
     <PreloaderComponent v-else/>
   </div>
@@ -19,13 +22,14 @@
 <script>
 import Editor from 'vuejs-medium-editor'
 import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
+import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 
 export default {
   name: "DashboardAbout",
   data() {
     return {
+      content: '',
       loading: false,
-      content: 'lorem sssssssssssssssssss',
       options: {
         toolbar: {
           buttons: [
@@ -42,19 +46,29 @@ export default {
     }
   },
   methods: {
+    save() {
+      this.$store.dispatch('updateAbout', {text: this.content})
+    },
     onChange(val) {
-      console.log(val)
+      this.content = val
     }
   },
   created() {
     this.$store.dispatch('getAbout')
   },
+  mounted() {
+    this.content = this.about?.text
+  },
   computed: {
     about() {
       return this.$store.getters.getAbout
+    },
+    error() {
+      return this.$store.getters.getAboutError
     }
   },
   components: {
+    ErrorMessages,
     PreloaderComponent,
     'medium-editor': Editor,
   },
@@ -87,7 +101,7 @@ export default {
   }
 
   .submit {
-    margin-top: 30px;
+
   }
 }
 </style>

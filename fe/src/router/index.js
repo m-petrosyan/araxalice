@@ -25,8 +25,18 @@ const router = createRouter({
                 },
                 {
                     path: '/portfolio',
-                    name: 'portfolio',
-                    component: PortfolioView
+                    children: [
+                        {
+                            path: '',
+                            name: 'portfolio',
+                            component: PortfolioView,
+                        },
+                        {
+                            path: ':id',
+                            name: 'portfolio-category',
+                            component: PortfolioView,
+                        }
+                    ]
                 },
                 {
                     path: '/about',
@@ -72,16 +82,14 @@ const router = createRouter({
                 }
             ]
         },
-    ]
+    ],
+    scrollBehavior() {
+        return {top: 0}
+    },
 })
 router.beforeEach((to, from, next) => {
-
-    console.log(to, from, next)
-
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // check if the user is authenticated
+    if (to.matched.some(record => record.meta?.requiresAuth)) {
         if (!sessionStorage.getItem('token')) {
-            // redirect to the login page if not authenticated
             next({
                 name: 'auth',
                 query: {redirect: to.fullPath}
@@ -92,6 +100,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-
 })
+
 export default router

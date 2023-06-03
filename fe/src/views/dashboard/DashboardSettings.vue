@@ -1,24 +1,24 @@
 <template>
-  <div class="d-settings">
+  <div class="d-settings" v-if="auth">
     <ErrorMessages :error="v$" :serverError="error"/>
     <form class="form" :class="{'disabled':loading}" @submit.prevent="save">
       <div class="form-group">
-        <input type="text" v-model="form.name" placeholder="name">
+        <input type="text" v-model="auth.name" placeholder="name">
       </div>
       <div class="form-group">
-        <input type="email" v-model="form.email" placeholder="email">
+        <input type="email" v-model="auth.email" placeholder="email">
       </div>
       <div class="form-group">
-        <input type="password" v-model="form.password_current" placeholder="current password">
+        <input type="password" v-model="auth.password_current" placeholder="current password">
       </div>
       <div class="form-group">
-        <input type="password" v-model="form.password" placeholder="new password">
+        <input type="password" v-model="auth.password" placeholder="new password">
       </div>
       <div class="form-group">
-        <input type="password" v-model="form.password_re" placeholder="repeat password">
+        <input type="password" v-model="auth.password_re" placeholder="repeat password">
       </div>
       <div class="form-group">
-        <button class="block mx-auto submit" @click="save" :disabled="loading">Save</button>
+        <button class="block mx-auto submit" :disabled="loading">Save</button>
       </div>
     </form>
   </div>
@@ -36,39 +36,37 @@ export default {
   components: {ErrorMessages},
   data() {
     return {
-      form: {
-        name: '',
-        email: '',
-        password_current: '',
-        password: '',
-        password_re: '',
-      },
+      // form: {
+      //   name: '',
+      //   email: '',
+      //   password_current: '',
+      //   password: '',
+      //   password_re: '',
+      // },
     }
   },
   methods: {
     save() {
-      this.submit().then(() => {
-        this.loading = true
-        this.$store.dispatch('auth').then(() => {
-        }).finally(() => this.loading = false)
-      })
+      this.loading = true
+      this.$store.dispatch('updateAuth', this.auth)
+          .finally(() => this.loading = false)
     }
   },
   validations() {
     return {
-      form: {
+      auth: {
         email: {email},
         name: {minLength: minLength(2)},
         password_current: {minLength: minLength(8)},
         password: {
           required: requiredIf(function () {
-            return this.form.password_current
+            return this.auth?.password_current
           }), minLength: minLength(8)
         },
         password_re: {
           required: requiredIf(function () {
-            return this.form.password_current
-          }), sameAs: sameAs(this.form.password), minLength: minLength(8)
+            return this.auth?.password_current
+          }), sameAs: sameAs(this.auth?.password), minLength: minLength(8)
         }
       }
     }
@@ -90,7 +88,6 @@ export default {
 <style scoped lang="scss">
 .form {
   width: 320px;
-  margin-top: 50px;
 
   .submit {
     width: 100%;

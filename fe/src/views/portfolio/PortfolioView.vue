@@ -1,10 +1,12 @@
 <template>
-  <div class="wrapper">
-    <div class="img" v-for="item in images" :key="item">
-      <img :src="item" alt="img">
+  <div class="wrapper" v-if="portfolio">
+    <div v-for="category in portfolio" :key="category.id">
+      <h1>{{ category.category }}</h1>
+      <div class="img" v-for="item in category.data" :key="item">
+        <img :src="item.image" alt="img">
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -18,6 +20,7 @@ export default {
   name: "PortfolioView",
   data() {
     return {
+      // category: this.$route.params?.id,
       images: [
         image1,
         image1,
@@ -49,12 +52,34 @@ export default {
         image5
       ]
     }
+  },
+  created() {
+    this.getPortfolio()
+  },
+  methods: {
+    getPortfolio() {
+      this.$store.dispatch('getPortfolio', {category: this.category})
+    }
+  },
+  computed: {
+    category() {
+      return this.$route.params?.id
+    },
+    portfolio() {
+      return this.$store.getters.getPortfolio
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.params.id !== undefined && to.params.id !== from.params.id) {
+        this.getPortfolio()
+      }
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-
 .wrapper {
   display: grid;
   gap: 10px;

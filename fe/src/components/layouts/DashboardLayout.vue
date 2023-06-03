@@ -18,8 +18,12 @@ export default {
 
 <style scoped lang="scss">
 .dashboard {
-  padding-top: 50px;
+  padding-top: 30px;
   display: flex;
-  gap: 20px 50px;
+
+  main {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 </style>

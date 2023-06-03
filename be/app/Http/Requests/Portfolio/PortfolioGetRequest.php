@@ -23,6 +23,7 @@ class PortfolioGetRequest extends FormRequest
     {
         return [
             'limit' => ['numeric'],
+            'category' => ['exists:portfolio_categories,id']
         ];
     }
 }

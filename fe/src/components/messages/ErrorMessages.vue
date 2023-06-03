@@ -1,7 +1,7 @@
 <template>
-  <div v-if="(error.$dirty && error.$error) || serverError" class="errors flex gap-x-3 mx-auto rounded">
+  <div v-if="(error?.$dirty && error.$error) || serverError" class="errors flex gap-x-3 mx-auto rounded">
     <div class="messages">
-      <div v-if="error.$dirty && error.$error">
+      <div v-if="error?.$dirty && error.$error">
         <p v-for="error of error.$errors" :key="error.$uid">
         <span class="lowercase">
           <span class="font-medium">{{ error.$property }}</span>
@@ -29,6 +29,7 @@ export default {
 
 <style scoped lang="scss">
 .messages {
+  margin-bottom: 30px;
   border: 2px solid #dd4c39;
   color: #dd4c39;
   display: inline-block;

@@ -14,7 +14,7 @@ class UserController extends Controller
     protected UserService $userService;
 
     /**
-     * @param  UserService  $userService
+     * @param UserService $userService
      */
     public function __construct(UserService $userService)
     {
@@ -33,7 +33,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest  $request
+     * @param UserUpdateRequest $request
      * @return Response
      */
     public function update(UserUpdateRequest $request): Response

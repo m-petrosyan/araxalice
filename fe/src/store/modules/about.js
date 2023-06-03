@@ -1,4 +1,4 @@
-import {getRequest, putRequest} from "@/store/api";
+import {getRequest, postRequest} from "@/store/api";
 
 export default {
     state: {
@@ -24,8 +24,12 @@ export default {
                 .catch(error => Promise.reject(error));
         },
         updateAbout({commit}, data) {
-            return putRequest(`/about`, data, commit)
-                .catch(error => Promise.reject(error));
+            return postRequest(`/about`, data, commit)
+                .then(() => commit('setAboutError', null))
+                .catch(error => {
+                    commit('setAboutError', error.message)
+                    return Promise.reject(error)
+                });
         },
     },
 }

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\PortfolioCreateRequest;
 use App\Http\Requests\Portfolio\PortfolioGetRequest;
 use App\Http\Requests\Portfolio\PortfolioUpdateRequest;
-use App\Http\Resources\Portfolio\PortfolioCollection;
+use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
+use App\Http\Resources\Portfolio\PortfolioCetegoryGroupResource;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
 use App\Services\PortfolioService;
@@ -24,22 +25,25 @@ class PortfolioController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  PortfolioGetRequest  $request
-     * @return PortfolioCollection
+     * @param PortfolioGetRequest $request
+     * @return PortfolioCategoryGroupCollection
      */
-    public function index(PortfolioGetRequest $request): PortfolioCollection
+    public function index(PortfolioGetRequest $request): PortfolioCategoryGroupCollection
     {
-        return new PortfolioCollection(
-            Portfolio::orderBy('id', 'desc')
-                ->paginate($request->validated()['limit'] ?? 20)
-        );
+//        dd(Portfolio::orderBy('id', 'desc')
+//            ->paginate($request->validated()['limit'] ?? 20)->groupBy('portfolio_categories_id')
+//        );
+        return new PortfolioCategoryGroupCollection(
+            PortfolioCategory::when($request->category, function ($query) use ($request) {
+                return $query->where('id', $request->category);
+            })->get()->load('portfolio'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  PortfolioCreateRequest  $request
-     * @param  PortfolioCategory  $portfolioCategory
+     * @param PortfolioCreateRequest $request
+     * @param PortfolioCategory $portfolioCategory
      * @return Response
      */
     public function store(PortfolioCreateRequest $request, PortfolioCategory $portfolioCategory): Response
@@ -52,8 +56,8 @@ class PortfolioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  PortfolioUpdateRequest  $request
-     * @param  Portfolio  $portfolio
+     * @param PortfolioUpdateRequest $request
+     * @param Portfolio $portfolio
      * @return Response
      */
     public function update(PortfolioUpdateRequest $request, Portfolio $portfolio): Response
@@ -66,7 +70,7 @@ class PortfolioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Portfolio  $portfolio
+     * @param Portfolio $portfolio
      * @return Response
      */
     public function destroy(Portfolio $portfolio): Response

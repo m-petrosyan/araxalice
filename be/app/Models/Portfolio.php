@@ -11,7 +11,7 @@ class Portfolio extends Model
     use HasFactory;
 
     protected $fillable = [
-        'portfolio_id',
+        'portfolio_category_id',
         'title',
         'file',
     ];
@@ -34,6 +34,6 @@ class Portfolio extends Model
 
     public function getFileAttribute($value): string
     {
-        return 'portfolio/'.$value;
+        return 'portfolio/' . $value;
     }
 }

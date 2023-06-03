@@ -12,8 +12,8 @@ class PortfolioService
     protected string $dir = 'portfolio/';
 
     /**
-     * @param  int  $categoryId
-     * @param  array  $attribues
+     * @param int $categoryId
+     * @param array $attribues
      * @return void
      */
     public function create(int $categoryId, array $attribues): void
@@ -32,17 +32,17 @@ class PortfolioService
                 $originalImage = $this->resize($originalImage);
             }
 
-            $filename = uniqid('image_').'.'.$file->getClientOriginalExtension();
+            $filename = uniqid('image_') . '.' . $file->getClientOriginalExtension();
 
-            Storage::disk('public')->put($this->dir.$filename, $originalImage->encode());
+            Storage::disk('public')->put($this->dir . $filename, $originalImage->encode());
 
-            auth()->user()->portfolio()->create(['title' => $title, 'file' => $filename, 'portfolio_id' => $categoryId]
+            auth()->user()->portfolio()->create(['title' => $title, 'file' => $filename, 'portfolio_category_id' => $categoryId]
             );
         }
     }
 
     /**
-     * @param  object  $originalImage
+     * @param object $originalImage
      * @return \Intervention\Image\Image
      */
     public function resize(object $originalImage): \Intervention\Image\Image

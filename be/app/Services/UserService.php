@@ -5,13 +5,13 @@ namespace App\Services;
 class UserService
 {
     /**
-     * @param  array  $attributes
+     * @param array $attributes
      * @return void
      */
     public function update(array $attributes): void
     {
         unset($attributes['password_current'], $attributes['password_re']);
 
-        auth()->user()->update($attributes);
+        auth()->user()->update(array_filter($attributes));
     }
 }

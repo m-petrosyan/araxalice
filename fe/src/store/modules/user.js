@@ -45,7 +45,10 @@ export default {
         },
         updateAuth({commit}, data) {
             return putRequest(`/user`, data, commit)
-                .catch(error => Promise.reject(error));
+                .catch(error => {
+                    commit('setAuthError', error.message)
+                    return Promise.reject(error)
+                });
         },
     },
 }
