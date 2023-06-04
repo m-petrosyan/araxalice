@@ -14,9 +14,12 @@ class PortfolioCategoryGroupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+//        dd($request->all()['limit']);
+
         return [
             'category' => $this->name,
-            'data' => new PortfolioCollection($this->portfolio)
+            'description' => $this->description,
+            'data' => new PortfolioCollection($this->portfolio),
         ];
     }
 }

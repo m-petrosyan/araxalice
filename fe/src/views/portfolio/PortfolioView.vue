@@ -2,6 +2,7 @@
   <div v-if="portfolio">
     <div v-for="category in portfolio" :key="category.id">
       <h1>{{ category.category }}</h1>
+      <p>{{ category.description }}</p>
       <div class="wrapper">
         <div class="img" v-for="item in category.data" :key="item" @click="openImage(item)">
           <div class="image-bg" :style="{backgroundImage: `url(${item.image})`}">
@@ -9,37 +10,23 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <PortfolioImageView v-if="image" :image="image"/>
+  <PreloaderComponent v-if="loading"/>
 </template>
 
 <script>
-import image1 from '@/assets/images/portfolio/1.jpg'
-import image2 from '@/assets/images/portfolio/2.jpg'
-import image4 from '@/assets/images/portfolio/4.jpg'
-import image5 from '@/assets/images/portfolio/5.jpg'
 import PortfolioImageView from "@/components/pottfolio/PortfolioImageView.vue";
+import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 
 export default {
   name: "PortfolioView",
-  components: {PortfolioImageView},
+  components: {PreloaderComponent, PortfolioImageView},
   data() {
     return {
+      loading: true,
       image: null,
-      images: [
-        {title: 'image title', image: image1},
-        {title: 'image title1', image: image1},
-        {title: 'image title2', image: image2},
-        {title: 'image title3', image: image5},
-        {title: 'image title4', image: image4},
-        {title: 'image title', image: image2},
-        {title: 'image title', image: image4},
-        {title: 'image title', image: image5},
-        {title: 'image title', image: image2},
-        {title: 'image title', image: image1},
-      ]
     }
   },
   created() {
@@ -47,7 +34,9 @@ export default {
   },
   methods: {
     getPortfolio() {
+      this.loading = true
       this.$store.dispatch('getPortfolio', {category: this.category})
+          .finally(() => this.loading = false)
     },
     openImage(image) {
       this.image = image
