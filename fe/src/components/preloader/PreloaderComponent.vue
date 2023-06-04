@@ -17,12 +17,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$Loader-color: #fff;
-$Loader-size: 14.6rem;
-$Loader-offset: 1.7rem;
-$Loader-timing: ease-in-out;
-
-
 .preloader {
   position: fixed;
   z-index: 5;
@@ -41,7 +35,7 @@ $Loader-timing: ease-in-out;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: $Loader-size;
+    max-width: 14.6rem;
 
     &:before,
     &:after {
@@ -50,43 +44,43 @@ $Loader-timing: ease-in-out;
       border-radius: 50%;
       animation-duration: 1.8s;
       animation-iteration-count: infinite;
-      animation-timing-function: $Loader-timing;
-      filter: drop-shadow(0 0 $Loader-offset/2.25 rgba($Loader-color, 0.75));
+      animation-timing-function: ease-in-out;
+      filter: drop-shadow(0 0 1.7rem/2.25 rgba(var(--vt-c-white), 0.75));
     }
 
     &:before {
       width: 100%;
       padding-bottom: 100%;
-      box-shadow: inset 0 0 0 $Loader-offset $Loader-color;
+      box-shadow: inset 0 0 0 1.7rem var(--vt-c-white);
       animation-name: pulsA;
     }
 
     &:after {
-      width: calc(100% - #{$Loader-offset} * 2);
-      padding-bottom: calc(100% - #{$Loader-offset} * 2);
-      box-shadow: 0 0 0 0 $Loader-color;
+      width: calc(100% - #{1.7rem} * 2);
+      padding-bottom: calc(100% - #{1.7rem} * 2);
+      box-shadow: 0 0 0 0 var(--vt-c-white);
       animation-name: pulsB;
     }
   }
 
   @keyframes pulsA {
     0% {
-      box-shadow: inset 0 0 0 $Loader-offset $Loader-color;
+      box-shadow: inset 0 0 0 1.7rem var(--vt-c-white);
       opacity: 1;
     }
     50%, 100% {
-      box-shadow: inset 0 0 0 0 $Loader-color;
+      box-shadow: inset 0 0 0 0 var(--vt-c-white);
       opacity: 0;
     }
   }
 
   @keyframes pulsB {
     0%, 50% {
-      box-shadow: 0 0 0 0 $Loader-color;
+      box-shadow: 0 0 0 0 var(--vt-c-white);
       opacity: 0;
     }
     100% {
-      box-shadow: 0 0 0 $Loader-offset $Loader-color;
+      box-shadow: 0 0 0 1.7rem var(--vt-c-white);
       opacity: 1;
     }
   }

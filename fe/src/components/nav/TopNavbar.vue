@@ -76,7 +76,7 @@ nav {
   backdrop-filter: blur(5px);
 
   &.scroll {
-    background-color: #22222294;
+    background-color: var(--color-scroll);
     font-size: var(--size-xl);
 
     .item {
@@ -96,7 +96,7 @@ nav {
     height: var(--navbar-size);
     line-height: 60px;
     margin: auto;
-    color: white;
+    color: var(--vt-c-white);
     display: flex;
     justify-content: space-between;
 

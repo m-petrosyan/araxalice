@@ -79,7 +79,7 @@ export default {
 .db-about {
   .medium-editor-container {
     background-color: var(--vt-gray-black);
-    color: white;
+    color: var(--vt-c-white);
     font-size: var(--size-m);
     padding: 15px !important;
     min-width: 200px;

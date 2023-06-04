@@ -49,7 +49,7 @@
                     placeholder="message"/>
         </div>
         <div class="form-group">
-          <input class="submit" type="submit" value="login">
+          <input class="submit" type="submit" value="send">
         </div>
       </form>
     </div>
@@ -157,7 +157,7 @@ section {
         }
 
         .info {
-          color: white;
+          color: var(--vt-c-white);
         }
       }
     }
@@ -177,7 +177,7 @@ section {
           min-height: 40px;
           padding-left: 10px;
           resize: vertical;
-          color: white;
+          color: var(--vt-c-white);
         }
 
         textarea {
@@ -186,7 +186,7 @@ section {
 
         .submit {
           border: none;
-          color: #636464;
+          color: var(--color-submit-text);
           height: 40px;
           width: 150px;
           background-color: var(--vt-gray-black);

@@ -29,11 +29,11 @@ class Portfolio extends Model
      */
     public function getImageAttribute(): string
     {
-        return asset($this->file);
+        return asset('storage/portfolio/'.$this->file);
     }
 
-    public function getFileAttribute($value): string
+    public function getFileLocationAttribute(): string
     {
-        return 'portfolio/' . $value;
+        return 'portfolio/'.$this->file;
     }
 }

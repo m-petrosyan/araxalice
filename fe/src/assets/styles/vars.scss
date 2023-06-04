@@ -7,72 +7,50 @@
   src: url(@/assets/fonts/Sdfortimburtondemo-ALoW2.ttf);
 }
 
-/* color palette from <https://github.com/vuejs/theme> */
-:root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-blue: #12212e;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-  --vt-c-indigo: #15252d;
-  --vt-gray-black: #292a2c;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgb(79, 79, 80);
-}
-
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
 $lg: 1280px;
 $md: 720px;
 $sm: 428px;
 
 :root {
+  //screen sizes
+  --lg: #{$lg};
+  --md: #{$md};
+  --sm: #{$sm};
+
+  //font size
   --size-xl: 22px;
   --size-l: 20px;
   --size-m: 16px;
   --size-s: 14px;
 
+  // component margin
+  --section-top: 50px;
+  --section-bottom: 100px;
 
+  // navbar size
   --navbar-size: 60px;
 
-  --lg: #{$lg};
-  --md: #{$md};
-  --sm: #{$sm};
+  //colors
+  --vt-c-black-soft: #222222;
+  --vt-c-white: #ffffff;
+  --vt-c-black: #181818;
+  --vt-c-indigo: #15252d;
+  --vt-c-black-mute: #282828;
+  --vt-gray-black: #292a2c;
+  --vt-c-divider-dark-2: #5454547A;
+  --vt-c-divider-dark-1: #545454A5;
+  --vt-c-text-dark-2: #4F4F50FF;
+  --vt-c-submit: #636464;
+  --vt-c-orange: #dd4c39;
 
+  //global color set
   --color-background: var(--vt-c-black);
   --color-background-soft: var(--vt-c-black-soft);
   --color-background-mute: var(--vt-c-black-mute);
-
   --color-border: var(--vt-c-divider-dark-2);
   --color-border-hover: var(--vt-c-divider-dark-1);
-
-  --color-heading: var(--vt-c-text-dark-1);
   --color-text: var(--vt-c-text-dark-2);
-
-  --section-top: 50px;
-  --section-bottom: 100px;
+  --color-submit-text: var(--vt-c-submit);
+  --color-scroll: #22222294;
+  --color-alert: var(--vt-c-orange)
 }

@@ -29,9 +29,9 @@ export default {
 
 <style scoped lang="scss">
 .messages {
+  border: 2px solid var(--color-alert);
+  color: var(--color-alert);
   margin-bottom: 30px;
-  border: 2px solid #dd4c39;
-  color: #dd4c39;
   display: inline-block;
   padding: 10px;
 }

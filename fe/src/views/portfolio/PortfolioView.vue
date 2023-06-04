@@ -2,11 +2,14 @@
   <div class="wrapper" v-if="portfolio">
     <div v-for="category in portfolio" :key="category.id">
       <h1>{{ category.category }}</h1>
-      <div class="img" v-for="item in category.data" :key="item">
-        <img :src="item.image" alt="img">
+      <div class="img" v-for="item in category.data" :key="item" @click="openImage(item)">
+        <div class="image-bg" :style="{backgroundImage: `url(${item.image})`}">
+          <p class="image-title">{{ item.title }}</p>
+        </div>
       </div>
     </div>
   </div>
+  <PortfolioImageView v-if="image" :image="image"/>
 </template>
 
 <script>
@@ -15,42 +18,31 @@ import image2 from '@/assets/images/portfolio/2.jpg'
 import image3 from '@/assets/images/portfolio/3.jpg'
 import image4 from '@/assets/images/portfolio/4.jpg'
 import image5 from '@/assets/images/portfolio/5.jpg'
+import PortfolioImageView from "@/components/pottfolio/PortfolioImageView.vue";
 
 export default {
   name: "PortfolioView",
+  components: {PortfolioImageView},
   data() {
     return {
-      // category: this.$route.params?.id,
+      image: null,
       images: [
-        image1,
-        image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        image4,
-        image5,
-        image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        image1,
-        image2,
-        image3,
-        image4,
-        image5
+        {title: 'image title', image: image1},
+        {title: 'image title1', image: image1},
+        {title: 'image title2', image: image2},
+        {title: 'image title3', image: image5},
+        {title: 'image title4', image: image4},
+        {title: 'image title', image: image2},
+        {title: 'image title', image: image4},
+        {title: 'image title', image: image5},
+        {title: 'image title', image: image2},
+        {title: 'image title', image: image1},
       ]
+    }
+  },
+  methods: {
+    openImage(image) {
+      this.image = image
     }
   },
   created() {
@@ -80,6 +72,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .wrapper {
   display: grid;
   gap: 10px;
@@ -87,11 +80,19 @@ export default {
 
   .img {
     height: 300px;
+    cursor: pointer;
 
-    img {
+    .image-bg {
       height: 100%;
       width: 100%;
-      object-fit: cover;
+      background-size: contain;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      .image-title {
+        color: var(--vt-c-white);
+      }
     }
   }
 }
