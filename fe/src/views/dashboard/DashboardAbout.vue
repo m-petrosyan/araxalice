@@ -12,7 +12,7 @@
           :hideVideo="true"
       />
       <div class="form-group">
-        <button class="block mx-auto submit" @click="save" :disabled="loading">save</button>
+        <button class="submit" @click="save" :disabled="loading">Save</button>
       </div>
     </div>
     <PreloaderComponent v-else/>

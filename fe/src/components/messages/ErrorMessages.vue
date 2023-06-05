@@ -1,10 +1,10 @@
 <template>
-  <div v-if="(error?.$dirty && error.$error) || serverError" class="errors flex gap-x-3 mx-auto rounded">
+  <div v-if="(error?.$dirty && error.$error) || serverError" class="errors">
     <div class="messages">
       <div v-if="error?.$dirty && error.$error">
         <p v-for="error of error.$errors" :key="error.$uid">
-        <span class="lowercase">
-          <span class="font-medium">{{ error.$property }}</span>
+        <span>
+          <span>{{ error.$property }}</span>
           <span>{{ ' ' + error.$message.replace("This field", "") }}</span>
         </span>
         </p>

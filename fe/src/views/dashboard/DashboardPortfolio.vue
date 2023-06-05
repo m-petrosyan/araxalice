@@ -1,11 +1,16 @@
 <template>
-  <div class="form">
-    <input type="file" class="image-upload" multiple @change="previewImages">
-    <div class="image-preview">
-      <div class="image" v-for="(image,index) in images" :key="image">
-        <button class="del-img" @click="del(index)">x</button>
-        <img :src="image.url" class="preview-image" alt="image"/>
-        <textarea type="text" v-model="image.title" placeholder="image description"/>
+  <div class="db-portfolio">
+    <div class="form">
+      <select v-if="categories" v-model="categoryId">
+        <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+      </select>
+      <input type="file" class="image-upload" multiple @change="previewImages">
+      <div class="image-preview">
+        <div class="image" v-for="(image,index) in images" :key="image">
+          <button class="del-img" @click="del(index)">x</button>
+          <img :src="image.url" class="preview-image" alt="image"/>
+          <textarea type="text" v-model="image.title" placeholder="image description"/>
+        </div>
       </div>
     </div>
   </div>
@@ -16,14 +21,15 @@ export default {
   name: "DashboardPortfolio",
   data() {
     return {
+      categoryId: null,
       images: [],
-      caption: "",
     }
+  },
+  created() {
+    this.$store.dispatch('getCategory')
   },
   methods: {
     previewImages(event) {
-      // this.images = []; // Clear previous preview
-
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -38,6 +44,11 @@ export default {
       this.images.splice(index, 1);
     }
   },
+  computed: {
+    categories() {
+      return this.$store.getters.getCategory
+    },
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-settings" v-if="auth">
+  <div class="db-settings" v-if="auth">
     <ErrorMessages :error="v$" :serverError="error"/>
     <form class="form" :class="{'disabled':loading}" @submit.prevent="save">
       <div class="form-group">
@@ -18,7 +18,7 @@
         <input type="password" v-model="auth.password_re" placeholder="repeat password">
       </div>
       <div class="form-group">
-        <button class="block mx-auto submit" :disabled="loading">Save</button>
+        <button class="submit" :disabled="loading">Save</button>
       </div>
     </form>
   </div>
@@ -34,17 +34,6 @@ export default {
   name: "DashboardSettings",
   mixins: [dashboardMixin],
   components: {ErrorMessages},
-  data() {
-    return {
-      // form: {
-      //   name: '',
-      //   email: '',
-      //   password_current: '',
-      //   password: '',
-      //   password_re: '',
-      // },
-    }
-  },
   methods: {
     save() {
       this.loading = true
@@ -86,11 +75,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.form {
-  width: 320px;
+.db-settings {
+  .form {
+    width: 320px;
 
-  .submit {
-    width: 100%;
+    .submit {
+      width: 100%;
+    }
   }
 }
 </style>

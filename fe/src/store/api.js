@@ -20,7 +20,7 @@ const deleteRequest = async (url, body) => {
     let headers = await getHeader();
     headers = {...headers, ...{data: body}};
     return axios
-        .delete(url, headers)
+        .delete(import.meta.env.VITE_APP_API + url, headers)
         .then(response => response.data)
         .catch(error => Promise.reject(error.response.data));
 };

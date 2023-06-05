@@ -10,6 +10,7 @@ import ClientLayout from "@/components/layouts/ClientLayout.vue";
 import DashboardSettings from "@/views/dashboard/DashboardSettings.vue";
 import DashboardAbout from "@/views/dashboard/DashboardAbout.vue";
 import AuthPage from "@/views/auth/AuthPage.vue";
+import DashboardPortfolioCategory from "@/views/dashboard/DashboardPortfolioCategory.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +70,11 @@ const router = createRouter({
                     path: 'portfolio',
                     name: 'd-portfolio',
                     component: DashboardPortfolio
+                },
+                {
+                    path: 'portfolio/category',
+                    name: 'd-portfolio-category',
+                    component: DashboardPortfolioCategory
                 },
                 {
                     path: 'about',

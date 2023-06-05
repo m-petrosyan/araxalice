@@ -29,7 +29,7 @@ class PortfolioCategoryUpdateRequest extends FormRequest
                 'min:2',
                 'unique:portfolio_categories,name,'.request()->route('portfolio_category')->id,
             ],
-            'description' => ['string', 'min:2'],
+            'description' => ['nullable', 'string', 'min:2'],
         ];
     }
 }

@@ -6,6 +6,11 @@
       </router-link>
     </li>
     <li class="item">
+      <router-link :to="{name:'d-portfolio-category'}">
+        <p>Category</p>
+      </router-link>
+    </li>
+    <li class="item">
       <router-link :to="{name:'d-about'}">
         <p>About me</p>
       </router-link>

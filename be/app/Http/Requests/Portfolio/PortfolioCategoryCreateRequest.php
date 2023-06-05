@@ -24,7 +24,7 @@ class PortfolioCategoryCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'unique:portfolio_categories'],
-            'description' => ['string', 'min:2'],
+            'description' => ['nullable', 'string', 'min:2'],
         ];
     }
 }

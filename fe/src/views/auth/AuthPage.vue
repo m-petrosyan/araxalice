@@ -9,7 +9,7 @@
         <input type="password" v-model="form.password" placeholder="password">
       </div>
       <div class="form-group">
-        <button class="block mx-auto submit" :disabled="loading">Login</button>
+        <button class="submit" :disabled="loading">Login</button>
       </div>
     </form>
     <PreloaderComponent v-else/>
@@ -52,13 +52,15 @@ export default {
     signIn() {
       this.v$.$touch()
       this.loading = true
-      this.$store.dispatch('signIn', this.form)
-          .then(() => {
-            this.$store.dispatch('auth').then(() => {
-              this.$router.push({name: 'd-portfolio'})
+      if (!this.v$.$error) {
+        this.$store.dispatch('signIn', this.form)
+            .then(() => {
+              this.$store.dispatch('auth').then(() => {
+                this.$router.push({name: 'd-portfolio'})
+              })
             })
-          })
-          .finally(() => this.loading = false)
+            .finally(() => this.loading = false)
+      }
     }
   },
   computed: {
