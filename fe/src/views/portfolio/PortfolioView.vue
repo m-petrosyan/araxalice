@@ -1,6 +1,6 @@
 <template>
   <div v-if="portfolio">
-    <div v-for="category in portfolio" :key="category.id">
+    <div class="category" v-for="category in portfolio" :key="category.id">
       <h1>{{ category.category }}</h1>
       <p>{{ category.description }}</p>
       <div class="wrapper">
@@ -52,7 +52,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to.params)
       if (to.params !== from.params) {
         this.getPortfolio()
       }
@@ -62,27 +61,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.category {
+  &:not(:first-child) {
+    margin-top: 50px;
+  }
 
-.wrapper {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: auto auto auto auto;
+  .wrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto auto auto;
 
-  .img {
-    height: 300px;
-    cursor: pointer;
 
-    .image-bg {
-      height: 100%;
-      width: 100%;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+    .img {
+      height: 300px;
+      cursor: pointer;
 
-      .image-title {
-        color: var(--vt-c-white);
+      .image-bg {
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        .image-title {
+          color: var(--vt-c-white);
+        }
       }
     }
   }

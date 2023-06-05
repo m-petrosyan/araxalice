@@ -187,6 +187,42 @@ a {
       cursor: pointer;
     }
   }
+
+  input[type=file] {
+
+    & {
+      color: transparent;
+    }
+
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+
+    &::before {
+      content: 'select images';
+      display: inline-block;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      user-select: none;
+      text-align: center;
+      border: none;
+      color: var(--color-submit-text);
+      height: 40px;
+      line-height: 40px;
+      min-width: 150px;
+      background-color: var(--vt-gray-black);
+      cursor: pointer;
+    }
+
+    &:hover::before {
+      border-color: black;
+    }
+
+    &:active::before {
+      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+  }
 }
 
 b {

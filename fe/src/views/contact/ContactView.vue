@@ -120,7 +120,7 @@ section {
 
   .ouija_board {
     width: 50%;
-    background-image: url("@/assets/images/other/ouija_board.jpg");
+    background-image: url("@/assets/images/other/ouija_board.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
