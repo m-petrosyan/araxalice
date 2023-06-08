@@ -16,19 +16,18 @@ class PortfolioService extends ImageService
      */
     public function create(int $categoryId, array $attribues): void
     {
-        $items = $attribues;
-
-        foreach ($items['item'] as $item) {
-            $title = $item['title'];
+        foreach ($attribues['item'] as $item) {
             $file = $item['file'];
-           
-            $originalImage = $this->resize($file);
+            $data = [];
 
+            $originalImage = $this->resize($file);
             $filename = $this->saveFile($file, $this->dir, $originalImage);
 
-            auth()->user()->portfolio()->create(
-                ['title' => $title, 'file' => $filename, 'portfolio_category_id' => $categoryId]
-            );
+            $data['file'] = $filename;
+            $data['portfolio_category_id'] = $categoryId;
+            $data['title'] = $item['title'] ?? null;
+
+            auth()->user()->portfolio()->create($data);
         }
     }
 

@@ -1,4 +1,4 @@
-import {getRequest} from "@/store/api";
+import {getRequest, postRequest} from "@/store/api";
 
 export default {
     state: {
@@ -33,13 +33,10 @@ export default {
                 .then(response => commit("setRandomPortfolio", response.data))
                 .catch(error => Promise.reject(error));
         },
-        // updatePortfolio({commit}, data) {
-        //     return postRequest(`/portfolio`, data, commit)
-        //         .then(() => commit('setPortfolioError', null))
-        //         .catch(error => {
-        //             commit('setPortfolioError', error.message)
-        //             return Promise.reject(error)
-        //         });
-        // },
+        createPortfolio({commit}, {id, data}) {
+            return postRequest('/portfolio/' + id, data)
+                .then(() => commit("setPortfolioError", null))
+                .catch(error => Promise.reject(error));
+        },
     },
 }

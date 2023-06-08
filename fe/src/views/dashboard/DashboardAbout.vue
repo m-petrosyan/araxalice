@@ -4,7 +4,7 @@
     <div class="user-avatar">
       <label class="block avatar mx-auto" for="cover"
              :style="{backgroundImage : `url(${!preview  ? about.image ?? defaultImg: preview  })`}"/>
-      <input type="file" hidden="" accept="image/*" id="cover" @change="changeCover">
+      <input type="file" hidden="" accept="image/*" id="cover" @change="changePicture">
     </div>
     <div v-if="!loading" class="form">
       <medium-editor
@@ -63,7 +63,8 @@ export default {
     onChange(val) {
       this.content = val
     },
-    changeCover(file) {
+    changePicture(file) {
+      console.log(file.target.files[0])
       this.preview = URL.createObjectURL(file.target.files[0])
       this.image = file.target.files[0]
     },

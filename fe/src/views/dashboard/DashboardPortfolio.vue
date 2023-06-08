@@ -8,10 +8,11 @@
       <div class="image-preview">
         <div class="image" v-for="(image,index) in images" :key="image">
           <button class="del-img" @click="del(index)">x</button>
-          <img :src="image.url" class="preview-image" alt="image"/>
+          <img :src="image.preview" class="preview-image" alt="image"/>
           <textarea type="text" v-model="image.title" placeholder="image description"/>
         </div>
       </div>
+      <button class="submit" @click="upload" :disabled="loading">Upload</button>
     </div>
   </div>
 </template>
@@ -35,13 +36,22 @@ export default {
         const file = files[i];
         const reader = new FileReader();
         reader.onload = (event) => {
-          this.images.push({url: event.target.result});
+          this.images.push({file: file, preview: event.target.result});
         };
         reader.readAsDataURL(file);
       }
     },
     del(index) {
       this.images.splice(index, 1);
+    },
+    upload() {
+      const data = new FormData
+
+      for (const [index, value] of Object.entries(this.images)) {
+        data.append(`item[${index}][file]`, value['file']);
+        if (value['title']) data.append(`item[${index}][title]`, value['title']);
+      }
+      this.$store.dispatch('createPortfolio', {id: this.categoryId, data: data})
     }
   },
   computed: {
