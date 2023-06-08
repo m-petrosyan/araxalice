@@ -15,7 +15,8 @@ class AboutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'text' => $this->text ?? '',
+            'text' => $this->text ?? null,
+            'image' => $this->imageUrl ?? null,
         ];
     }
 }

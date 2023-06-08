@@ -37,6 +37,7 @@ $sm: 428px;
   --vt-c-indigo: #15252d;
   --vt-c-black-mute: #282828;
   --vt-gray-black: #292a2c;
+  --vt-light-grey: #817e7e;
   --vt-c-divider-dark-2: #5454547A;
   --vt-c-divider-dark-1: #545454A5;
   --vt-c-text-dark-2: #4F4F50FF;
@@ -49,8 +50,8 @@ $sm: 428px;
   --color-background-mute: var(--vt-c-black-mute);
   --color-border: var(--vt-c-divider-dark-2);
   --color-border-hover: var(--vt-c-divider-dark-1);
-  --color-text: var(--vt-c-text-dark-2);
+  --color-text: var(--vt-light-grey);
   --color-submit-text: var(--vt-c-submit);
-  --color-scroll: #22222294;
+  --color-scroll: #222222E2;
   --color-alert: var(--vt-c-orange)
 }

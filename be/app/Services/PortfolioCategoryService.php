@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class PortfolioCategoryService
 {
     /**
@@ -25,6 +27,10 @@ class PortfolioCategoryService
 
     public function destroy($category): void
     {
+        foreach ($category->portfolio()->get() as $item) {
+            Storage::disk('public')->delete($item->fileLocation);
+        }
+
         $category->delete();
     }
 }

@@ -11,7 +11,7 @@
           Portfolio
         </router-link>
         <ul class="sub-menu">
-          <li v-for="item in categories" :key="item.id">
+          <li class="item" v-for="item in categories" :key="item.id">
             <router-link :to="{name:'portfolio-category',params:{id: item.id}}">
               {{ item.name }}
             </router-link>
@@ -57,11 +57,11 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getPortfolioCategories')
+    this.$store.dispatch('getCategory')
   },
   computed: {
     categories() {
-      return this.$store.getters.getPortfolioCategories
+      return this.$store.getters.getCategory
     }
   }
 }
@@ -81,7 +81,7 @@ nav {
 
     .item {
       .sub-menu {
-        background-color: #22222294;
+        background-color: var(--color-scroll);
         backdrop-filter: blur(5px);
       }
     }
@@ -100,12 +100,16 @@ nav {
     display: flex;
     justify-content: space-between;
 
-    .item {
+    > .item {
       width: 20%;
       text-align: center;
       list-style: none;
 
       &:hover {
+        > a {
+          font-size: 24px;
+        }
+
         .sub-menu {
           opacity: 1;
           visibility: visible;
@@ -121,6 +125,12 @@ nav {
         height: 0;
         list-style: none;
         padding-left: 0;
+
+        .item {
+          &:hover {
+            font-size: 24px;
+          }
+        }
       }
 
       a {

@@ -68,21 +68,108 @@ export default {
         lastLatter: '',
         cordinates: {
           a: {
-            top: '182px',
-            left: '20%'
+            top: '140px',
+            left: '95px'
+          },
+          b: {
+            top: '134px',
+            left: '138px'
+          },
+          c: {
+            top: '131px',
+            left: '178px'
+          },
+          d: {
+            top: '130px',
+            left: '211px'
+          },
+          e: {
+            top: '130px',
+            left: '248px'
+          },
+          f: {
+            top: '130px',
+            left: '284px'
+          },
+          g: {
+            top: '132px',
+            left: '322px'
+          },
+          h: {
+            top: '134px',
+            left: '360px'
+          },
+          i: {
+            top: '137px',
+            left: '394px'
+          },
+          j: {
+            top: '197px',
+            left: '101px'
+          },
+          k: {
+            top: '194px',
+            left: '139px'
+          },
+          l: {
+            top: '194px',
+            left: '179px'
           },
           m: {
-            top: '35%',
-            left: '60%',
-
-          },
-          z: {
-            top: '229px',
-            left: '388px',
+            top: '192px',
+            left: '221px'
           },
           n: {
-            top: '225px',
-            left: '19%'
+            top: '192px',
+            left: '268px'
+          },
+          o: {
+            top: '193px',
+            left: '306px'
+          },
+          p: {
+            top: '193px',
+            left: '340px'
+          },
+          q: {
+            top: '199px',
+            left: '379px'
+          },
+          r: {
+            top: '261px',
+            left: '78px'
+          },
+          s: {
+            top: '259px',
+            left: '116px'
+          },
+          t: {
+            top: '256px',
+            left: '152px'
+          },
+          u: {
+            top: '255px',
+            left: '192px'
+          },
+          v: {
+            top: '254px',
+            left: '232px'
+          },
+          w: {
+            top: '254px',
+            left: '280px'
+          },
+          x: {
+            top: '256px',
+            left: '325px'
+          },
+          y: {
+            top: '258px',
+            left: '364px'
+          },
+          z: {
+            top: '261px',
+            left: '402px'
           },
         }
       },
@@ -98,7 +185,7 @@ export default {
 
     },
     type(val) {
-      this.board.lastLatter = val.slice(-1);
+      this.board.lastLatter = val.slice(-1).toLowerCase();
       this.$refs.cursor.style.top = this.board.cordinates[this.board.lastLatter].top
       this.$refs.cursor.style.left = this.board.cordinates[this.board.lastLatter].left
     },
@@ -134,7 +221,7 @@ section {
       transition: 1s;
 
       &.start {
-        width: 20%;
+        width: 150px;
       }
     }
   }

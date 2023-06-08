@@ -1,6 +1,6 @@
 <template>
   <div class="db-portfolio-categories">
-    <table v-if="categories">
+    <table v-if="categories" class="category-list">
       <thead>
       <tr>
         <th>name</th>
@@ -89,11 +89,19 @@ export default {
       this.category = {...category}
     },
     updateCategory() {
-      this.$store.dispatch('updateCategory', {id: this.category.id, data: this.category})
-          .then(() => {
-            this.$store.dispatch('getCategory')
-            // this.cancel()
-          })
+      this.v$.$touch()
+      if (!this.v$.$error) {
+        this.loading = true
+        this.$store.dispatch('updateCategory', {id: this.category.id, data: this.category})
+            .then(() => {
+              this.$store.dispatch('getCategory')
+              this.cancel()
+            })
+            .finally(() => {
+              this.v$.$reset()
+              this.loading = false
+            })
+      }
     },
     deleteCategory(id) {
       this.$store.dispatch('deleteCategory', id)
@@ -132,6 +140,29 @@ export default {
 
 <style lang="scss">
 .db-portfolio-categories {
+  .category-list {
+    tbody {
+      tr {
+        td {
+          &:first-child {
+            padding-right: 10px;
+            border-right: 1px dotted #292a2c;
+          }
+
+          &:nth-child(2) {
+            padding-left: 10px;
+          }
+
+
+          max-width: 800px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
   .create {
     margin-top: 50px;
 

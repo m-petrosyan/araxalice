@@ -24,6 +24,7 @@ class AboutCreateUpdateRequest extends FormRequest
     {
         return [
             'text' => ['string'],
+            'image' => ['file', 'mimes:jpeg,jpg,png,webp'],
         ];
     }
 }

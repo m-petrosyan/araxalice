@@ -1,6 +1,12 @@
 <template>
-  <section>
-    <div class="header-animation" ref="flicker">
+  <div class="home-page">
+
+
+    <!--  <section>-->
+    <!--    <div id='stars'></div>-->
+    <!--    <div id='stars2'></div>-->
+    <!--    <div id='stars3'></div>-->
+    <section class="header-animation mt-0" ref="flicker">
       <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
         <img class="animation item2" :src="item2" alt="">
@@ -31,72 +37,16 @@
         <img class="animation item12" :src="item12" alt="">
         <img class="animation item13" :src="item13" alt="">
       </div>
+    </section>
+    <div class="content parallax">
+      <section class="about" v-html="about?.text + ' ...'"/>
     </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
-    <div class="content">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut distinctio dolor earum eum exercitationem harum
-        ipsum nemo neque nobis omnis, porro possimus provident qui ratione reprehenderit tenetur totam, velit
-        voluptatibus.
-      </p>
-    </div>
+    <section class="content">
+      <PortfolioImages :images="portfolio"/>
+    </section>
     <img class="scrol-animation an1" ref="animation" :src="item6" alt="">
-  </section>
+    <!--  </section>-->
+  </div>
 </template>
 
 <script>
@@ -114,8 +64,10 @@ import item10 from '@/assets/images/header_animation/item10.png'
 import item11 from '@/assets/images/header_animation/item11.png'
 import item12 from '@/assets/images/header_animation/item12.png'
 import item13 from '@/assets/images/header_animation/item13.png'
+import PortfolioImages from "@/components/portfolio/PortfolioImages.vue";
 
 export default {
+  components: {PortfolioImages},
   props: {
     scroll: Number
   },
@@ -137,6 +89,10 @@ export default {
       item13: item13,
     }
   },
+  created() {
+    this.$store.dispatch('getAbout')
+    this.$store.dispatch('getRandomPortfolio', {limit: 8})
+  },
   mounted() {
     setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3500)
   },
@@ -150,15 +106,54 @@ export default {
       if (val > 500) this.animation()
     }
   },
+  computed: {
+    about() {
+      return this.$store.getters.getAbout
+    },
+    portfolio() {
+      return this.$store.getters.getrandomPortfolio
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
-section {
+.home-page {
   position: relative;
+
+  .parallax {
+    padding: 50px;
+    height: 100vh;
+    background-image: url("@/assets/images/other/paralax.jpg");
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--vt-c-white);
+
+    &:before {
+      content: "";
+      background-color: #00000047;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  section {
+    &:first-child {
+      height: calc(100vh - var(--section-top));
+    }
+
+    &:last-child {
+      height: auto;
+    }
+  }
 
   .header-animation {
     position: relative;
-    height: 600px;
     background-image: url("@/assets/images/header_animation/arax.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -311,6 +306,10 @@ section {
     }
 
     .left-side {
+      position: absolute;
+      left: 0;
+      top: 137px;
+
       .item1 {
         top: 346px;
         left: 274px;
@@ -391,6 +390,9 @@ section {
     }
 
     .right-side {
+      position: absolute;
+      right: 0;
+      top: 137px;
 
       .item1 {
         top: 346px;
@@ -503,6 +505,11 @@ section {
 
   .content {
     margin-top: 100px;
+
+    .about {
+      max-height: calc(100vh - 150px);
+      overflow: hidden;
+    }
   }
 
   .scrol-animation {
@@ -511,7 +518,7 @@ section {
     transition: all 2s;
 
     &.an1 {
-      top: 800px;
+      top: 1200px;
       left: 100%;
       transform: translateX(-150%);
 

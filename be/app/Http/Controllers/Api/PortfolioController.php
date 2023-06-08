@@ -8,6 +8,7 @@ use App\Http\Requests\Portfolio\PortfolioGetRequest;
 use App\Http\Requests\Portfolio\PortfolioUpdateRequest;
 use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
 use App\Http\Resources\Portfolio\PortfolioCetegoryGroupResource;
+use App\Http\Resources\Portfolio\PortfolioCollection;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
 use App\Services\PortfolioService;
@@ -35,6 +36,15 @@ class PortfolioController extends Controller
                 return $query->where('id', $request->category);
             })->get()->load('portfolio')
         );
+    }
+
+    /**
+     * @param  PortfolioGetRequest  $request
+     * @return PortfolioCollection
+     */
+    public function randomImages(PortfolioGetRequest $request): PortfolioCollection
+    {
+        return new PortfolioCollection(Portfolio::inRandomOrder()->paginate($request->validated()['limit'] ?? 20));
     }
 
     /**

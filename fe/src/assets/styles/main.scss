@@ -110,7 +110,7 @@ body::-webkit-scrollbar-thumb {
     &:after {
       content: '';
       width: 105%;
-      height: 105%;
+      height: 100%;
       position: absolute;
       top: 0;
       left: -5%;
@@ -132,11 +132,21 @@ body::-webkit-scrollbar-thumb {
     main {
       min-height: calc(100vh - var(--navbar-size) - var(--section-top));
       z-index: 1;
-      width: var(--lg);
+      //width: var(--lg);
       margin: var(--section-top) auto auto auto;
       padding-bottom: var(--section-bottom);
       @media (width <= $lg) {
         width: var(--md);
+      }
+
+      section {
+        width: var(--lg);
+        margin: 50px auto;
+
+        &.mt-0 {
+          margin: auto;
+        }
+        
       }
     }
   }

@@ -3,12 +3,10 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
-class PortfolioService
+class PortfolioService extends ImageService
 {
-    protected int $width = 1920;
-    protected int $height = 1920;
+
     protected string $dir = 'portfolio/';
 
     /**
@@ -23,18 +21,10 @@ class PortfolioService
         foreach ($items['item'] as $item) {
             $title = $item['title'];
             $file = $item['file'];
+           
+            $originalImage = $this->resize($file);
 
-            $originalImage = Image::make($file);
-            $width = $originalImage->width();
-            $height = $originalImage->height();
-
-            if ($width > $this->width || $height > $this->height) {
-                $originalImage = $this->resize($originalImage);
-            }
-
-            $filename = uniqid('image_').'.'.$file->getClientOriginalExtension();
-
-            Storage::disk('public')->put($this->dir.$filename, $originalImage->encode());
+            $filename = $this->saveFile($file, $this->dir, $originalImage);
 
             auth()->user()->portfolio()->create(
                 ['title' => $title, 'file' => $filename, 'portfolio_category_id' => $categoryId]
@@ -42,17 +32,6 @@ class PortfolioService
         }
     }
 
-    /**
-     * @param  object  $originalImage
-     * @return \Intervention\Image\Image
-     */
-    public function resize(object $originalImage): \Intervention\Image\Image
-    {
-        return $originalImage->resize($this->width, $this->height, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-    }
 
     /**
      * @param $portfolio

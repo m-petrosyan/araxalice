@@ -1,6 +1,11 @@
 <template>
   <div class="db-about" v-if="about">
     <ErrorMessages :serverError="error"/>
+    <div class="user-avatar">
+      <label class="block avatar mx-auto" for="cover"
+             :style="{backgroundImage : `url(${!preview  ? about.image ?? defaultImg: preview  })`}"/>
+      <input type="file" hidden="" accept="image/*" id="cover" @change="changeCover">
+    </div>
     <div v-if="!loading" class="form">
       <medium-editor
           v-model="content"
@@ -23,6 +28,7 @@
 import Editor from 'vuejs-medium-editor'
 import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 import ErrorMessages from "@/components/messages/ErrorMessages.vue";
+import defaultImg from "@/assets/images/other/no-pic.png"
 
 export default {
   name: "DashboardAbout",
@@ -30,6 +36,8 @@ export default {
     return {
       content: '',
       loading: false,
+      defaultImg: defaultImg,
+      preview: null,
       options: {
         toolbar: {
           buttons: [
@@ -47,11 +55,18 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch('updateAbout', {text: this.content})
+      const formData = new FormData
+      if (this.image) formData.append('image', this.image)
+      formData.append('text', this.content)
+      this.$store.dispatch('updateAbout', formData)
     },
     onChange(val) {
       this.content = val
-    }
+    },
+    changeCover(file) {
+      this.preview = URL.createObjectURL(file.target.files[0])
+      this.image = file.target.files[0]
+    },
   },
   created() {
     this.$store.dispatch('getAbout')
@@ -100,8 +115,25 @@ export default {
     }
   }
 
-  .submit {
+  .user-avatar {
+    position: relative;
+    float: left;
+    shape-outside: circle(50%);
+    z-index: 1;
+    margin: 0 10px 10px 0;
+    background-color: #181818;
+    border-bottom-right-radius: 100%;
+    border-top-right-radius: 100%;
 
+    .avatar {
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      display: inline-block;
+      background-size: cover;
+      background-position: center;
+      border-radius: 100%;
+    }
   }
 }
 </style>

@@ -12,5 +12,16 @@ class About extends Model
     protected $fillable = [
         'id',
         'text',
+        'image',
     ];
+
+    public function getImageUrlAttribute(): string
+    {
+        return asset('storage/about/'.$this->image);
+    }
+
+    public function getFileLocationAttribute(): string
+    {
+        return 'about/'.$this->image;
+    }
 }
