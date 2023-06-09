@@ -1,7 +1,9 @@
 <template>
   <section>
     <div class="ouija_board">
-      <img class="cursor" ref="cursor" :src="board.cursor" alt="cursor">
+      <div class="board">
+        <img class="cursor" ref="cursor" :src="board.cursor" alt="cursor">
+      </div>
     </div>
     <div class="form-content">
       <div class="contacts">
@@ -68,107 +70,107 @@ export default {
         lastLatter: '',
         cordinates: {
           a: {
-            top: '140px',
+            top: '134px',
             left: '95px'
           },
           b: {
-            top: '134px',
+            top: '128px',
             left: '138px'
           },
           c: {
-            top: '131px',
+            top: '125px',
             left: '178px'
           },
           d: {
-            top: '130px',
+            top: '124px',
             left: '211px'
           },
           e: {
-            top: '130px',
+            top: '124px',
             left: '248px'
           },
           f: {
-            top: '130px',
+            top: '124px',
             left: '284px'
           },
           g: {
-            top: '132px',
+            top: '126px',
             left: '322px'
           },
           h: {
-            top: '134px',
+            top: '128px',
             left: '360px'
           },
           i: {
-            top: '137px',
+            top: '131px',
             left: '394px'
           },
           j: {
-            top: '197px',
+            top: '191px',
             left: '101px'
           },
           k: {
-            top: '194px',
+            top: '188px',
             left: '139px'
           },
           l: {
-            top: '194px',
+            top: '188px',
             left: '179px'
           },
           m: {
-            top: '192px',
+            top: '186px',
             left: '221px'
           },
           n: {
-            top: '192px',
+            top: '186px',
             left: '268px'
           },
           o: {
-            top: '193px',
+            top: '187px',
             left: '306px'
           },
           p: {
-            top: '193px',
+            top: '187px',
             left: '340px'
           },
           q: {
-            top: '199px',
+            top: '193px',
             left: '379px'
           },
           r: {
-            top: '261px',
+            top: '255px',
             left: '78px'
           },
           s: {
-            top: '259px',
+            top: '253px',
             left: '116px'
           },
           t: {
-            top: '256px',
+            top: '250px',
             left: '152px'
           },
           u: {
-            top: '255px',
+            top: '249px',
             left: '192px'
           },
           v: {
-            top: '254px',
+            top: '248px',
             left: '232px'
           },
           w: {
-            top: '254px',
+            top: '248px',
             left: '280px'
           },
           x: {
-            top: '256px',
+            top: '250px',
             left: '325px'
           },
           y: {
-            top: '258px',
+            top: '252px',
             left: '364px'
           },
           z: {
-            top: '261px',
+            top: '255px',
             left: '402px'
           },
         }
@@ -207,23 +209,29 @@ section {
 
   .ouija_board {
     width: 50%;
-    background-image: url("@/assets/images/other/ouija_board.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
 
-    .cursor {
-      position: absolute;
-      width: 14%;
-      top: 349px;
-      left: 44%;
-      transition: 1s;
+    .board {
+      width: 100%;
+      height: 500px;
+      background-image: url("@/assets/images/other/ouija_board.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
 
-      &.start {
-        width: 150px;
+      .cursor {
+        position: absolute;
+        width: 14%;
+        top: 349px;
+        left: 44%;
+        transition: 1s;
+
+        &.start {
+          width: 150px;
+        }
       }
     }
+
   }
 
   .form-content {
@@ -257,29 +265,10 @@ section {
           margin-top: 30px;
         }
 
-        input, textarea {
-          background-color: var(--vt-gray-black);
-          border: none;
-          width: 100%;
-          min-height: 40px;
-          padding-left: 10px;
-          resize: vertical;
-          color: var(--vt-c-white);
-        }
-
         textarea {
           padding-top: 10px;
         }
-
-        .submit {
-          border: none;
-          color: var(--color-submit-text);
-          height: 40px;
-          width: 150px;
-          background-color: var(--vt-gray-black);
-        }
       }
-
     }
   }
 }

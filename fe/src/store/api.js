@@ -16,19 +16,19 @@ const postRequest = async (url, data) => {
         .catch(error => Promise.reject(error.response.data));
 };
 
-const deleteRequest = async (url, body) => {
+const deleteRequest = async (url, data) => {
     let headers = await getHeader();
-    headers = {...headers, ...{data: body}};
+    headers = {...headers, ...{data: data}};
     return axios
         .delete(import.meta.env.VITE_APP_API + url, headers)
         .then(response => response.data)
         .catch(error => Promise.reject(error.response.data));
 };
 
-const putRequest = async (url, body) => {
+const putRequest = async (url, data) => {
     let headers = await getHeader();
     return axios
-        .put(import.meta.env.VITE_APP_API + url, body, headers)
+        .put(import.meta.env.VITE_APP_API + url, data, headers)
         .then(response => response.data)
         .catch(error => Promise.reject(error.response.data));
 };

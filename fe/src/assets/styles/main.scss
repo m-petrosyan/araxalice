@@ -146,7 +146,7 @@ body::-webkit-scrollbar-thumb {
         &.mt-0 {
           margin: auto;
         }
-        
+
       }
     }
   }
@@ -187,6 +187,23 @@ a {
     input[type=submit] {
       cursor: pointer;
     }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    color: var(--color-submit-text);
+    height: 40px;
+    background-color: var(--vt-gray-black);
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    cursor: pointer;
   }
 
   input[type=file] {
@@ -230,7 +247,7 @@ b {
   font-weight: bold;
 }
 
-button {
+button, input[type=submit] {
   &.submit {
     border: none;
     color: var(--color-submit-text);
@@ -238,9 +255,15 @@ button {
     min-width: 150px;
     background-color: var(--vt-gray-black);
     cursor: pointer;
+    transition: .3s;
 
     &.sm {
       min-width: 60px;
+    }
+
+    &:hover {
+      color: var(--color-alert);
+      background-color: var(--vt-c-divider-dark-2);
     }
   }
 }
