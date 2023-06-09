@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Portfolio;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PortfolioGetRequest extends FormRequest
+class PortfolioCategoryGetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,12 +18,12 @@ class PortfolioGetRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'limit' => ['numeric'],
+            'category' => ['exists:portfolio_categories,id'],
         ];
     }
 }

@@ -24,7 +24,7 @@ export default {
     },
     actions: {
         getPortfolio({commit}, data) {
-            return getRequest('/portfolio', data)
+            return getRequest('/portfolio_category/filters', data)
                 .then(response => commit("setPortfolio", response.data))
                 .catch(error => Promise.reject(error));
         },

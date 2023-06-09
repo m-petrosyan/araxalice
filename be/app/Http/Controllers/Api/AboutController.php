@@ -5,17 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\About\AboutCreateUpdateRequest;
 use App\Http\Resources\About\AboutResource;
-use App\Models\About;
+use App\Repositories\AboutRepository;
 use App\Services\AboutService;
 use Illuminate\Http\Response;
 
 class AboutController extends Controller
 {
     protected AboutService $aboutService;
+    protected AboutRepository $aboutRepository;
 
-    public function __construct(AboutService $aboutService)
+    public function __construct(AboutService $aboutService, AboutRepository $aboutRepository)
     {
         $this->aboutService = $aboutService;
+        $this->aboutRepository = $aboutRepository;
     }
 
     /**
@@ -38,6 +40,6 @@ class AboutController extends Controller
      */
     public function show(): AboutResource
     {
-        return new AboutResource(About::first());
+        return new AboutResource($this->aboutRepository->getAboutFirst());
     }
 }

@@ -4,20 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\PortfolioCategoryCreateRequest;
+use App\Http\Requests\portfolio\PortfolioCategoryGetRequest;
 use App\Http\Requests\Portfolio\PortfolioCategoryUpdateRequest;
 use App\Http\Resources\Portfolio\PortfolioCategoryCollection;
+use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
 use App\Http\Resources\Portfolio\PortfolioCategoryResource;
 use App\Models\PortfolioCategory;
+use App\Repositories\PortfolioCategoryRepository;
 use App\Services\PortfolioCategoryService;
 use Illuminate\Http\Response;
 
 class PortfolioCategoryController extends Controller
 {
     protected PortfolioCategoryService $portfolioCategoryService;
+    protected PortfolioCategoryRepository $portfolioCategoryRepository;
 
-    public function __construct(PortfolioCategoryService $portfolioCategoryService)
-    {
+    public function __construct(
+        PortfolioCategoryService $portfolioCategoryService,
+        PortfolioCategoryRepository $portfolioCategoryRepository
+    ) {
         $this->portfolioCategoryService = $portfolioCategoryService;
+        $this->portfolioCategoryRepository = $portfolioCategoryRepository;
     }
 
     /**
@@ -27,7 +34,20 @@ class PortfolioCategoryController extends Controller
      */
     public function index(): PortfolioCategoryCollection
     {
-        return new PortfolioCategoryCollection(PortfolioCategory::get());
+        return new PortfolioCategoryCollection($this->portfolioCategoryRepository->getAll());
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  PortfolioCategoryGetRequest  $request
+     * @return PortfolioCategoryGroupCollection
+     */
+    public function getByFilters(PortfolioCategoryGetRequest $request): PortfolioCategoryGroupCollection
+    {
+        return new PortfolioCategoryGroupCollection(
+            $this->portfolioCategoryRepository->getByCategory($request->category)
+        );
     }
 
     /**

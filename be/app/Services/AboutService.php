@@ -2,11 +2,18 @@
 
 namespace App\Services;
 
+use App\Repositories\AboutRepository;
 use Illuminate\Support\Facades\Storage;
 
 class AboutService extends ImageService
 {
     protected string $dir = 'about/';
+    protected AboutRepository $aboutRepository;
+
+    public function __construct(AboutRepository $aboutRepository)
+    {
+        $this->aboutRepository = $aboutRepository;
+    }
 
     public function storeOrUpdate(array $attributes): void
     {
@@ -20,13 +27,13 @@ class AboutService extends ImageService
 
             $data['image'] = $this->saveFile($image, $this->dir, $originalImage);
 
-            $oldImage = auth()->user()->about()->first();
+            $oldImage = $this->aboutRepository->getUserAbout()->first();
 
             if ($oldImage?->image) {
                 Storage::disk('public')->delete($oldImage->fileLocation);
             }
         }
 
-        auth()->user()->about()->updateOrCreate(['id' => 1], $data);
+        $this->aboutRepository->getUserAbout()->updateOrCreate(['id' => 1], $data);
     }
 }

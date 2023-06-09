@@ -2,17 +2,30 @@
 
 namespace App\Services;
 
+use App\Repositories\PortfolioCategoryRepository;
+use App\Repositories\PortfolioRepository;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioCategoryService
 {
+    protected PortfolioCategoryRepository $portfolioCategoryRepository;
+    protected PortfolioRepository $portfolioRepository;
+
+    public function __construct(
+        PortfolioCategoryRepository $portfolioCategoryRepository,
+        PortfolioRepository $portfolioRepository
+    ) {
+        $this->portfolioCategoryRepository = $portfolioCategoryRepository;
+        $this->portfolioRepository = $portfolioRepository;
+    }
+
     /**
      * @param  array  $attributes
      * @return mixed
      */
     public function store(array $attributes): mixed
     {
-        return auth()->user()->portfolioCategory()->create($attributes);
+        return $this->portfolioCategoryRepository->getUserCategories()->create($attributes);
     }
 
     /**
@@ -27,7 +40,7 @@ class PortfolioCategoryService
 
     public function destroy($category): void
     {
-        foreach ($category->portfolio()->get() as $item) {
+        foreach ($this->portfolioRepository->getPortfolioByCategory($category) as $item) {
             Storage::disk('public')->delete($item->fileLocation);
         }
 

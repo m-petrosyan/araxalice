@@ -121,6 +121,7 @@ export default {
     float: left;
     shape-outside: circle(50%);
     z-index: 1;
+    padding-right: 5px;
     margin: 0 10px 10px 0;
     background-color: #181818;
     border-bottom-right-radius: 100%;

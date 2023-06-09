@@ -6,36 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\PortfolioCreateRequest;
 use App\Http\Requests\Portfolio\PortfolioGetRequest;
 use App\Http\Requests\Portfolio\PortfolioUpdateRequest;
-use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
-use App\Http\Resources\Portfolio\PortfolioCetegoryGroupResource;
 use App\Http\Resources\Portfolio\PortfolioCollection;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
+use App\Repositories\PortfolioRepository;
 use App\Services\PortfolioService;
 use Illuminate\Http\Response;
 
 class PortfolioController extends Controller
 {
     protected PortfolioService $portfolioService;
+    protected PortfolioRepository $portfolioRepository;
 
-    public function __construct(PortfolioService $portfolioService)
+    public function __construct(PortfolioService $portfolioService, PortfolioRepository $portfolioRepository)
     {
         $this->portfolioService = $portfolioService;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  PortfolioGetRequest  $request
-     * @return PortfolioCategoryGroupCollection
-     */
-    public function index(PortfolioGetRequest $request): PortfolioCategoryGroupCollection
-    {
-        return new PortfolioCategoryGroupCollection(
-            PortfolioCategory::when($request->category, function ($query) use ($request) {
-                return $query->where('id', $request->category);
-            })->get()->load('portfolio')
-        );
+        $this->portfolioRepository = $portfolioRepository;
     }
 
     /**
@@ -44,7 +30,9 @@ class PortfolioController extends Controller
      */
     public function randomImages(PortfolioGetRequest $request): PortfolioCollection
     {
-        return new PortfolioCollection(Portfolio::inRandomOrder()->paginate($request->validated()['limit'] ?? 20));
+        return new PortfolioCollection(
+            $this->portfolioRepository->getPortfolioRandom()->paginate($request->validated()['limit'] ?? 20)
+        );
     }
 
     /**

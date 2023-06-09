@@ -18,9 +18,9 @@ use App\Http\Controllers\Api\PortfolioController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('portfolio', [PortfolioController::class, 'index']);
 Route::get('portfolio/random', [PortfolioController::class, 'randomImages']);
 Route::get('portfolio_category', [PortfolioCategoryController::class, 'index']);
+Route::get('portfolio_category/filters', [PortfolioCategoryController::class, 'getByFilters']);
 Route::post('contact', [ContactController::class, 'store']);
 Route::get('about', [AboutController::class, 'show']);
 
