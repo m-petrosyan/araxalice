@@ -234,6 +234,7 @@ nav {
           visibility: visible;
           height: auto;
           background: var(--color-scroll);
+          white-space: nowrap;
         }
       }
 
