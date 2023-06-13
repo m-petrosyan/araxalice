@@ -214,6 +214,7 @@ section {
     width: 50%;
     background-image: url("@/assets/images/other/board_texture.png");
     background-repeat: no-repeat;
+    background-position: center;
 
     .board {
       width: 598px;
