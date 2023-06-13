@@ -4,5 +4,5 @@ namespace App\Interface;
 
 interface UserRepositoryInterface
 {
-    public function getLoggedInUser();
+    public static function getLoggedInUser();
 }

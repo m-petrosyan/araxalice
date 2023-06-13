@@ -4,9 +4,9 @@ namespace App\Interface;
 
 interface PortfolioCategoryInterface
 {
-    public function getAll();
+    public static function getAll();
 
-    public function getUserCategories();
+    public static function getUserCategories();
 
-
+    public static function getByCategory(int|null $category);
 }

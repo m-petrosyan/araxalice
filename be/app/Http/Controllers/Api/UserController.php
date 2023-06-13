@@ -13,16 +13,13 @@ use Illuminate\Http\Response;
 class UserController extends Controller
 {
     protected UserService $userService;
-    protected UserRepository $userRepository;
 
     /**
      * @param  UserService  $userService
-     * @param  UserRepository  $userRepository
      */
-    public function __construct(UserService $userService, UserRepository $userRepository)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -31,7 +28,7 @@ class UserController extends Controller
      */
     public function auth(): UserResource
     {
-        return new UserResource($this->userRepository->getLoggedInUser());
+        return new UserResource(UserRepository::getLoggedInUser());
     }
 
     /**

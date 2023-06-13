@@ -10,7 +10,7 @@ class AboutRepository implements AboutRepositoryInterface
     /**
      * @return mixed
      */
-    public function getAboutFirst(): mixed
+    public static function getAboutFirst(): mixed
     {
         return About::first();
     }
@@ -18,7 +18,7 @@ class AboutRepository implements AboutRepositoryInterface
     /**
      * @return mixed
      */
-    public function getUserAbout(): mixed
+    public static function getUserAbout(): mixed
     {
         return auth()->user()->about();
     }

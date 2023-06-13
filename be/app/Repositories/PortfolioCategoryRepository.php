@@ -10,7 +10,7 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
     /**
      * @return mixed
      */
-    public function getAll(): mixed
+    public static function getAll(): mixed
     {
         return PortfolioCategory::get();
     }
@@ -18,7 +18,7 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
     /**
      * @return mixed
      */
-    public function getUserCategories(): mixed
+    public static function getUserCategories(): mixed
     {
         return auth()->user()->portfolioCategory();
     }
@@ -27,7 +27,7 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
      * @param  int|null  $category
      * @return mixed
      */
-    public function getByCategory(int|null $category): mixed
+    public static function getByCategory(int|null $category): mixed
     {
         return PortfolioCategory::when($category, function ($query) use ($category) {
             return $query->where('id', $category);

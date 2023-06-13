@@ -6,11 +6,11 @@
       </div>
     </div>
   </div>
-  <PortfolioImageView v-if="image" :image="image"/>
+  <PortfolioImageView v-if="image" v-model:image="image"/>
 </template>
 
 <script>
-import PortfolioImageView from "@/components/pottfolio/PortfolioImageView.vue";
+import PortfolioImageView from "@/components/portfolio/PortfolioImageView.vue";
 
 export default {
   name: "PortfolioImages",
@@ -32,10 +32,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/assets/styles/vars";
+
 .wrapper {
   display: grid;
   gap: 10px;
   grid-template-columns: auto auto auto auto;
+
+  @media all and (max-width: $lg) {
+    gap: 15px;
+    grid-template-columns: auto auto auto;
+  }
+
+  @media all and (max-width: $sm) {
+    grid-template-columns: auto;
+  }
 
   .img {
     height: 300px;

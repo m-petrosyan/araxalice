@@ -2,9 +2,9 @@
 
 namespace App\Interface;
 
-interface PortfolioRepostiroryInterface
+interface  PortfolioRepostiroryInterface
 {
-    public function getPortfolioByCategory(object $category);
+    public static function getPortfolioByCategory(object $category);
 
-    public function getPortfolioRandom();
+    public static function getPortfolioRandom();
 }

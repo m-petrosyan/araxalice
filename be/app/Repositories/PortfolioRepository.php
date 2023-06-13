@@ -11,7 +11,7 @@ class PortfolioRepository implements PortfolioRepostiroryInterface
      * @param  object  $category
      * @return mixed
      */
-    public function getPortfolioByCategory(object $category): mixed
+    public static function getPortfolioByCategory(object $category): mixed
     {
         return $category->portfolio()->get();
     }
@@ -19,7 +19,7 @@ class PortfolioRepository implements PortfolioRepostiroryInterface
     /**
      * @return mixed
      */
-    public function getPortfolioRandom(): mixed
+    public static function getPortfolioRandom(): mixed
     {
         return Portfolio::inRandomOrder();
     }

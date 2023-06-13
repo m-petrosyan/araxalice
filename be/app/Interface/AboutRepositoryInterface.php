@@ -4,7 +4,7 @@ namespace App\Interface;
 
 interface AboutRepositoryInterface
 {
-    public function getAboutFirst();
+    public static function getAboutFirst();
 
-    public function getUserAbout();
+    public static function getUserAbout();
 }

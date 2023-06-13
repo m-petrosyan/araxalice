@@ -6,16 +6,6 @@ use App\Repositories\UserRepository;
 
 class UserService
 {
-    protected UserRepository $userRepository;
-
-    /**
-     * @param  UserRepository  $userRepository
-     */
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
     /**
      * @param  array  $attributes
      * @return void
@@ -24,6 +14,6 @@ class UserService
     {
         unset($attributes['password_current'], $attributes['password_re']);
 
-        $this->userRepository->getLoggedInUser()->update(array_filter($attributes));
+        UserRepository::getLoggedInUser()->update(array_filter($attributes));
     }
 }

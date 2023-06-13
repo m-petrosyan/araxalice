@@ -203,9 +203,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/assets/styles/vars";
+
 section {
   display: flex;
   gap: 20px;
+
 
   .ouija_board {
     width: 50%;
@@ -231,7 +234,6 @@ section {
         }
       }
     }
-
   }
 
   .form-content {
@@ -269,6 +271,13 @@ section {
           padding-top: 10px;
         }
       }
+    }
+  }
+
+  @media all and (max-width: $lg) {
+    flex-direction: column;
+    .ouija_board, .form-content {
+      width: 100%;
     }
   }
 }

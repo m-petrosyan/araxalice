@@ -7,6 +7,7 @@
     <!--    <div id='stars2'></div>-->
     <!--    <div id='stars3'></div>-->
     <section class="header-animation mt-0" ref="flicker">
+      <div class="bg-img"/>
       <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
         <img class="animation item2" :src="item2" alt="">
@@ -50,7 +51,6 @@
 </template>
 
 <script>
-import arax from '@/assets/images/header_animation/arax.png'
 import item1 from '@/assets/images/header_animation/item1.png'
 import item2 from '@/assets/images/header_animation/item2.png'
 import item3 from '@/assets/images/header_animation/item3.png'
@@ -73,7 +73,6 @@ export default {
   },
   data() {
     return {
-      arax: arax,
       item1: item1,
       item2: item2,
       item3: item3,
@@ -117,11 +116,13 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import "src/assets/styles/vars";
+
 .home-page {
   position: relative;
 
   .parallax {
-    padding: 50px;
+    padding: 50px 100px;
     height: 100vh;
     background-image: url("@/assets/images/other/paralax.jpg");
     min-height: 500px;
@@ -140,6 +141,18 @@ export default {
       bottom: 0;
       left: 0;
     }
+
+    @media all and (max-width: $lg) {
+      padding: 15px 25px;
+    }
+
+    @media all and (max-width: $sm) {
+      padding: 10px;
+    }
+
+    section {
+      padding: 0 5rem;
+    }
   }
 
   section {
@@ -152,157 +165,176 @@ export default {
     }
   }
 
-  .header-animation {
+  section.header-animation {
     position: relative;
-    background-image: url("@/assets/images/header_animation/arax.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    text-align: center;
-    animation: zoom 3s linear;
 
-    @keyframes zoom {
-      0% {
-        background-size: 0;
+    .bg-img {
+      position: absolute;
+      top: 130px;
+      height: 100%;
+      width: 100%;
+      background-image: url("@/assets/images/header_animation/header.png");
+      background-repeat: no-repeat;
+      background-position: top;
+      animation: zoom 3s linear;
+      @keyframes zoom {
+        0% {
+          background-size: 0;
+        }
+        100% {
+          background-size: 90%;
+        }
       }
-      100% {
-        background-size: 90%;
+
+      &.flicker {
+        animation: flicker 2s linear both;
+        @keyframes flicker {
+          0% {
+            opacity: 1;
+          }
+          13.9% {
+            opacity: 1;
+          }
+          14% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          14.9% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          15% {
+            opacity: 1;
+          }
+          22.9% {
+            opacity: 1;
+          }
+          23% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          24.9% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          25% {
+            opacity: 1;
+          }
+          34.9% {
+            opacity: 1;
+          }
+          35% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          39.9% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          40% {
+            opacity: 1;
+          }
+          42.9% {
+            opacity: 1;
+          }
+          43% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          44.9% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          45% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 1;
+          }
+          54.9% {
+            opacity: 1;
+          }
+          55% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          69.4% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          69.5% {
+            opacity: 1;
+          }
+          69.9% {
+            opacity: 1;
+          }
+          70% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          79.4% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          79.9% {
+            opacity: 1;
+          }
+          80% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          89.8% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          89.9% {
+            opacity: 1;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          90% {
+            opacity: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
       }
     }
 
-    &.flicker {
-      animation: flicker 2s linear both;
-      @keyframes flicker {
-        0% {
-          opacity: 1;
-        }
-        13.9% {
-          opacity: 1;
-        }
-        14% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        14.9% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        15% {
-          opacity: 1;
-        }
-        22.9% {
-          opacity: 1;
-        }
-        23% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        24.9% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        25% {
-          opacity: 1;
-        }
-        34.9% {
-          opacity: 1;
-        }
-        35% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        39.9% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        40% {
-          opacity: 1;
-        }
-        42.9% {
-          opacity: 1;
-        }
-        43% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        44.9% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        45% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 1;
-        }
-        54.9% {
-          opacity: 1;
-        }
-        55% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        69.4% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        69.5% {
-          opacity: 1;
-        }
-        69.9% {
-          opacity: 1;
-        }
-        70% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        79.4% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        79.9% {
-          opacity: 1;
-        }
-        80% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        89.8% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        89.9% {
-          opacity: 1;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        90% {
-          opacity: 0;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-        }
-        100% {
-          opacity: 1;
-        }
+    @media all and (max-width: $lg) {
+      height: 400px;
+
+      .bg-img {
+        top: 0;
+        left: 0;
+        background-size: contain;
+        background-position: center;
+        background-image: url("@/assets/images/header_animation/header2.png");
+      }
+      .animation {
+        display: none;
       }
     }
 
     .animation {
       position: absolute;
-      //transform: scale(0);
     }
 
     .left-side {
@@ -396,79 +428,79 @@ export default {
 
       .item1 {
         top: 346px;
-        right: 260px;
+        right: 225px;
         animation: zoom-transform-right 6s 6s both;
       }
 
       .item2 {
         top: 402px;
-        right: 296px;
+        right: 261px;
         animation: zoom-transform-right 6s 7s both;
       }
 
       .item3 {
         top: 404px;
-        right: 213px;
+        right: 183px;
         animation: zoom-transform-right 6s 8s both;
       }
 
       .item4 {
         top: 216px;
-        right: 154px;
+        right: 119px;
         animation: zoom-transform-right 6s 8.5s both;
       }
 
       .item5 {
         top: 291px;
-        right: 134px;
+        right: 99px;
         animation: zoom-transform-right 6s 7s both;
       }
 
       .item6 {
         top: 225px;
-        right: 250px;
+        right: 215px;
         animation: zoom-transform-right 6s 8s both;
       }
 
       .item7 {
         top: 164px;
-        right: 284px;
+        right: 249px;
         animation: zoom-transform-right 6s 9s both;
       }
 
       .item8 {
         top: 500px;
-        right: 397px;
+        right: 362px;
         animation: zoom-transform-right 6s 8s both;
       }
 
       .item9 {
         top: 345px;
-        right: 198px;
+        right: 173px;
         animation: zoom-transform-right 6s 8s both;
       }
 
       .item10 {
         top: 361px;
-        right: 234px;
+        right: 199px;
         animation: zoom-transform-right 6s 8s both;
       }
 
       .item11 {
         top: 260px;
-        right: 199px;
+        right: 164px;
         animation: zoom-transform-right 6s 6s both;
       }
 
       .item12 {
         top: 242px;
-        right: 243px;
+        right: 208px;
         animation: zoom-transform-right 6s 9s both;
       }
 
       .item13 {
         top: 191px;
-        right: 204px;
+        right: 169px;
         animation: zoom-transform-right 6s 7s both;
       }
     }

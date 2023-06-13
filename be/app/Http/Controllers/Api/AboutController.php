@@ -12,12 +12,10 @@ use Illuminate\Http\Response;
 class AboutController extends Controller
 {
     protected AboutService $aboutService;
-    protected AboutRepository $aboutRepository;
 
-    public function __construct(AboutService $aboutService, AboutRepository $aboutRepository)
+    public function __construct(AboutService $aboutService)
     {
         $this->aboutService = $aboutService;
-        $this->aboutRepository = $aboutRepository;
     }
 
     /**
@@ -40,6 +38,6 @@ class AboutController extends Controller
      */
     public function show(): AboutResource
     {
-        return new AboutResource($this->aboutRepository->getAboutFirst());
+        return new AboutResource(AboutRepository::getAboutFirst());
     }
 }

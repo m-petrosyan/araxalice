@@ -17,14 +17,10 @@ use Illuminate\Http\Response;
 class PortfolioCategoryController extends Controller
 {
     protected PortfolioCategoryService $portfolioCategoryService;
-    protected PortfolioCategoryRepository $portfolioCategoryRepository;
 
-    public function __construct(
-        PortfolioCategoryService $portfolioCategoryService,
-        PortfolioCategoryRepository $portfolioCategoryRepository
-    ) {
+    public function __construct(PortfolioCategoryService $portfolioCategoryService)
+    {
         $this->portfolioCategoryService = $portfolioCategoryService;
-        $this->portfolioCategoryRepository = $portfolioCategoryRepository;
     }
 
     /**
@@ -34,7 +30,7 @@ class PortfolioCategoryController extends Controller
      */
     public function index(): PortfolioCategoryCollection
     {
-        return new PortfolioCategoryCollection($this->portfolioCategoryRepository->getAll());
+        return new PortfolioCategoryCollection(PortfolioCategoryRepository::getAll());
     }
 
     /**
@@ -46,7 +42,7 @@ class PortfolioCategoryController extends Controller
     public function getByFilters(PortfolioCategoryGetRequest $request): PortfolioCategoryGroupCollection
     {
         return new PortfolioCategoryGroupCollection(
-            $this->portfolioCategoryRepository->getByCategory($request->category)
+            PortfolioCategoryRepository::getByCategory($request->category)
         );
     }
 

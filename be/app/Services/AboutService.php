@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Storage;
 class AboutService extends ImageService
 {
     protected string $dir = 'about/';
-    protected AboutRepository $aboutRepository;
-
-    public function __construct(AboutRepository $aboutRepository)
-    {
-        $this->aboutRepository = $aboutRepository;
-    }
 
     public function storeOrUpdate(array $attributes): void
     {
@@ -34,6 +28,6 @@ class AboutService extends ImageService
             }
         }
 
-        $this->aboutRepository->getUserAbout()->updateOrCreate(['id' => 1], $data);
+        AboutRepository::getUserAbout()->updateOrCreate(['id' => 1], $data);
     }
 }

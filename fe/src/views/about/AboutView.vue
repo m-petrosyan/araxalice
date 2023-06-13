@@ -29,10 +29,11 @@ export default {
 }</script>
 
 <style lang="scss">
+@import "src/assets/styles/vars";
+
 .about {
   .img {
     .portrait {
-      position: relative;
       border-radius: 100%;
       overflow: hidden;
       float: left;
@@ -44,45 +45,13 @@ export default {
       background-image: var(--profile_pic);
       background-size: contain;
       background-repeat: no-repeat;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: var(--profile_pic);
-        background-size: contain;
-        background-repeat: no-repeat;
-        opacity: .5;
-        animation: glitch 10s linear infinite;
-
-        @keyframes glitch {
-          0% {
-            background-position: 0 0;
-            filter: hue-rotate(0deg);
-          }
-          10% {
-            background-position: 15px 0;
-          }
-          15% {
-            background-position: -15px 0;
-          }
-          20% {
-            filter: hue-rotate(360deg);
-          }
-          25% {
-            background-position: 0 0;
-            filter: hue-rotate(0deg);
-          }
-          100% {
-            background-position: 0 0;
-            filter: hue-rotate(0deg);
-          }
-        }
-      }
     }
+  }
+
+  @media all and (max-width: $sm) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

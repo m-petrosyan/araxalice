@@ -132,21 +132,22 @@ body::-webkit-scrollbar-thumb {
     main {
       min-height: calc(100vh - var(--navbar-size) - var(--section-top));
       z-index: 1;
-      //width: var(--lg);
       margin: var(--section-top) auto auto auto;
       padding-bottom: var(--section-bottom);
-      @media (width <= $lg) {
-        width: var(--md);
-      }
 
       section {
-        width: var(--lg);
+        max-width: var(--lg);
         margin: 50px auto;
+        padding: 0 2rem;
 
         &.mt-0 {
           margin: auto;
         }
 
+        @media all and (max-width: $lg) {
+          width: 100%;
+          margin-bottom: 0;
+        }
       }
     }
   }

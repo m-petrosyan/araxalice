@@ -11,7 +11,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @return Authenticatable
      */
-    public function getLoggedInUser(): Authenticatable
+    public static function getLoggedInUser(): Authenticatable
     {
         return auth()->user();
     }
