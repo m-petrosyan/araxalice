@@ -12,7 +12,7 @@
         </router-link>
         <ul class="sub-menu">
           <li class="item" v-for="item in categories" :key="item.id">
-            <router-link :to="{name:'portfolio-category',params:{id: item.id}}">
+            <router-link :to="{name:'portfolio-category',params:{id: item.id}}" @click="toggleBurger(false)">
               {{ item.name }}
             </router-link>
           </li>
@@ -56,8 +56,8 @@ export default {
     }
   },
   methods: {
-    toggleBurger() {
-      this.burgerOpen = !this.burgerOpen
+    toggleBurger(burgerOpen = null) {
+      this.burgerOpen = burgerOpen ?? !this.burgerOpen
     }
   },
   watch: {
