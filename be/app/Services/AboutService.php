@@ -21,7 +21,7 @@ class AboutService extends ImageService
 
             $data['image'] = $this->saveFile($image, $this->dir, $originalImage);
 
-            $oldImage = $this->aboutRepository->getUserAbout()->first();
+            $oldImage = AboutRepository::getUserAbout()->first();
 
             if ($oldImage?->image) {
                 Storage::disk('public')->delete($oldImage->fileLocation);
