@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\PortfolioCategoryCreateRequest;
-use App\Http\Requests\portfolio\PortfolioCategoryGetRequest;
+use App\Http\Requests\Portfolio\PortfolioCategoryGetRequest;
 use App\Http\Requests\Portfolio\PortfolioCategoryUpdateRequest;
 use App\Http\Resources\Portfolio\PortfolioCategoryCollection;
 use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
