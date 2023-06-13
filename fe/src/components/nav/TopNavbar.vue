@@ -12,7 +12,7 @@
         </router-link>
         <ul class="sub-menu">
           <li class="item" v-for="item in categories" :key="item.id">
-            <router-link :to="{name:'portfolio-category',params:{id: item.id}}" @click="toggleBurger(false)">
+            <router-link :to="{name:'portfolio-category',params:{id: item.id}}">
               {{ item.name }}
             </router-link>
           </li>
@@ -56,14 +56,17 @@ export default {
     }
   },
   methods: {
-    toggleBurger(burgerOpen = null) {
-      this.burgerOpen = burgerOpen ?? !this.burgerOpen
+    toggleBurger() {
+      this.burgerOpen = !this.burgerOpen
     }
   },
   watch: {
     scroll(val) {
       val > this.transformLimit ? this.$refs.menu.classList.add('scroll') : this.$refs.menu.classList.remove('scroll')
-    }
+    },
+    $route() {
+      this.burgerOpen = false
+    },
   },
   created() {
     this.$store.dispatch('getCategory')
@@ -72,7 +75,7 @@ export default {
     categories() {
       return this.$store.getters.getCategory
     }
-  }
+  },
 }
 </script>
 
