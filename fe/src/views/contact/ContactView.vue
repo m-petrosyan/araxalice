@@ -70,108 +70,108 @@ export default {
         lastLatter: '',
         cordinates: {
           a: {
-            top: '134px',
-            left: '95px'
+            top: '132px',
+            left: '86px'
           },
           b: {
-            top: '128px',
-            left: '138px'
+            top: '129px',
+            left: '127px'
           },
           c: {
-            top: '125px',
-            left: '178px'
+            top: '126px',
+            left: '164px'
           },
           d: {
             top: '124px',
-            left: '211px'
+            left: '199px'
           },
           e: {
-            top: '124px',
-            left: '248px'
+            top: '125px',
+            left: '232px'
           },
           f: {
-            top: '124px',
-            left: '284px'
+            top: '126px',
+            left: '267px'
           },
           g: {
-            top: '126px',
-            left: '322px'
+            top: '128px',
+            left: '303px'
           },
           h: {
-            top: '128px',
-            left: '360px'
+            top: '130px',
+            left: '338px'
           },
           i: {
-            top: '131px',
-            left: '394px'
+            top: '133px',
+            left: '372px'
           },
           j: {
             top: '191px',
-            left: '101px'
+            left: '94px'
           },
           k: {
-            top: '188px',
-            left: '139px'
+            top: '186px',
+            left: '130px'
           },
           l: {
-            top: '188px',
-            left: '179px'
+            top: '186px',
+            left: '170px'
           },
           m: {
-            top: '186px',
-            left: '221px'
+            top: '184px',
+            left: '207px'
           },
           n: {
-            top: '186px',
-            left: '268px'
+            top: '184px',
+            left: '250px'
           },
           o: {
             top: '187px',
-            left: '306px'
+            left: '287px'
           },
           p: {
-            top: '187px',
-            left: '340px'
+            top: '188px',
+            left: '320px'
           },
           q: {
             top: '193px',
-            left: '379px'
+            left: '356px'
           },
           r: {
-            top: '255px',
-            left: '78px'
+            top: '253px',
+            left: '69px'
           },
           s: {
-            top: '253px',
-            left: '116px'
+            top: '251px',
+            left: '107px'
           },
           t: {
-            top: '250px',
-            left: '152px'
+            top: '248px',
+            left: '143px'
           },
           u: {
-            top: '249px',
-            left: '192px'
+            top: '247px',
+            left: '180px'
           },
           v: {
-            top: '248px',
-            left: '232px'
+            top: '246px',
+            left: '218px'
           },
           w: {
-            top: '248px',
-            left: '280px'
+            top: '246px',
+            left: '262px'
           },
           x: {
-            top: '250px',
-            left: '325px'
+            top: '248px',
+            left: '306px'
           },
           y: {
-            top: '252px',
-            left: '364px'
+            top: '250px',
+            left: '343px'
           },
           z: {
-            top: '255px',
-            left: '402px'
+            top: '253px',
+            left: '379px'
           },
         }
       },
@@ -214,13 +214,18 @@ section {
     width: 50%;
 
     .board {
-      width: 100%;
+      width: 598px;
       height: 500px;
+      margin: auto;
       background-image: url("@/assets/images/other/ouija_board.png");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       position: relative;
+
+      @media all and (max-width: $sm) {
+        display: none;
+      }
 
       .cursor {
         position: absolute;
