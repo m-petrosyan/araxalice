@@ -1,13 +1,7 @@
 <template>
   <div class="home-page">
-
-
-    <!--  <section>-->
-    <!--    <div id='stars'></div>-->
-    <!--    <div id='stars2'></div>-->
-    <!--    <div id='stars3'></div>-->
-    <section class="header-animation mt-0" ref="flicker">
-      <div class="bg-img"/>
+    <section class="header-animation mt-0">
+      <div class="bg-img" ref="flicker"/>
       <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
         <img class="animation item2" :src="item2" alt="">
@@ -93,7 +87,7 @@ export default {
     this.$store.dispatch('getRandomPortfolio', {limit: 8})
   },
   mounted() {
-    setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3500)
+    setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3000)
   },
   methods: {
     animation() {
