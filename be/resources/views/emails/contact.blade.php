@@ -12,25 +12,30 @@
             background-color: #1b1b1b;
         }
 
-        .logo {
-            text-align: center;
-            width: 80%;
+        .content {
+
+        }
+        .content:before {
+            content: '';
+            background-image: url("{{asset('static/logo.png')}}");
+            background-position: center;
+            background-size: contain;
             opacity: .7;
         }
     </style>
 </head>
 <body class="antialiased">
 <div class="content">
-    <div>
-        <p>from: </p>
-        <p>{{$from}}</p>
-    </div>
-    <hr/>
-    <div>
-        <p>message: </p>
-        <p>{{$text}}</p>
-    </div>
-    <img src="{{asset('static/logo.png')}}" alt="logo" class="logo">
+    <table>
+        <tr>
+            <td>from:</td>
+            <td>{{$from}}</td>
+        </tr>
+        <tr>
+            <td>message:</td>
+            <td>{{$text}}</td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
