@@ -41,20 +41,25 @@
           </a>
         </div>
         <form class="form" @submit.prevent="contact">
-          <div class="form-group">
-            <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.name"
-                   placeholder="full name">
+          <div class="send-message" ref="sendmessage">
+            <p>Thank you, email has been sent</p>
           </div>
-          <div class="form-group">
-            <input type="email" name="email" @input="event => type(event.target.value)" v-model="data.email"
-                   placeholder="email">
-          </div>
-          <div class="form-group">
+          <div class="form-fields" ref="formfields" :class="{close:closeForm}">
+            <div class="form-group">
+              <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.name"
+                     placeholder="full name">
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" @input="event => type(event.target.value)" v-model="data.email"
+                     placeholder="email">
+            </div>
+            <div class="form-group">
           <textarea name="message" @input="event => type(event.target.value)" v-model="data.message" rows="10"
                     placeholder="message"/>
-          </div>
-          <div class="form-group">
-            <input class="submit" type="submit" value="send">
+            </div>
+            <div class="form-group">
+              <input class="submit" type="submit" value="send">
+            </div>
           </div>
         </form>
       </div>
@@ -76,6 +81,7 @@ export default {
   data() {
     return {
       loading: false,
+      closeForm: false,
       board: {
         cursor: cursor,
         lastLatter: '',
@@ -209,6 +215,11 @@ export default {
         this.loading = true
         this.$store.dispatch('createContact', this.data).then(() => {
           this.data = {}
+          this.closeForm = true
+          setTimeout(() => {
+            this.$refs.formfields.style.display = 'none'
+            this.$refs.sendmessage.classList.add('open')
+          }, 400)
         }).finally(() => {
           this.v$.$reset()
           this.loading = false
@@ -307,13 +318,43 @@ section {
       .form {
         margin-top: 50px;
 
-        .form-group {
-          &:not(:first-child) {
-            margin-top: 30px;
+        .form-fields {
+          &.close {
+            transition: 0.3s;
+            transform: rotateY(90deg);
+            animation: close .3s 1;
           }
 
-          textarea {
-            padding-top: 10px;
+          .form-group {
+            &:not(:first-child) {
+              margin-top: 30px;
+            }
+
+            textarea {
+              padding-top: 10px;
+            }
+          }
+        }
+
+        .send-message {
+          display: none;
+          justify-content: center;
+          align-items: center;
+          height: 280px;
+          transition: all 2.3s;
+          font-size: var(--size-l);
+
+          &.open {
+            display: flex;
+            animation: zoom 3s;
+            @keyframes zoom {
+              0% {
+                transform: scale(0);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
           }
         }
       }
@@ -326,7 +367,6 @@ section {
       }
     }
   }
-
 }
 
 </style>
