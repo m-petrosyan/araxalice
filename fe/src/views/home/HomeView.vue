@@ -161,6 +161,10 @@ export default {
 
   section.header-animation {
     position: relative;
+    min-height: 630px;
+    @media all and (max-width: $lg) {
+      min-height: unset;
+    }
 
     .bg-img {
       position: absolute;
