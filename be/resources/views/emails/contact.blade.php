@@ -13,14 +13,24 @@
         }
 
         .content {
-
+            min-height: 500px;
+            padding: 15px;
         }
+
         .content:before {
             content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
             background-image: url("{{asset('static/logo.png')}}");
             background-position: center;
             background-size: contain;
+            background-repeat: no-repeat;
             opacity: .7;
+        }
+
+        .content table tr:last-child td {
+            padding-top: 20px;
         }
     </style>
 </head>
