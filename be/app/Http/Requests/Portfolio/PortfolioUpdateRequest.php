@@ -23,7 +23,7 @@ class PortfolioUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
+            'title' => ['nullable', 'min:2'],
         ];
     }
 }

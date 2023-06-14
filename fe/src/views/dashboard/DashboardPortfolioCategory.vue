@@ -167,7 +167,7 @@ export default {
     margin-top: 50px;
 
     .form {
-      width: 500px;
+      max-width: 500px;
     }
   }
 

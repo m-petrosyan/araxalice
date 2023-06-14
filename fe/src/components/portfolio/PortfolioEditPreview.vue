@@ -1,5 +1,4 @@
 <template>
-  <input v-if="select" type="file" class="image-upload" multiple @change="previewImages">
   <div class="portfolio-edit-preview">
     <div class="images">
       <template v-if="portfolio">
@@ -38,7 +37,8 @@
         </div>
       </template>
     </div>
-    <hr v-if="images.length"/>
+    <hr/>
+    <input v-if="select" type="file" class="image-upload" multiple @change="previewImages">
     <div class="images">
       <div class="image" v-for="(image,index) in images" :key="image">
         <button class="del-img" @click="del(index)">x</button>
@@ -120,18 +120,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/assets/styles/vars";
+
 .portfolio-edit-preview {
   .images {
     display: flex;
     flex-wrap: wrap;
     margin-top: 30px;
+    gap: 10px;
 
     .image {
       position: relative;
       width: 15%;
       display: flex;
-      flex-direction: column-reverse;;
       gap: 10px;
+      flex-direction: column;
+      @media all and (max-width: $lg) {
+        width: calc(25% - 10px);
+      }
+      @media all and (max-width: $sm) {
+        width: calc(50% - 10px);
+      }
+
+      .del-img {
+        background-color: #F44336;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
 
       &:hover {
         .edit-text.hidden {
