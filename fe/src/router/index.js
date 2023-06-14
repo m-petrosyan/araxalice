@@ -51,7 +51,7 @@ const router = createRouter({
                 },
                 {
                     path: '/login',
-                    name: 'auth',
+                    name: 'login',
                     component: AuthPage
                 },
                 {
@@ -97,7 +97,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta?.requiresAuth)) {
         if (!sessionStorage.getItem('token')) {
             next({
-                name: 'auth',
+                name: 'login',
                 query: {redirect: to.fullPath}
             })
         } else {
