@@ -13,7 +13,7 @@
 
         .content {
             min-height: 500px;
-            padding: 16px;
+            padding: 15px;
             background-image: url("{{asset('static/logo.png')}}");
             background-color: #1b1b1b;
             background-position: center;
