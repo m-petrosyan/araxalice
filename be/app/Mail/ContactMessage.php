@@ -30,7 +30,10 @@ class ContactMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->mailData['name']),
+            from: new Address($this->mailData['email'], $this->mailData['name']),
+            replyTo: [
+                new Address($this->mailData['email'], $this->mailData['name']),
+            ],
             subject: 'Message from '.env('APP_URL'),
         );
     }
