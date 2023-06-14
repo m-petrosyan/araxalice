@@ -7,27 +7,18 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
     <style>
-        body {
+        table {
             color: white;
-            background-color: #1b1b1b;
         }
 
         .content {
             min-height: 500px;
             padding: 15px;
-        }
-
-        .content:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
             background-image: url("{{asset('static/logo.png')}}");
+            background-color: #1b1b1b;
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            opacity: .7;
         }
 
         .content table tr:last-child td {
