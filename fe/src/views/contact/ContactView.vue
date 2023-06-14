@@ -1,70 +1,81 @@
 <template>
   <section>
-    <div class="ouija_board">
-      <div class="board">
-        <img class="cursor" ref="cursor" :src="board.cursor" alt="cursor">
-      </div>
-    </div>
-    <div class="form-content">
-      <div class="contacts">
-        <a class="contact" href="mailto:araxsargsyan@gmail.com">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="44"
-               height="44"
-               viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
-               stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M3 9l9 6l9 -6l-9 -6l-9 6"/>
-            <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/>
-            <path d="M3 19l6 -6"/>
-            <path d="M15 13l6 6"/>
-          </svg>
-          <p class="info">
-            araxsargsyan@gmail.com
-          </p>
-        </a>
-        <a class="contact" href="tel:+17473429919">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone-call" width="44" height="44"
-               viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
-               stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path
-                d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>
-            <path d="M15 7a2 2 0 0 1 2 2"/>
-            <path d="M15 3a6 6 0 0 1 6 6"/>
-          </svg>
-          <p class="info">
-            +1(747) 342-9919
-          </p>
-        </a>
-      </div>
-      <form class="form" @submit.prevent="contact">
-        <div class="form-group">
-          <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.name"
-                 placeholder="full name">
+    <div class="form-area">
+      <div class="ouija_board">
+        <div class="board">
+          <img class="cursor" ref="cursor" :src="board.cursor" alt="cursor">
         </div>
-        <div class="form-group">
-          <input type="email" name="email" @input="event => type(event.target.value)" v-model="data.email"
-                 placeholder="email">
+      </div>
+      <div class="form-content">
+        <ErrorMessages :error="v$" :serverError="error"/>
+        <div class="contacts">
+          <a class="contact" href="mailto:araxsargsyan@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="44"
+                 height="44"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M3 9l9 6l9 -6l-9 -6l-9 6"/>
+              <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/>
+              <path d="M3 19l6 -6"/>
+              <path d="M15 13l6 6"/>
+            </svg>
+            <p class="info">
+              araxsargsyan@gmail.com
+            </p>
+          </a>
+          <a class="contact" href="tel:+17473429919">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone-call" width="44"
+                 height="44"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path
+                  d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>
+              <path d="M15 7a2 2 0 0 1 2 2"/>
+              <path d="M15 3a6 6 0 0 1 6 6"/>
+            </svg>
+            <p class="info">
+              +1(747) 342-9919
+            </p>
+          </a>
         </div>
-        <div class="form-group">
+        <form class="form" @submit.prevent="contact">
+          <div class="form-group">
+            <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.name"
+                   placeholder="full name">
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" @input="event => type(event.target.value)" v-model="data.email"
+                   placeholder="email">
+          </div>
+          <div class="form-group">
           <textarea name="message" @input="event => type(event.target.value)" v-model="data.message" rows="10"
                     placeholder="message"/>
-        </div>
-        <div class="form-group">
-          <input class="submit" type="submit" value="send">
-        </div>
-      </form>
+          </div>
+          <div class="form-group">
+            <input class="submit" type="submit" value="send">
+          </div>
+        </form>
+      </div>
     </div>
+    <PreloaderComponent v-if="loading"/>
   </section>
 </template>
 
 <script>
 import cursor from "@/assets/images/other/cursor.png"
+import ErrorMessages from "@/components/messages/ErrorMessages.vue";
+import {email, minLength, required} from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 
 export default {
   name: "ContactView",
+  components: {PreloaderComponent, ErrorMessages},
   data() {
     return {
+      loading: false,
       board: {
         cursor: cursor,
         lastLatter: '',
@@ -182,11 +193,27 @@ export default {
       }
     }
   },
+  validations() {
+    return {
+      data: {
+        email: {required, email},
+        name: {required, minLength: minLength(2)},
+        message: {required, minLength: minLength(10)},
+      }
+    }
+  },
   methods: {
     contact() {
-      this.$store.dispatch('createContact', this.data).then(() => {
-        this.data = {}
-      })
+      this.v$.$touch()
+      if (!this.v$.$error) {
+        this.loading = true
+        this.$store.dispatch('createContact', this.data).then(() => {
+          this.data = {}
+        }).finally(() => {
+          this.v$.$reset()
+          this.loading = false
+        })
+      }
     },
     type(val) {
       this.board.lastLatter = val.slice(-1).toLowerCase();
@@ -200,7 +227,15 @@ export default {
         this.$refs.cursor.classList.add('start')
       }
     },
-  }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.getContactError
+    }
+  },
+  setup() {
+    return {v$: useVuelidate()}
+  },
 }
 </script>
 
@@ -208,88 +243,90 @@ export default {
 @import "src/assets/styles/vars";
 
 section {
-  display: flex;
-  gap: 20px;
+  .form-area {
+    display: flex;
+    gap: 20px;
 
-
-  .ouija_board {
-    width: 50%;
-    background-image: url("@/assets/images/other/board_texture.png");
-    background-repeat: no-repeat;
-    background-position: center;
-
-    .board {
-      width: 598px;
-      height: 500px;
-      margin: auto;
-      background-image: url("@/assets/images/other/ouija_board.png");
-      background-size: contain;
+    .ouija_board {
+      width: 50%;
+      background-image: url("@/assets/images/other/board_texture.png");
       background-repeat: no-repeat;
       background-position: center;
-      position: relative;
 
-      @media all and (max-width: $sm) {
-        display: none;
-      }
+      .board {
+        width: 598px;
+        height: 500px;
+        margin: auto;
+        background-image: url("@/assets/images/other/ouija_board.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
 
-      .cursor {
-        position: absolute;
-        width: 14%;
-        top: 349px;
-        left: 44%;
-        transition: 1s;
+        @media all and (max-width: $sm) {
+          display: none;
+        }
 
-        &.start {
-          width: 150px;
+        .cursor {
+          position: absolute;
+          width: 14%;
+          top: 349px;
+          left: 44%;
+          transition: 1s;
+
+          &.start {
+            width: 150px;
+          }
         }
       }
     }
-  }
 
-  .form-content {
-    width: 50%;
+    .form-content {
+      width: 50%;
 
-    .contacts {
-      display: flex;
-      flex-direction: column;
-      gap: 20px 0;
-
-      .contact {
+      .contacts {
         display: flex;
-        height: 30px;
-        line-height: 30px;
+        flex-direction: column;
+        gap: 20px 0;
 
-        svg {
-          height: inherit;
+        .contact {
+          display: flex;
+          height: 30px;
+          line-height: 30px;
+
+          svg {
+            height: inherit;
+          }
+
+          .info {
+            color: var(--vt-c-white);
+          }
         }
+      }
 
-        .info {
-          color: var(--vt-c-white);
+      .form {
+        margin-top: 50px;
+
+        .form-group {
+          &:not(:first-child) {
+            margin-top: 30px;
+          }
+
+          textarea {
+            padding-top: 10px;
+          }
         }
       }
     }
 
-    .form {
-      margin-top: 50px;
-
-      .form-group {
-        &:not(:first-child) {
-          margin-top: 30px;
-        }
-
-        textarea {
-          padding-top: 10px;
-        }
+    @media all and (max-width: $lg) {
+      flex-direction: column;
+      .ouija_board, .form-content {
+        width: 100%;
       }
     }
   }
 
-  @media all and (max-width: $lg) {
-    flex-direction: column;
-    .ouija_board, .form-content {
-      width: 100%;
-    }
-  }
 }
 
 </style>

@@ -5,19 +5,19 @@ export default {
         contactError: null,
     },
     getters: {
-        getContactError: state => state.aboutError,
+        getContactError: state => state.contactError,
     },
     mutations: {
         setContactError(state, data) {
-            state.aboutError = data
+            state.contactError = data
         },
     },
     actions: {
         createContact({commit}, data) {
             return postRequest(`/contact`, data, commit)
-                .then(() => commit('setAboutError', null))
+                .then(() => commit('setContactError', null))
                 .catch(error => {
-                    commit('setCategoryError', error.message)
+                    commit('setContactError', error.message)
                     return Promise.reject(error)
                 });
         },

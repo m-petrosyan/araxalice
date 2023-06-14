@@ -29,6 +29,7 @@ export default {
 
 <style scoped lang="scss">
 .messages {
+  width: 100%;
   border: 2px solid var(--color-alert);
   color: var(--color-alert);
   margin-bottom: 30px;

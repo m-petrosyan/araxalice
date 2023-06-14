@@ -20,6 +20,7 @@
         .content:before {
             content: '';
             position: absolute;
+            top: 0;
             width: 100%;
             height: 100%;
             background-image: url("{{asset('static/logo.png')}}");
