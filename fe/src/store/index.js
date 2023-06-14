@@ -3,6 +3,7 @@ import user from "@/store/modules/user"
 import about from "@/store/modules/about";
 import portfolio from "@/store/modules/portfolio";
 import portfolioCategory from "@/store/modules/portfolioCategory";
+import contact from "@/store/modules/contact";
 
 export default createStore({
     state: {
@@ -17,6 +18,7 @@ export default createStore({
         user,
         about,
         portfolio,
-        portfolioCategory
+        portfolioCategory,
+        contact
     }
 })

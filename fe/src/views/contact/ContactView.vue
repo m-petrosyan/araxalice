@@ -39,7 +39,7 @@
       </div>
       <form class="form" @submit.prevent="contact">
         <div class="form-group">
-          <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.fullname"
+          <input type="text" name="message" @input="event => type(event.target.value)" v-model="data.name"
                  placeholder="full name">
         </div>
         <div class="form-group">
@@ -176,7 +176,7 @@ export default {
         }
       },
       data: {
-        fullname: '',
+        name: '',
         email: '',
         message: ''
       }
@@ -184,7 +184,9 @@ export default {
   },
   methods: {
     contact() {
-
+      this.$store.dispatch('createContact', this.data).then(() => {
+        this.data = {}
+      })
     },
     type(val) {
       this.board.lastLatter = val.slice(-1).toLowerCase();
