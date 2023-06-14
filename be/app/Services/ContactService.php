@@ -16,6 +16,6 @@ class ContactService
     {
         Contact::create($attributes);
 
-        Mail::to(config('mail')['email']['to'])->send(new ContactMessage($attributes));
+        Mail::to('example@gmail.com')->send(new ContactMessage($attributes));
     }
 }
