@@ -210,6 +210,7 @@ nav {
         height: auto;
         visibility: visible;
         opacity: 1;
+        padding-left: 0;
       }
     }
 
