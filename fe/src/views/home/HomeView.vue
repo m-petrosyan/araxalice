@@ -88,9 +88,6 @@ export default {
     this.$store.dispatch('getAbout')
     this.$store.dispatch('getRandomPortfolio', {limit: 8})
   },
-  mounted() {
-    setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3000)
-  },
   methods: {
     animation() {
       this.$refs.animation.classList.add('start')
@@ -99,6 +96,9 @@ export default {
   watch: {
     scroll(val) {
       if (val > 500) this.animation()
+    },
+    loading() {
+      if (!this.loading) setTimeout(() => this.$refs.flicker.classList.add('flicker'), 3000)
     }
   },
   computed: {
@@ -111,7 +111,7 @@ export default {
     loading() {
       return this.portfolio === null && this.about === null
     }
-  }
+  },
 }
 </script>
 <style scoped lang="scss">
