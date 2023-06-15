@@ -7,10 +7,14 @@
     <div class="glitch">
     </div>
   </section>
+  <PreloaderComponent v-else/>
 </template>
 <script>
+import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
+
 export default {
   name: 'AboutView',
+  components: {PreloaderComponent},
   created() {
     this.$store.dispatch('getAbout').then(() => {
       this.$refs.portrait.style.setProperty('--profile_pic', `url( ${this.about.image})`);
