@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div v-if="!loading" class="home-page">
     <section class="header-animation mt-0">
       <div class="bg-img" ref="flicker"/>
       <div class="right-side">
@@ -42,6 +42,7 @@
     <img class="scrol-animation an1" ref="animation" :src="item6" alt="">
     <!--  </section>-->
   </div>
+  <PreloaderComponent v-else/>
 </template>
 
 <script>
@@ -59,9 +60,10 @@ import item11 from '@/assets/images/header_animation/item11.png'
 import item12 from '@/assets/images/header_animation/item12.png'
 import item13 from '@/assets/images/header_animation/item13.png'
 import PortfolioImages from "@/components/portfolio/PortfolioImages.vue";
+import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 
 export default {
-  components: {PortfolioImages},
+  components: {PreloaderComponent, PortfolioImages},
   props: {
     scroll: Number
   },
@@ -105,6 +107,9 @@ export default {
     },
     portfolio() {
       return this.$store.getters.getrandomPortfolio
+    },
+    loading() {
+      return this.portfolio === null && this.about === null
     }
   }
 }
