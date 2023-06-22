@@ -32,6 +32,6 @@ php artisan serve
 ```
 npm install
 .env.example -> .env
-.env  VUE_APP_CLIENT_ID => passport Client ID , VUE_APP_CLIENT_SECRET => passport Client secret, VUE_APP_URL => Be url, VUE_APP_API => Be api url
+.env  VUE_APP_CLIENT_ID => passport Client ID , VUE_APP_CLIENT_SECRET => passport Client secret, VITE_APP_API => Be api
 npm run dev 
 ```
