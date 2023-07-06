@@ -34,7 +34,7 @@ class ContactMessage extends Mailable
             replyTo: [
                 new Address($this->mailData['email'], $this->mailData['name']),
             ],
-            subject: 'Message from '.env('APP_URL'),
+            subject: 'Message from '.config('app.url'),
         );
     }
 
