@@ -64,16 +64,14 @@ export default {
       this.content = val
     },
     changePicture(file) {
-      console.log(file.target.files[0])
       this.preview = URL.createObjectURL(file.target.files[0])
       this.image = file.target.files[0]
     },
   },
   created() {
-    this.$store.dispatch('getAbout')
-  },
-  mounted() {
-    this.content = this.about?.text
+    this.$store.dispatch('getAbout').then(() => {
+      this.content = this.about?.text
+    })
   },
   computed: {
     about() {

@@ -33,7 +33,6 @@ export default {
 }</script>
 
 <style lang="scss">
-@import "src/assets/styles/vars";
 
 .about {
   .img {
@@ -47,7 +46,7 @@ export default {
       margin-right: 20px;
       margin-bottom: 20px;
       background-image: var(--profile_pic);
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
     }
   }

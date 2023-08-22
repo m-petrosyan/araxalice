@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import PortfolioEditPreview from "@/components/portfolio/PortfolioEditPreview.vue";
+import PortfolioEditPreview from "@/components/dashboard/PortfolioEditPreview.vue";
 
 export default {
   name: "DashboardPortfolio",

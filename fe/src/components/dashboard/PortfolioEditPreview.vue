@@ -1,37 +1,30 @@
 <template>
+  <DeleteMessage v-if="modal.id" v-model:modal="modal" :delate="deleteQuery"/>
   <div class="portfolio-edit-preview">
     <div class="images">
       <template v-if="portfolio">
         <div class="image" v-for="image in portfolio[0].data" :key="image">
           <div class="edit-delete">
             <template v-if="!image.edit">
-              <button @click="deleteQuery(image.id)">x</button>
+              <button @click="deleteImage(image.id)">x</button>
               <button @click="editImage(image)">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-text-size" width="12"
-                     height="12"
-                     viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M3 7v-2h13v2"/>
-                  <path d="M10 5v14"/>
-                  <path d="M12 19h-4"/>
-                  <path d="M15 13v-1h6v1"/>
-                  <path d="M18 12v7"/>
-                  <path d="M17 19h2"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-edit-2">
+                  <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                 </svg>
               </button>
             </template>
             <button v-else @click="updateQuery(image)">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="12"
-                   height="12" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M5 12l5 5l10 -10"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="feather feather-check">
+                <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </button>
           </div>
           <img :src="image.image" class="preview-image" alt="image"/>
-          <textarea v-if="image.edit" class="edit-text" type="text" v-model="image.title"
+          <textarea v-if="image.edit" class="edit-text" v-model="image.title"
                     placeholder="image description"/>
           <p v-else-if="image.title" class="edit-text hidden">{{ image.title }}</p>
         </div>
@@ -41,23 +34,30 @@
     <input v-if="select" type="file" class="image-upload" multiple @change="previewImages">
     <div class="images">
       <div class="image" v-for="(image,index) in images" :key="image">
-        <button class="del-img" @click="del(index)">x</button>
+        <button class="del-img" @click="delPreview(index)">delete</button>
         <img :src="image.preview" class="preview-image" alt="image"/>
-        <textarea type="text" v-model="image.title" placeholder="image description"/>
+        <textarea v-model="image.title" placeholder="image description"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import DeleteMessage from "@/components/dashboard/DeleteMessage.vue";
+
 export default {
   name: "PortfolioEditPreview",
+  components: {DeleteMessage},
   props: {
     categoryId: Number,
     select: Boolean,
   },
   data() {
     return {
+      modal: {
+        id: null,
+        text: "image"
+      },
       images: []
     }
   },
@@ -73,12 +73,16 @@ export default {
         reader.readAsDataURL(file);
       }
     },
-    del(index) {
+    delPreview(index) {
       this.images.splice(index, 1);
     },
-    deleteQuery(id) {
-      this.$store.dispatch('deletePortfolio', id).then(() => {
+    deleteImage(id) {
+      this.modal.id = id
+    },
+    deleteQuery() {
+      this.$store.dispatch('deletePortfolio', this.modal.id).then(() => {
         this.getPortfolio()
+        this.modal.id = null
       })
     },
     updateQuery(image) {
@@ -119,8 +123,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import "src/assets/styles/vars";
+<style lang="scss">
 
 .portfolio-edit-preview {
   .images {
@@ -169,15 +172,22 @@ export default {
         gap: 0 10px;
 
         button {
-          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
           border: none;
           color: white;
           z-index: 2;
           width: 20px;
           height: 20px;
-          background-color: #00000040;
+          background-color: #555555;
           border-radius: 100%;
+          transition: .3s;
+
+          &:hover {
+            background-color: orangered;
+          }
         }
       }
 

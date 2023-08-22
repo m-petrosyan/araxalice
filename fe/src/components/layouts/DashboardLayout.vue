@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .dashboard {
   padding-top: 30px;
   display: flex;

@@ -25,7 +25,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'min:2'],
-            'email' => ['nullable', 'email', 'unique:users,email,' . auth()->id(), 'max:100'],
+            'email' => ['email', 'unique:users,email,'.auth()->id(), 'max:100'],
             'password_current' => [
                 'nullable',
                 function ($attribute, $value, $fail) {

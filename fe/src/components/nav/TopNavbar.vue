@@ -80,7 +80,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/assets/styles/vars";
 
 nav {
   position: sticky;

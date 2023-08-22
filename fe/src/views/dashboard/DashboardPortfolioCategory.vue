@@ -1,4 +1,5 @@
 <template>
+  <DeleteMessage v-if="modal.id" v-model:modal="modal" :delate="deleteCategoryQuery"/>
   <div class="db-portfolio-categories">
     <table v-if="categories" class="category-list">
       <thead>
@@ -27,7 +28,7 @@
           <input type="text" v-model="category.name" placeholder="name">
         </div>
         <div class="form-group">
-          <textarea type="email" v-model="category.description" placeholder="description" rows="6"/>
+          <textarea v-model="category.description" placeholder="description" rows="6"/>
         </div>
         <div class="form-group">
           <button v-if="!edit" class="submit" @click="createCategory" :disabled="loading">
@@ -48,12 +49,17 @@ import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 import useVuelidate from "@vuelidate/core";
 import {minLength, required} from "@vuelidate/validators";
+import DeleteMessage from "@/components/dashboard/DeleteMessage.vue";
 
 export default {
   name: "DashboardPortfolioCategory",
   data() {
     return {
       edit: null,
+      modal: {
+        id: null,
+        text: "category"
+      },
       category: {
         name: "",
         description: ""
@@ -104,7 +110,12 @@ export default {
       }
     },
     deleteCategory(id) {
-      this.$store.dispatch('deleteCategory', id)
+      this.modal.id = id
+    },
+    deleteCategoryQuery() {
+      this.$store.dispatch('deleteCategory', this.modal.id).then(() => {
+        this.modal.id = null
+      })
     },
     cancel() {
       this.edit = false
@@ -129,6 +140,7 @@ export default {
     }
   },
   components: {
+    DeleteMessage,
     ErrorMessages,
     PreloaderComponent,
   },

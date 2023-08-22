@@ -5,6 +5,8 @@ import store from "@/store";
 import MediumEditor from 'vuejs-medium-editor'
 import '@/assets/styles/main.scss'
 import VueGtag from "vue-gtag-next";
+import "medium-editor/dist/css/medium-editor.css";
+import 'highlight.js/styles/github.css';
 
 const app = createApp(App)
 

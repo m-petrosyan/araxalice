@@ -6,8 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/be/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/be/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/be/tests" isTestSource="true" packagePrefix="Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/be/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/be/tests/Unit" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/phpunit/php-file-iterator" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/phar-io/manifest" />
@@ -133,6 +133,8 @@
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/psr/clock" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/symfony/psr-http-message-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/be/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/be/storage/framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
