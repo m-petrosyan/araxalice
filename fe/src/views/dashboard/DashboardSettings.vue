@@ -1,7 +1,7 @@
 <template>
   <div class="db-settings" v-if="auth">
     <ErrorMessages :error="v$" :serverError="error"/>
-    <form class="form" :class="{'disabled':loading}" @submit.prevent="save">
+    <form class="form" :class="{'disabled':loading}" @submit.prevent="validateRequest">
       <div class="form-group">
         <input type="text" v-model="auth.name" placeholder="name">
       </div>
@@ -22,30 +22,32 @@
       </div>
     </form>
   </div>
+  <PreloaderComponent v-if="loading"/>
 </template>
 
 <script>
-import {email, minLength, requiredIf, sameAs} from "@vuelidate/validators";
+import {email, minLength, required, requiredIf, sameAs} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
-import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 import dashboardMixin from "@/mixins/dashboardMixin";
+import {mapActions} from "vuex";
 
 export default {
   name: "DashboardSettings",
   mixins: [dashboardMixin],
-  components: {ErrorMessages},
   methods: {
-    save() {
-      this.loading = true
-      this.$store.dispatch('updateAuth', this.auth)
-          .finally(() => this.loading = false)
+    ...mapActions({"action": "updateAuth"}),
+    async fetchAction() {
+      await this.action(this.auth);
     }
+  },
+  mounted() {
+    this.loading = false
   },
   validations() {
     return {
       auth: {
-        email: {email},
-        name: {minLength: minLength(2)},
+        email: {required, email},
+        name: {required, minLength: minLength(2)},
         password_current: {minLength: minLength(8)},
         password: {
           required: requiredIf(function () {

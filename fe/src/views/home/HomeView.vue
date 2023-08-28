@@ -60,10 +60,12 @@ import item11 from '@/assets/images/header_animation/item11.png'
 import item12 from '@/assets/images/header_animation/item12.png'
 import item13 from '@/assets/images/header_animation/item13.png'
 import PortfolioImages from "@/components/portfolio/PortfolioImages.vue";
-import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
+import {mapActions} from "vuex";
+import clientMixin from "@/mixins/clientMixin";
 
 export default {
-  components: {PreloaderComponent, PortfolioImages},
+  components: {PortfolioImages},
+  mixins: [clientMixin],
   props: {
     scroll: Number
   },
@@ -84,13 +86,13 @@ export default {
       item13: item13,
     }
   },
-  created() {
-    this.$store.dispatch('getAbout')
-    this.$store.dispatch('getRandomPortfolio', {limit: 8})
-  },
   methods: {
+    ...mapActions(["getAbout", "getRandomPortfolio"]),
     animation() {
       this.$refs.animation.classList.add('start')
+    },
+    async getContent() {
+      await Promise.all([this.getRandomPortfolio({limit: 8}), this.getAbout()]);
     }
   },
   watch: {
@@ -108,9 +110,6 @@ export default {
     portfolio() {
       return this.$store.getters.getrandomPortfolio
     },
-    loading() {
-      return this.portfolio === null && this.about === null
-    }
   },
 }
 </script>

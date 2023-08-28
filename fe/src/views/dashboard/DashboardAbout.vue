@@ -17,25 +17,25 @@
           :hideVideo="true"
       />
       <div class="form-group">
-        <button class="submit" @click="save" :disabled="loading">Save</button>
+        <button class="submit" @click="validateRequest" :disabled="loading">Save</button>
       </div>
     </div>
-    <PreloaderComponent v-else/>
   </div>
+  <PreloaderComponent v-if="loading"/>
 </template>
 
 <script>
 import Editor from 'vuejs-medium-editor'
-import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
-import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 import defaultImg from "@/assets/images/other/no-pic.png"
+import dashboardMixin from "@/mixins/dashboardMixin";
+import {mapActions} from "vuex";
 
 export default {
   name: "DashboardAbout",
+  mixins: [dashboardMixin],
   data() {
     return {
       content: '',
-      loading: false,
       defaultImg: defaultImg,
       preview: null,
       options: {
@@ -54,11 +54,14 @@ export default {
     }
   },
   methods: {
-    save() {
+    ...mapActions({"getData": "getAbout"}),
+    ...mapActions(["updateAbout"]),
+    async fetchAction() {
       const formData = new FormData
       if (this.image) formData.append('image', this.image)
       formData.append('text', this.content)
-      this.$store.dispatch('updateAbout', formData)
+
+      await this.updateAbout(formData)
     },
     onChange(val) {
       this.content = val
@@ -69,8 +72,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('getAbout').then(() => {
+    this.getData().then(() => {
       this.content = this.about?.text
+      this.loading = false
     })
   },
   computed: {
@@ -82,8 +86,6 @@ export default {
     }
   },
   components: {
-    ErrorMessages,
-    PreloaderComponent,
     'medium-editor': Editor,
   },
 }

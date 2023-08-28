@@ -15,7 +15,7 @@
         <td>{{ category.description }}</td>
         <td>
           <button class="submit sm" @click="editCategory(category)">edit</button>
-          <button class="submit sm" @click="deleteCategory(category.id)">delete</button>
+          <button class="submit sm" @click="deleteCategoryAnswer(category.id)">delete</button>
         </td>
       </tr>
       </tbody>
@@ -31,28 +31,31 @@
           <textarea v-model="category.description" placeholder="description" rows="6"/>
         </div>
         <div class="form-group">
-          <button v-if="!edit" class="submit" @click="createCategory" :disabled="loading">
+          <button v-if="!edit" class="submit" @click="validateRequest" :disabled="loading">
             Create
           </button>
           <template v-else>
-            <button class="submit" @click="updateCategory" :disabled="loading">Update</button>
+            <button class="submit" @click="updateCategoryQuery" :disabled="loading">Update</button>
             <button class="submit" @click="cancel" :disabled="loading">Cancel</button>
           </template>
         </div>
       </div>
     </div>
   </div>
+  <PreloaderComponent v-if="loading"/>
 </template>
 
 <script>
 import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
-import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 import useVuelidate from "@vuelidate/core";
 import {minLength, required} from "@vuelidate/validators";
 import DeleteMessage from "@/components/dashboard/DeleteMessage.vue";
+import dashboardMixin from "@/mixins/dashboardMixin";
+import {mapActions} from "vuex";
 
 export default {
   name: "DashboardPortfolioCategory",
+  mixins: [dashboardMixin],
   data() {
     return {
       edit: null,
@@ -76,45 +79,29 @@ export default {
     }
   },
   methods: {
-    createCategory() {
-      this.v$.$touch()
-      if (!this.v$.$error) {
-        this.loading = true
-        this.$store.dispatch('createCategory', this.category)
-            .then(() => {
-              this.$store.dispatch('getCategory')
-              this.cancel()
-            }).finally(() => {
-          this.v$.$reset()
-          this.loading = false
-        })
-      }
+    ...mapActions({"getData": "getCategory"}),
+    ...mapActions(["createCategory", "updateCategory", "deleteCategory"]),
+    async fetchAction() {
+      await this.createCategory(this.category).then(() => {
+        this.getData()
+        this.cancel()
+      })
     },
     editCategory(category) {
       this.edit = true
       this.category = {...category}
     },
-    updateCategory() {
-      this.v$.$touch()
-      if (!this.v$.$error) {
-        this.loading = true
-        this.$store.dispatch('updateCategory', {id: this.category.id, data: this.category})
-            .then(() => {
-              this.$store.dispatch('getCategory')
-              this.cancel()
-            })
-            .finally(() => {
-              this.v$.$reset()
-              this.loading = false
-            })
-      }
+    updateCategoryQuery() {
+      this.validateRequest("updateCategory", {id: this.category.id, data: this.category})
     },
-    deleteCategory(id) {
+    deleteCategoryAnswer(id) {
       this.modal.id = id
     },
     deleteCategoryQuery() {
-      this.$store.dispatch('deleteCategory', this.modal.id).then(() => {
+      this.loading = true
+      this.deleteCategory(this.modal.id).then(() => {
         this.modal.id = null
+        this.loading = false
       })
     },
     cancel() {
@@ -126,7 +113,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getCategory')
+    this.getData()
   },
   mounted() {
     this.content = this.about?.text
@@ -141,7 +128,6 @@ export default {
   },
   components: {
     DeleteMessage,
-    ErrorMessages,
     PreloaderComponent,
   },
   setup() {

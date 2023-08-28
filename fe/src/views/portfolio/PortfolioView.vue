@@ -10,27 +10,25 @@
 </template>
 
 <script>
-import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 import PortfolioImages from "@/components/portfolio/PortfolioImages.vue";
+import clientMixin from "@/mixins/clientMixin";
+import {mapActions} from "vuex";
 
 export default {
   name: "PortfolioView",
-  components: {PortfolioImages, PreloaderComponent},
+  components: {PortfolioImages},
+  mixins: [clientMixin],
   data() {
     return {
       loading: true,
       image: null,
     }
   },
-  created() {
-    this.getPortfolio()
-  },
   methods: {
-    getPortfolio() {
-      this.loading = true
-      this.$store.dispatch('getPortfolio', {category: this.category})
-          .finally(() => this.loading = false)
-    },
+    ...mapActions({"getData": "getPortfolio"}),
+    async getContent() {
+      await this.getData({category: this.category});
+    }
   },
   computed: {
     category() {
@@ -43,7 +41,10 @@ export default {
   watch: {
     $route(to, from) {
       if (to.params !== from.params) {
-        this.getPortfolio()
+        this.loading = true
+        this.getContent().then(() => {
+          this.loading = false
+        });
       }
     }
   }

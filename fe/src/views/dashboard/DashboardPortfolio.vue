@@ -7,16 +7,20 @@
         </option>
       </select>
       <PortfolioEditPreview :categoryId="categoryId" :select="true" @newImages="changeImages" ref="childRef"/>
-      <button v-if="newImage.length" class="submit" @click="upload" :disabled="loading">Upload</button>
+      <button v-if="newImage.length" class="submit" @click="validateRequest" :disabled="loading">Upload</button>
     </div>
   </div>
+  <PreloaderComponent v-if="loading"/>
 </template>
 
 <script>
 import PortfolioEditPreview from "@/components/dashboard/PortfolioEditPreview.vue";
+import dashboardMixin from "@/mixins/dashboardMixin";
+import {mapActions} from "vuex";
 
 export default {
   name: "DashboardPortfolio",
+  mixins: [dashboardMixin],
   components: {PortfolioEditPreview},
   data() {
     return {
@@ -27,19 +31,23 @@ export default {
   created() {
     this.$store.dispatch('getCategory').then(() => {
       this.categoryId = this.categories[0].id
+      this.loading = false
     })
   },
   methods: {
-    upload() {
+    ...mapActions({"action": "createPortfolio"}),
+    async fetchAction() {
+      this.loading = true
       const data = new FormData
 
       for (const [index, value] of Object.entries(this.newImage)) {
         data.append(`item[${index}][file]`, value['file']);
         if (value['title']) data.append(`item[${index}][title]`, value['title']);
       }
-      this.$store.dispatch('createPortfolio', {id: this.categoryId, data: data}).then(() => {
+
+      await this.action({id: this.categoryId, data: data}).then(() => {
         this.$refs.childRef.clearImages();
-      })
+      });
     },
     changeImages(images) {
       this.newImage = images;

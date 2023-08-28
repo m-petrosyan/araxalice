@@ -21,13 +21,11 @@
 import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
 import ErrorMessages from "@/components/messages/ErrorMessages.vue";
 import {email, minLength, required} from '@vuelidate/validators'
-import formMixin from "@/mixins/formMixin";
 import useVuelidate from "@vuelidate/core";
 
 export default {
   name: "AuthPage",
   components: {ErrorMessages, PreloaderComponent},
-  mixins: [formMixin],
   data() {
     return {
       loading: false,

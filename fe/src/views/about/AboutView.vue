@@ -1,24 +1,27 @@
 <template>
-  <section v-if="about" class="about">
+  <section v-if="!loading" class="about">
     <div class="img">
-      <div class="portrait" ref="portrait"/>
+      <div class="portrait" ref="portrait" :style="{backgroundImage: `url( ${this.about?.image})`}"/>
     </div>
-    <div class="text" v-html="about.text"/>
+    <div class="text" v-html="about?.text"/>
     <div class="glitch">
     </div>
   </section>
   <PreloaderComponent v-else/>
 </template>
+
 <script>
-import PreloaderComponent from "@/components/preloader/PreloaderComponent.vue";
+import {mapActions} from "vuex";
+import clientMixin from "@/mixins/clientMixin";
 
 export default {
   name: 'AboutView',
-  components: {PreloaderComponent},
-  created() {
-    this.$store.dispatch('getAbout').then(() => {
-      this.$refs.portrait.style.setProperty('--profile_pic', `url( ${this.about.image})`);
-    })
+  mixins: [clientMixin],
+  methods: {
+    ...mapActions(["getAbout"]),
+    async getContent() {
+      await this.getAbout()
+    }
   },
   computed: {
     about() {
@@ -26,7 +29,7 @@ export default {
     },
     cssVars() {
       return {
-        '--image': this.about.image,
+        '--image': this.about?.image,
       }
     }
   }
@@ -45,7 +48,6 @@ export default {
       height: 300px;
       margin-right: 20px;
       margin-bottom: 20px;
-      background-image: var(--profile_pic);
       background-size: cover;
       background-repeat: no-repeat;
     }

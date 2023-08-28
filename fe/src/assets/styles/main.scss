@@ -216,7 +216,6 @@ a {
   select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    -ms-appearance: none;
     appearance: none;
     outline: 0;
     box-shadow: none;
@@ -288,6 +287,11 @@ button, input[type=submit] {
     &:hover {
       color: var(--color-alert);
       background-color: var(--vt-c-divider-dark-2);
+    }
+
+    &:disabled {
+      opacity: .3;
+      cursor: not-allowed;
     }
   }
 }

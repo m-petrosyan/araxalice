@@ -67,7 +67,7 @@ const router = createRouter({
             meta: {requiresAuth: true},
             children: [
                 {
-                    path: 'portfolio',
+                    path: '',
                     name: 'd-portfolio',
                     component: DashboardPortfolio
                 },

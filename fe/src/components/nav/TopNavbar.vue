@@ -12,7 +12,7 @@
         </router-link>
         <ul class="sub-menu">
           <li class="item" v-for="item in categories" :key="item.id">
-            <router-link :to="{name:'portfolio-category',params:{id: item.id}}">
+            <router-link :to="{name:'portfolio-category', params:{id: item.id}}">
               {{ item.name }}
             </router-link>
           </li>
