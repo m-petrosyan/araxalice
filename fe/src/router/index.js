@@ -13,7 +13,7 @@ import AuthPage from "@/views/auth/AuthPage.vue";
 import DashboardPortfolioCategory from "@/views/dashboard/DashboardPortfolioCategory.vue";
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.VITE_APP_BASE_URL),
+    history: createWebHistory(),
     routes: [
         {
             path: '/',
