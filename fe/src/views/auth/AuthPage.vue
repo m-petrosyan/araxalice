@@ -30,8 +30,8 @@ export default {
     return {
       loading: false,
       form: {
-        username: 'araxsargsyan@gmail.com',
-        password: '12345678'
+        username: '',
+        password: ''
       }
     }
   },
