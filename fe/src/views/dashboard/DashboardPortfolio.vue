@@ -1,5 +1,8 @@
 <template>
-  <div class="db-portfolio">
+  <router-link v-if="!categories?.length" :to="{name:'d-portfolio-category'}" class="submit">
+    <p>Please first create category</p>
+  </router-link>
+  <div class="db-portfolio" v-else>
     <div class="form">
       <select v-if="categories" v-model="categoryId">
         <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -10,7 +13,7 @@
       <button v-if="newImage.length" class="submit" @click="validateRequest" :disabled="loading">Upload</button>
     </div>
   </div>
-  <PreloaderComponent v-if="loading"/>
+  <PreloaderComponent v-if="loading && categories?.length"/>
 </template>
 
 <script>

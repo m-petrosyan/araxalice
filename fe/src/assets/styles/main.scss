@@ -270,7 +270,7 @@ b {
   font-weight: bold;
 }
 
-button, input[type=submit] {
+button, input[type=submit], a {
   &.submit {
     border: none;
     color: var(--color-submit-text);

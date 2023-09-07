@@ -49,8 +49,8 @@ export default {
   methods: {
     signIn() {
       this.v$.$touch()
-      this.loading = true
       if (!this.v$.$error) {
+        this.loading = true
         this.$store.dispatch('signIn', this.form)
             .then(() => {
               this.$store.dispatch('auth').then(() => {
