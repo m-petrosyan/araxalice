@@ -10,9 +10,9 @@ export default {
     methods: {
         validateRequest(method = null, params) {
             this.v$?.$touch()
-            this.loading = true
 
             if (!this.v$?.$error) {
+                this.loading = true
                 const action = typeof method === 'string' ? this[method](params) : this.fetchAction()
                 action.then(() => {
                     this.loading = false
