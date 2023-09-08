@@ -16,7 +16,7 @@ class AboutResource extends JsonResource
     {
         return [
             'text' => $this->text ?? null,
-            'image' => $this->imageUrl,
+            'image' => $this->imageUrl ?? null,
         ];
     }
 }
