@@ -15,9 +15,9 @@ class About extends Model
         'image',
     ];
 
-    public function getImageUrlAttribute(): string
+    public function getImageUrlAttribute(): ?string
     {
-        return asset('storage/about/'.$this->image);
+        return $this->image ? asset('storage/about/'.$this->image) : null;
     }
 
     public function getFileLocationAttribute(): string
