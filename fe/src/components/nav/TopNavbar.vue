@@ -236,6 +236,8 @@ nav {
           height: auto;
           background: var(--color-scroll);
           white-space: nowrap;
+          width: fit-content;
+          padding: 0 10px;
         }
       }
 
