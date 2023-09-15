@@ -35,21 +35,23 @@
     <div class="images">
       <div class="image" v-for="(image,index) in images" :key="image">
         <button class="del-img" @click="delPreview(index)">delete</button>
-        <img :src="image.preview" class="preview-image" alt="image" ref="image"/>
+        <div class="image-content">
+          <img :src="image.preview" class="preview-image" alt="image" ref="image"/>
+          <button class="rotate" @click="rotate(index)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise-2" width="30"
+                 height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 4.55a8 8 0 0 1 6 14.9m0 -4.45v5h5"/>
+              <path d="M5.63 7.16l0 .01"/>
+              <path d="M4.06 11l0 .01"/>
+              <path d="M4.63 15.1l0 .01"/>
+              <path d="M7.16 18.37l0 .01"/>
+              <path d="M11 19.94l0 .01"/>
+            </svg>
+          </button>
+        </div>
         <textarea v-model="image.title" placeholder="image description"/>
-        <button class="rotate" @click="rotate(index)">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise-2" width="30"
-               height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
-               stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M9 4.55a8 8 0 0 1 6 14.9m0 -4.45v5h5"/>
-            <path d="M5.63 7.16l0 .01"/>
-            <path d="M4.06 11l0 .01"/>
-            <path d="M4.63 15.1l0 .01"/>
-            <path d="M7.16 18.37l0 .01"/>
-            <path d="M11 19.94l0 .01"/>
-          </svg>
-        </button>
       </div>
     </div>
   </div>
@@ -151,13 +153,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-top: 30px;
-    gap: 10px;
+    gap: 5px;
 
     .image {
       position: relative;
       width: 15%;
       display: flex;
-      gap: 10px;
+      gap: 5px;
       flex-direction: column;
       @media all and (max-width: $lg) {
         width: calc(25% - 10px);
@@ -166,11 +168,20 @@ export default {
         width: calc(50% - 10px);
       }
 
-      button {
-        background: none;
-        border: none;
-        cursor: pointer;
+      .image-content {
+        position: relative;
+
+        button {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: none;
+          border: none;
+          cursor: pointer;
+          z-index: 2;
+        }
       }
+
 
       .del-img {
         background-color: #F44336;
@@ -238,7 +249,7 @@ export default {
 
       img {
         width: 100%;
-        height: 150px;
+        max-height: 150px;
         object-fit: contain;
       }
 
