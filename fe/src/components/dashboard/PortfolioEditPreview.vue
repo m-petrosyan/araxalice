@@ -38,16 +38,16 @@
         <img :src="image.preview" class="preview-image" alt="image" ref="image"/>
         <textarea v-model="image.title" placeholder="image description"/>
         <button class="rotate" @click="rotate(index)">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="30" height="30"
-               viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise-2" width="30"
+               height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
                stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5"/>
-            <path d="M18.37 7.16l0 .01"/>
-            <path d="M13 19.94l0 .01"/>
-            <path d="M16.84 18.37l0 .01"/>
-            <path d="M19.37 15.1l0 .01"/>
-            <path d="M19.94 11l0 .01"/>
+            <path d="M9 4.55a8 8 0 0 1 6 14.9m0 -4.45v5h5"/>
+            <path d="M5.63 7.16l0 .01"/>
+            <path d="M4.06 11l0 .01"/>
+            <path d="M4.63 15.1l0 .01"/>
+            <path d="M7.16 18.37l0 .01"/>
+            <path d="M11 19.94l0 .01"/>
           </svg>
         </button>
       </div>
