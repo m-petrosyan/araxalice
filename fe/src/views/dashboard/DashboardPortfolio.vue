@@ -9,7 +9,7 @@
           {{ category.name }}
         </option>
       </select>
-      <PortfolioEditPreview :categoryId="categoryId" :select="true" @newImages="changeImages" ref="childRef"/>
+      <PortfolioEditPreview :categoryId="categoryId" :select="true" @newImage="changeImages" ref="childRef"/>
       <button v-if="newImage.length" class="submit" @click="validateRequest" :disabled="loading">Upload</button>
     </div>
   </div>
@@ -46,6 +46,7 @@ export default {
       for (const [index, value] of Object.entries(this.newImage)) {
         data.append(`item[${index}][file]`, value['file']);
         if (value['title']) data.append(`item[${index}][title]`, value['title']);
+        if (value['rotation']) data.append(`item[${index}][rotation]`, value['rotation']);
       }
 
       await this.action({id: this.categoryId, data: data}).then(() => {

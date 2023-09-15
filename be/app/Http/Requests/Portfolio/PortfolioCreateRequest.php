@@ -25,6 +25,7 @@ class PortfolioCreateRequest extends FormRequest
         return [
             'item' => ['required', 'array', 'min:1'],
             'item.*.title' => ['string', 'nullable'],
+            'item.*.rotation' => ['numeric', 'nullable'],
             'item.*.file' => ['required', 'file', 'mimes:jpeg,jpg,png,webp'],
         ];
     }

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import logo from '@/assets/images/other/logo.png'
+import logo from '@/assets/images/other/bug.png'
 
 export default {
   name: "TopNavbar",
@@ -97,6 +97,7 @@ nav {
     }
   }
 
+
   &.scroll {
     background-color: var(--color-scroll);
     font-size: var(--size-xl);
@@ -108,7 +109,7 @@ nav {
     }
 
     .logo {
-      transform: rotate(180deg);
+      transform: rotate(90deg);
     }
   }
 

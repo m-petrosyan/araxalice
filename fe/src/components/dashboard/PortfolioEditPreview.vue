@@ -35,8 +35,21 @@
     <div class="images">
       <div class="image" v-for="(image,index) in images" :key="image">
         <button class="del-img" @click="delPreview(index)">delete</button>
-        <img :src="image.preview" class="preview-image" alt="image"/>
+        <img :src="image.preview" class="preview-image" alt="image" ref="image"/>
         <textarea v-model="image.title" placeholder="image description"/>
+        <button class="rotate" @click="rotate(index)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="30" height="30"
+               viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5"/>
+            <path d="M18.37 7.16l0 .01"/>
+            <path d="M13 19.94l0 .01"/>
+            <path d="M16.84 18.37l0 .01"/>
+            <path d="M19.37 15.1l0 .01"/>
+            <path d="M19.94 11l0 .01"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
@@ -56,20 +69,33 @@ export default {
     return {
       modal: {
         id: null,
-        text: "image"
+        text: "image",
       },
       images: []
     }
   },
   methods: {
+    rotate(index) {
+      let rotation = this.images[index].rotation
+
+      if (rotation >= 360 - 90) {
+        rotation = 0
+      } else {
+        rotation += 90
+      }
+
+      this.images[index].rotation = rotation
+      this.$refs.image[index].style.transform = `rotate(${rotation}deg)`;
+    },
     previewImages(event) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
         reader.onload = (event) => {
-          this.images.push({file: file, preview: event.target.result});
+          this.images.push({file: file, preview: event.target.result, rotation: 0});
         };
+        this.$emit('newImage', this.images)
         reader.readAsDataURL(file);
       }
     },
@@ -81,16 +107,16 @@ export default {
     },
     deleteQuery() {
       this.$store.dispatch('deletePortfolio', this.modal.id).then(() => {
-        this.getPortfolio()
+        this.getData()
         this.modal.id = null
       })
     },
     updateQuery(image) {
       this.$store.dispatch('updatePortfolio', {id: image.id, data: {title: image.title}}).then(() => {
-        this.getPortfolio()
+        this.getData()
       })
     },
-    getPortfolio() {
+    getData() {
       this.$store.dispatch('getPortfolio', {category: this.categoryId})
     },
     editImage(image) {
@@ -101,8 +127,9 @@ export default {
     },
     clearImages() {
       this.images = []
-      this.getPortfolio()
-    }
+      this.$emit('newImage', this.images)
+      this.getData()
+    },
   },
   computed: {
     portfolio() {
@@ -111,19 +138,13 @@ export default {
   },
   watch: {
     categoryId(val) {
-      this.getPortfolio(val)
+      this.getData(val)
     },
-    images: {
-      handler(val) {
-        this.$emit('newImages', val)
-      },
-      deep: true
-    }
   }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .portfolio-edit-preview {
   .images {
@@ -145,12 +166,19 @@ export default {
         width: calc(50% - 10px);
       }
 
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
       .del-img {
         background-color: #F44336;
         border: none;
         color: white;
         font-size: 18px;
         cursor: pointer;
+        z-index: 2;
       }
 
       &:hover {

@@ -11,8 +11,8 @@
       </thead>
       <tbody>
       <tr v-for="category in categories" :key="category.id">
-        <td>{{ category.name }}</td>
-        <td>{{ category.description }}</td>
+        <td><p>{{ category.name }}</p></td>
+        <td><p>{{ category.description }}</p></td>
         <td>
           <button class="submit sm" @click="editCategory(category)">edit</button>
           <button class="submit sm" @click="deleteCategoryAnswer(category.id)">delete</button>
@@ -154,7 +154,6 @@ export default {
 
           max-width: 800px;
           text-overflow: ellipsis;
-          white-space: nowrap;
           overflow: hidden;
         }
       }

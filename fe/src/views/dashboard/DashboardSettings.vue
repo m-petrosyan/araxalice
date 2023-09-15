@@ -79,7 +79,7 @@ export default {
 <style scoped lang="scss">
 .db-settings {
   .form {
-    width: 320px;
+    max-width: 320px;
 
     .submit {
       width: 100%;

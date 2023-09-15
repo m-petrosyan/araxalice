@@ -1,9 +1,9 @@
 <template>
   <Teleport to="body">
     <div class="modal-container">
+      <button class="close" @click="$emit('update:image',null)">x</button>
       <div class="modal-content">
         <div class="image">
-          <button class="close" @click="$emit('update:image',null)">x</button>
           <img :src="image.image" alt="">
           <p class="text">{{ image.title }}</p>
         </div>
@@ -22,6 +22,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.close {
+  position: absolute;
+  right: 2%;
+  top: 5%;
+  z-index: 2;
+  border: none;
+  color: white;
+  font-size: 22px;
+  background-color: #00000024;
+  border-radius: 100%;
+  cursor: pointer;
+}
 
 .image {
   position: relative;
@@ -39,19 +51,6 @@ export default {
     left: 0;
     right: 0;
     text-align: center;
-  }
-
-  .close {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    z-index: 2;
-    border: none;
-    color: white;
-    font-size: 22px;
-    background-color: #00000024;
-    border-radius: 100%;
-    cursor: pointer;
   }
 }
 </style>

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PortfolioService extends ImageService
 {
@@ -23,12 +24,29 @@ class PortfolioService extends ImageService
             $originalImage = $this->resize($file);
             $filename = $this->saveFile($file, $this->dir, $originalImage);
 
+            if (isset($item['rotation'])) {
+                $this->rotateImage($filename, +$item['rotation']);
+            }
+
             $data['file'] = $filename;
             $data['portfolio_category_id'] = $categoryId;
             $data['title'] = $item['title'] ?? null;
 
             auth()->user()->portfolio()->create($data);
         }
+    }
+
+    /**
+     * @param $filename
+     * @param $rotation
+     * @return void
+     */
+    private function rotateImage($filename, $rotation): void
+    {
+        $imagePath = public_path('storage/'.$this->dir.$filename);
+        $image = Image::make($imagePath);
+        $image->rotate(-$rotation);
+        $image->save($imagePath);
     }
 
 
