@@ -6,7 +6,7 @@
           Home
         </router-link>
       </li>
-      <li class="item">
+      <li class="item portfolio">
         <router-link :to="{name:'portfolio'}">
           Portfolio
         </router-link>
@@ -103,6 +103,7 @@ nav {
     font-size: var(--size-xl);
 
     .item {
+
       .sub-menu {
         backdrop-filter: blur(5px);
       }
@@ -215,7 +216,6 @@ nav {
     }
 
     > .item {
-      width: 20%;
       text-align: center;
       list-style: none;
 
