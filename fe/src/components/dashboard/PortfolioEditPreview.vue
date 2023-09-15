@@ -37,6 +37,16 @@
         <button class="del-img" @click="delPreview(index)">delete</button>
         <div class="image-content">
           <img :src="image.preview" class="preview-image" alt="image" ref="image"/>
+          <button class="desc-toggle" @click="descriptionToggle(index)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-align-justified" width="30"
+                 height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M4 6l16 0"/>
+              <path d="M4 12l16 0"/>
+              <path d="M4 18l12 0"/>
+            </svg>
+          </button>
           <button class="rotate" @click="rotate(index)">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise-2" width="30"
                  height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
@@ -51,7 +61,7 @@
             </svg>
           </button>
         </div>
-        <textarea v-model="image.title" placeholder="image description"/>
+        <textarea v-model="image.title" placeholder="image description" class="description" ref="description"/>
       </div>
     </div>
   </div>
@@ -77,6 +87,9 @@ export default {
     }
   },
   methods: {
+    descriptionToggle(index) {
+      this.$refs.description[index].classList.toggle('show')
+    },
     rotate(index) {
       let rotation = this.images[index].rotation
 
@@ -171,14 +184,22 @@ export default {
       .image-content {
         position: relative;
 
+
         button {
           position: absolute;
           bottom: 0;
-          right: 0;
           background: none;
           border: none;
           cursor: pointer;
           z-index: 2;
+
+          &.rotate {
+            right: 0;
+          }
+
+          &.desc-toggle {
+            left: 0;
+          }
         }
       }
 
@@ -190,6 +211,14 @@ export default {
         font-size: 18px;
         cursor: pointer;
         z-index: 2;
+      }
+
+      .description {
+        display: none;
+
+        &.show {
+          display: block;
+        }
       }
 
       &:hover {
