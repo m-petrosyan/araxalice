@@ -1,6 +1,6 @@
 <template>
-  <router-link v-if="!categories?.length" :to="{name:'d-portfolio-category'}" class="submit">
-    <p>Please first create category</p>
+  <router-link v-if="!categories?.length" :to="{name:'d-portfolio-projects'}" class="submit">
+    <p>Please first create project</p>
   </router-link>
   <div class="db-portfolio" v-else>
     <div class="form">

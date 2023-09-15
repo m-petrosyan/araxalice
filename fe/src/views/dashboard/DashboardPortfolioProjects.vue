@@ -54,14 +54,14 @@ import dashboardMixin from "@/mixins/dashboardMixin";
 import {mapActions} from "vuex";
 
 export default {
-  name: "DashboardPortfolioCategory",
+  name: "DashboardPortfolioProjects",
   mixins: [dashboardMixin],
   data() {
     return {
       edit: null,
       modal: {
         id: null,
-        text: "category"
+        text: "project"
       },
       category: {
         name: "",

@@ -6,8 +6,8 @@
       </router-link>
     </li>
     <li class="item">
-      <router-link :to="{name:'d-portfolio-category'}">
-        <p>Category</p>
+      <router-link :to="{name:'d-portfolio-projects'}">
+        <p>Projects</p>
       </router-link>
     </li>
     <li class="item">
