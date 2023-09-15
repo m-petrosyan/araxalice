@@ -7,8 +7,8 @@ use Intervention\Image\Facades\Image;
 
 class ImageService
 {
-    protected int $width = 1920;
-    protected int $height = 1920;
+    protected int $width = 1200;
+    protected int $height = 1200;
 
     /**
      * @param $file
@@ -19,9 +19,10 @@ class ImageService
         $originalImage = Image::make($file);
         $width = $originalImage->width();
         $height = $originalImage->height();
-        
+
         if ($width > $this->width || $height > $this->height) {
             $originalImage = $originalImage->resize($this->width, $this->height, function ($constraint) {
+
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
