@@ -142,6 +142,8 @@ export default {
     tbody {
       tr {
         td {
+          border-bottom: 2px solid #292a2c;
+
           &:first-child {
             padding-right: 10px;
             border-right: 1px dotted #292a2c;
