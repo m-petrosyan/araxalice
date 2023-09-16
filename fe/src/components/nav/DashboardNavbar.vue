@@ -126,6 +126,8 @@ export default {
   justify-content: space-between;
 
   &.minimize {
+    padding-left: 10px;
+
     .menu {
       max-width: 40px;
       padding: 0;
