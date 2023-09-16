@@ -21,6 +21,7 @@ export default {
 .dashboard {
   padding-top: 30px;
   display: flex;
+  min-height: 100vh;
 
   main {
     width: 100%;
