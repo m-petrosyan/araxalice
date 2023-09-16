@@ -218,6 +218,7 @@ nav {
     > .item {
       text-align: center;
       list-style: none;
+      width: 20%;
 
       &.logo {
         @media all and (max-width: $sm) {
@@ -226,6 +227,11 @@ nav {
       }
 
       &:hover {
+
+        &.portfolio {
+          width: auto;
+        }
+
         > a {
           font-size: 24px;
         }
