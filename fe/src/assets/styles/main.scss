@@ -271,6 +271,10 @@ b {
 }
 
 button, input[type=submit], a {
+  background: none;
+  border: none;
+  cursor: pointer;
+
   &.submit {
     border: none;
     color: var(--color-submit-text);

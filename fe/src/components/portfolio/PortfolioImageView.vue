@@ -32,7 +32,6 @@ export default {
   font-size: 22px;
   background-color: #00000024;
   border-radius: 100%;
-  cursor: pointer;
 }
 
 .image {

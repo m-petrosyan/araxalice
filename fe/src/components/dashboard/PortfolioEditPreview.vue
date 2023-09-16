@@ -188,9 +188,6 @@ export default {
         button {
           position: absolute;
           bottom: 0;
-          background: none;
-          border: none;
-          cursor: pointer;
           z-index: 2;
 
           &.rotate {
@@ -209,7 +206,6 @@ export default {
         border: none;
         color: white;
         font-size: 18px;
-        cursor: pointer;
         z-index: 2;
       }
 
@@ -243,7 +239,6 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
           border: none;
           color: white;
           z-index: 2;
