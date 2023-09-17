@@ -196,7 +196,7 @@ nav {
       align-items: center;
       z-index: 1;
       min-width: 100%;
-      min-height: 100%;
+      //min-height: 100%;
       position: fixed;
       top: 0;
       height: 0;
@@ -237,6 +237,8 @@ nav {
         }
 
         .sub-menu {
+          max-height: 500px;
+          overflow-y: auto;
           opacity: 1;
           visibility: visible;
           height: auto;
@@ -255,6 +257,27 @@ nav {
         height: 0;
         list-style: none;
         padding-left: 0;
+
+        &::-webkit-scrollbar {
+          width: 16px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: var(--vt-c-black);
+          border-radius: 100px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: var(--vt-c-indigo);
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--vt-c-black-mute);
+        }
+
+        @media all and (max-width: $sm) {
+          max-height: 250px;
+        }
 
         .item {
           &:hover {
