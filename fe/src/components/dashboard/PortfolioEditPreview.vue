@@ -175,7 +175,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-top: 30px;
+    margin-bottom: 30px;
     gap: 5px;
+    border-bottom: 10px;
 
     .image {
       position: relative;

@@ -1,12 +1,16 @@
 <template>
   <div class="wrapper">
-    <div class="img" v-for="item in images" :key="item" @click="openImage(item)">
+    <div class="img" v-for="(item,index) in images" :key="item" @click="openImage(index)">
       <div class="image-bg" :style="{backgroundImage: `url(${item.image})`}">
         <p class="image-title">{{ item.title }}</p>
       </div>
     </div>
   </div>
-  <PortfolioImageView v-if="image" v-model:image="image"/>
+  <PortfolioImageView
+      v-if="imageIndex !== null"
+      :image="images[imageIndex]"
+      :nextImage="nextImage"
+      :openImage="openImage"/>
 </template>
 
 <script>
@@ -17,16 +21,33 @@ export default {
   components: {PortfolioImageView},
   data() {
     return {
-      image: null
+      imageIndex: null
     }
   },
   props: {
     images: Object
   },
   methods: {
-    openImage(image) {
-      this.image = image
-    }
+    openImage(index) {
+      this.imageIndex = index
+    },
+    nextImage(bool) {
+      if (bool) {
+        if (this.imageIndex >= this.images.length - 1) {
+          this.imageIndex = 0
+        } else {
+          this.imageIndex++
+        }
+
+      } else {
+        if (this.imageIndex === 0) {
+          this.imageIndex = this.images.length - 1
+        } else {
+          this.imageIndex--
+        }
+      }
+      console.log(this.imageIndex)
+    },
   }
 }
 </script>
