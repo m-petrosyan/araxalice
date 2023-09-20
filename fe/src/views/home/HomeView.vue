@@ -554,7 +554,7 @@ export default {
     transition: all 2s;
 
     &.an1 {
-      top: 1200px;
+      top: 1100px;
       left: 100%;
       transform: translateX(-150%);
 
