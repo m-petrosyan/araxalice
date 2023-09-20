@@ -34,7 +34,7 @@
       </div>
     </section>
     <div class="content parallax">
-      <section class="about" v-html="about?.text + ' ...'"/>
+      <section class="about" v-html="about?.text"/>
     </div>
     <section class="content">
       <PortfolioImages :images="portfolio"/>
@@ -120,9 +120,9 @@ export default {
 
   .parallax {
     padding: 50px 100px;
-    height: 100vh;
+    height: 300px;
     background-image: url("@/assets/images/other/paralax.jpg");
-    min-height: 500px;
+    min-height: 450px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,6 +141,7 @@ export default {
 
     @media all and (max-width: $lg) {
       padding: 15px 25px;
+      height: auto;
     }
 
     @media all and (max-width: $sm) {
@@ -164,10 +165,7 @@ export default {
 
   section.header-animation {
     position: relative;
-    min-height: 630px;
-    @media all and (max-width: $lg) {
-      min-height: unset;
-    }
+
 
     .bg-img {
       position: absolute;
@@ -321,7 +319,7 @@ export default {
 
     @media all and (max-width: $lg) {
       height: 400px;
-
+      min-height: 630px;
       .bg-img {
         top: 0;
         left: 0;
@@ -332,6 +330,11 @@ export default {
       .animation {
         display: none;
       }
+    }
+
+    @media all and (max-width: $sm) {
+      height: 175px;
+      min-height: unset;
     }
 
     .animation {
