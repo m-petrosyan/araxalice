@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Interface\PortfolioRepostiroryInterface;
-use App\Models\Portfolio;
 
 class PortfolioRepository implements PortfolioRepostiroryInterface
 {
@@ -19,8 +18,4 @@ class PortfolioRepository implements PortfolioRepostiroryInterface
     /**
      * @return mixed
      */
-    public static function getPortfolioRandom(): mixed
-    {
-        return Portfolio::inRandomOrder();
-    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\Portfolio\PortfolioCategoryGetRequest;
 use App\Http\Requests\Portfolio\PortfolioCategoryUpdateRequest;
 use App\Http\Resources\Portfolio\PortfolioCategoryCollection;
 use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
+use App\Http\Resources\Portfolio\PortfolioCategoryGroupResource;
 use App\Http\Resources\Portfolio\PortfolioCategoryResource;
 use App\Models\PortfolioCategory;
 use App\Repositories\PortfolioCategoryRepository;
@@ -17,10 +18,14 @@ use Illuminate\Http\Response;
 class PortfolioCategoryController extends Controller
 {
     protected PortfolioCategoryService $portfolioCategoryService;
+    protected PortfolioCategoryRepository $portfolioCategoryRepository;
 
-    public function __construct(PortfolioCategoryService $portfolioCategoryService)
-    {
+    public function __construct(
+        PortfolioCategoryService $portfolioCategoryService,
+        PortfolioCategoryRepository $portfolioCategoryRepository
+    ) {
         $this->portfolioCategoryService = $portfolioCategoryService;
+        $this->portfolioCategoryRepository = $portfolioCategoryRepository;
     }
 
     /**
@@ -30,8 +35,21 @@ class PortfolioCategoryController extends Controller
      */
     public function index(): PortfolioCategoryCollection
     {
-        return new PortfolioCategoryCollection(PortfolioCategoryRepository::getAll());
+        return new PortfolioCategoryCollection($this->portfolioCategoryRepository->getAll());
     }
+
+
+    /**
+     * @param  PortfolioCategoryGetRequest  $request
+     * @return PortfolioCategoryGroupResource
+     */
+    public function randomImages(PortfolioCategoryGetRequest $request): PortfolioCategoryGroupResource
+    {
+        return new PortfolioCategoryGroupResource(
+            $this->portfolioCategoryRepository->getRandomCategory()->first()
+        );
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -42,7 +60,7 @@ class PortfolioCategoryController extends Controller
     public function getByFilters(PortfolioCategoryGetRequest $request): PortfolioCategoryGroupCollection
     {
         return new PortfolioCategoryGroupCollection(
-            PortfolioCategoryRepository::getByCategory($request->category)
+            $this->portfolioCategoryRepository->getByCategory($request->category)
         );
     }
 

@@ -46,7 +46,6 @@ export default {
           this.imageIndex--
         }
       }
-      console.log(this.imageIndex)
     },
   }
 }

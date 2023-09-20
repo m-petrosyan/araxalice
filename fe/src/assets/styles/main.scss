@@ -1,13 +1,5 @@
 @import 'vars.scss';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  position: relative;
-  font-weight: normal;
-}
 
 body {
   min-height: 100vh;
@@ -25,21 +17,33 @@ body {
 
 }
 
-body::-webkit-scrollbar {
-  width: 16px;
-}
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    font-weight: normal;
+  }
 
-body::-webkit-scrollbar-track {
-  background-color: var(--vt-c-black);
-  border-radius: 100px;
-}
+  &::-webkit-scrollbar {
+    width: 16px;
+  }
 
-body::-webkit-scrollbar-thumb:hover {
-  background-color: var(--vt-c-indigo);
-}
+  &::-webkit-scrollbar-track {
+    background-color: var(--vt-c-black);
+    border-radius: 100px;
+  }
 
-body::-webkit-scrollbar-thumb {
-  background-color: var(--vt-c-black-mute);
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--vt-c-indigo);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--vt-c-black-mute);
+  }
+
 }
 
 #app {

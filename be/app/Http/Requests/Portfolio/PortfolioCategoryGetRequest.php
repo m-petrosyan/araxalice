@@ -24,6 +24,7 @@ class PortfolioCategoryGetRequest extends FormRequest
     {
         return [
             'category' => ['exists:portfolio_categories,id'],
+            'limit' => ['nullable', 'numeric'],
         ];
     }
 }

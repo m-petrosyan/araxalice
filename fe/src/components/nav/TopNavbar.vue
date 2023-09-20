@@ -258,23 +258,6 @@ nav {
         list-style: none;
         padding-left: 0;
 
-        &::-webkit-scrollbar {
-          width: 16px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: var(--vt-c-black);
-          border-radius: 100px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-          background-color: var(--vt-c-indigo);
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: var(--vt-c-black-mute);
-        }
-
         @media all and (max-width: $sm) {
           max-height: 250px;
         }

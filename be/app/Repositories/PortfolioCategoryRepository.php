@@ -33,4 +33,12 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
             return $query->where('id', $category);
         })->get()->load('portfolio');
     }
+
+    /**
+     * @return mixed
+     */
+    public static function getRandomCategory(): mixed
+    {
+        return PortfolioCategory::inRandomOrder()->whereHas('portfolio')->with('portfolio');
+    }
 }

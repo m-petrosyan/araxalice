@@ -9,4 +9,6 @@ interface PortfolioCategoryInterface
     public static function getUserCategories();
 
     public static function getByCategory(int|null $category);
+
+    public static function getRandomCategory();
 }
