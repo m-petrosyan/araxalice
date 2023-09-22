@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Mail\ContactMessage;
+use App\Jobs\ContactEmailJob;
 use App\Models\Contact;
-use Illuminate\Support\Facades\Mail;
 
 class ContactService
 {
@@ -16,6 +15,6 @@ class ContactService
     {
         Contact::create($attributes);
 
-        Mail::to(config('mail')['email']['from'])->send(new ContactMessage($attributes));
+        ContactEmailJob::dispatch(config('mail')['email']['from'], $attributes);
     }
 }
