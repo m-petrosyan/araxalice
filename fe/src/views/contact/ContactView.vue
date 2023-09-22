@@ -272,15 +272,12 @@ section {
 
     .ouija_board {
       width: 50%;
-      background-image: url("@/assets/images/other/board_texture.png");
-      background-repeat: no-repeat;
-      background-position: center;
 
       .board {
         width: 598px;
         height: 500px;
         margin: auto;
-        background-image: url("@/assets/images/other/ouija_board.png");
+        background-image: url("@/assets/images/other/board_texture.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -293,8 +290,8 @@ section {
         .cursor {
           position: absolute;
           width: 14%;
-          top: 349px;
-          left: 44%;
+          top: 354px;
+          left: 43%;
           transition: 1s;
 
           &.start {
