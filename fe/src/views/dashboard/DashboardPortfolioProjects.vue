@@ -4,13 +4,13 @@
     <table v-if="categories" class="category-list">
       <thead>
       <tr>
+        <th></th>
         <th>name</th>
         <th>description</th>
         <th>actions</th>
       </tr>
       </thead>
-      <tbody>
-      <draggable v-model="categories" @change="updateSorting">
+      <draggable v-model="categories" @change="updateSorting" :disabled="loading" tag="tbody">
         <transition-group>
           <tr v-for="category in categories" :key="category.id">
             <td>
@@ -34,7 +34,6 @@
           </tr>
         </transition-group>
       </draggable>
-      </tbody>
     </table>
     <PreloaderComponent v-else/>
     <div class="create">
