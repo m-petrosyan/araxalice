@@ -17,7 +17,7 @@ class PortfolioCategoryService
     {
         return PortfolioCategoryRepository::getUserCategories()->create(
             $attributes + [
-                'sorting' => PortfolioCategory::select('sorting')->orderBy('id', 'desc')->limit(
+                'sorting' => PortfolioCategory::select('sorting')->orderBy('sorting', 'desc')->limit(
                         1
                     )->first()->sorting + 1,
             ]
