@@ -10,30 +10,14 @@
       </tr>
       </thead>
       <tbody>
-      <draggable v-model="categories" @change="update">
-        <transition-group>
-          <tr v-for="category in categories.reverse()" :key="category.id">
-            <td>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="feather feather-move">
-                <polyline points="5 9 2 12 5 15"></polyline>
-                <polyline points="9 5 12 2 15 5"></polyline>
-                <polyline points="15 19 12 22 9 19"></polyline>
-                <polyline points="19 9 22 12 19 15"></polyline>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <line x1="12" y1="2" x2="12" y2="22"></line>
-              </svg>
-            </td>
-            <td><p>{{ category.name }}</p></td>
-            <td><p>{{ category.description }}</p></td>
-            <td>
-              <button class="submit sm" @click="editCategory(category)">edit</button>
-              <button class="submit sm" @click="deleteCategoryAnswer(category.id)">delete</button>
-            </td>
-          </tr>
-        </transition-group>
-      </draggable>
+      <tr v-for="category in categories" :key="category.id">
+        <td><p>{{ category.name }}</p></td>
+        <td><p>{{ category.description }}</p></td>
+        <td>
+          <button class="submit sm" @click="editCategory(category)">edit</button>
+          <button class="submit sm" @click="deleteCategoryAnswer(category.id)">delete</button>
+        </td>
+      </tr>
       </tbody>
     </table>
     <PreloaderComponent v-else/>
@@ -68,8 +52,6 @@ import {minLength, required} from "@vuelidate/validators";
 import DeleteMessage from "@/components/dashboard/DeleteMessage.vue";
 import dashboardMixin from "@/mixins/dashboardMixin";
 import {mapActions} from "vuex";
-import {VueDraggableNext} from 'vue-draggable-next'
-
 
 export default {
   name: "DashboardPortfolioProjects",
@@ -104,9 +86,6 @@ export default {
         this.getData()
         this.cancel()
       })
-    },
-    update(data) {
-      this.$store.dispatch('updateCategorySorting', {'newIndex': data.moved.newIndex, 'oldIndex': data.moved.oldIndex})
     },
     editCategory(category) {
       this.edit = true
@@ -148,7 +127,6 @@ export default {
     }
   },
   components: {
-    draggable: VueDraggableNext,
     DeleteMessage,
     PreloaderComponent,
   },
@@ -167,15 +145,11 @@ export default {
           border-bottom: 2px solid #292a2c;
 
           &:first-child {
-            cursor: move;
-          }
-
-          &:first-child, &:nth-child(2) {
             padding-right: 10px;
             border-right: 1px dotted #292a2c;
           }
 
-          &:nth-child(3) {
+          &:nth-child(2) {
             padding-left: 10px;
           }
 
