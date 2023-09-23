@@ -13,6 +13,7 @@ class PortfolioCategory extends Model
     protected $fillable = [
         'name',
         'description',
+        'sorting',
     ];
 
     public function portfolio(): HasMany

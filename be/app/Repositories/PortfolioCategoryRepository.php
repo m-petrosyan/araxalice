@@ -12,7 +12,7 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
      */
     public static function getAll(): mixed
     {
-        return PortfolioCategory::get();
+        return PortfolioCategory::orderBy('sorting', 'desc')->get();
     }
 
     /**
