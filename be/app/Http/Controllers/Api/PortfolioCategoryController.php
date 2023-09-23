@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\PortfolioCategoryCreateRequest;
 use App\Http\Requests\Category\PortfolioCategoryGetRequest;
-use App\Http\Requests\category\PortfolioCategorySortRequest;
+use App\Http\Requests\Category\PortfolioCategorySortRequest;
 use App\Http\Requests\Category\PortfolioCategoryUpdateRequest;
 use App\Http\Resources\Category\PortfolioCategoryCollection;
 use App\Http\Resources\Category\PortfolioCategoryGroupCollection;
