@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Portfolio;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PortfolioCategoryUpdateRequest extends FormRequest
+class PortfolioCategoryCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,7 @@ class PortfolioCategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'min:2',
-                'unique:portfolio_categories,name,'.request()->route('portfolio_category')->id,
-            ],
+            'name' => ['required', 'string', 'min:2', 'unique:portfolio_categories'],
             'description' => ['nullable', 'string', 'min:2'],
         ];
     }

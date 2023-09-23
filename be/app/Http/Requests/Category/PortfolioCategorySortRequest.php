@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Portfolio;
+namespace App\Http\Requests\category;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PortfolioCategoryGetRequest extends FormRequest
+class PortfolioCategorySortRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,8 @@ class PortfolioCategoryGetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category' => ['exists:portfolio_categories,id'],
-            'limit' => ['nullable', 'numeric'],
+            'newIndex' => ['required', 'numeric'],
+            'oldIndex' => ['required', 'numeric'],
         ];
     }
 }

@@ -46,6 +46,14 @@ export default {
                     return Promise.reject(error)
                 });
         },
+        updateCategorySorting({commit}, data) {
+            return putRequest('/portfolio_category/sort/', {...data})
+                .then(response => commit("setCategory", response.data))
+                .catch(error => {
+                    commit('setCategoryError', error.message)
+                    return Promise.reject(error)
+                });
+        },
         deleteCategory({commit}, id) {
             return deleteRequest('/portfolio_category/' + id, '')
                 .then(() => commit("deleteCategory", id))

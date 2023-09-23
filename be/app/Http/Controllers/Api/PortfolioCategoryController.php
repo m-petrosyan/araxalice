@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portfolio\PortfolioCategoryCreateRequest;
-use App\Http\Requests\Portfolio\PortfolioCategoryGetRequest;
-use App\Http\Requests\Portfolio\PortfolioCategoryUpdateRequest;
-use App\Http\Resources\Portfolio\PortfolioCategoryCollection;
-use App\Http\Resources\Portfolio\PortfolioCategoryGroupCollection;
-use App\Http\Resources\Portfolio\PortfolioCategoryGroupResource;
-use App\Http\Resources\Portfolio\PortfolioCategoryResource;
+use App\Http\Requests\Category\PortfolioCategoryCreateRequest;
+use App\Http\Requests\Category\PortfolioCategoryGetRequest;
+use App\Http\Requests\category\PortfolioCategorySortRequest;
+use App\Http\Requests\Category\PortfolioCategoryUpdateRequest;
+use App\Http\Resources\Category\PortfolioCategoryCollection;
+use App\Http\Resources\Category\PortfolioCategoryGroupCollection;
+use App\Http\Resources\Category\PortfolioCategoryGroupResource;
+use App\Http\Resources\Category\PortfolioCategoryResource;
 use App\Models\PortfolioCategory;
 use App\Repositories\PortfolioCategoryRepository;
 use App\Services\PortfolioCategoryService;
@@ -87,6 +88,17 @@ class PortfolioCategoryController extends Controller
         $this->portfolioCategoryService->update($portfolioCategory, $request->validated());
 
         return response()->noContent();
+    }
+
+    /**
+     * @param  PortfolioCategorySortRequest  $request
+     * @return PortfolioCategoryCollection
+     */
+    public function sort(PortfolioCategorySortRequest $request): PortfolioCategoryCollection
+    {
+        $this->portfolioCategoryService->sort($request->validated());
+
+        return $this->index();
     }
 
     /**

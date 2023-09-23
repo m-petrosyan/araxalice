@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/be/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/be/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/be/tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/be/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/phpunit/php-code-coverage" />
@@ -138,6 +137,8 @@
       <excludeFolder url="file://$MODULE_DIR$/be/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/be/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/be/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/be/vendor/laravel/prompts" />
+      <excludeFolder url="file://$MODULE_DIR$/be/vendor/symfony/polyfill-php83" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

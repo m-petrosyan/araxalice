@@ -34,6 +34,17 @@ class PortfolioCategoryService
         $category->update($attributes);
     }
 
+    /**
+     * @param  array  $sorting
+     * @return void
+     */
+    public function sort(array $sorting): void
+    {
+        $currentCategory = PortfolioCategory::where('sorting', $sorting['oldIndex'])->first();
+        PortfolioCategory::where('sorting', $sorting['newIndex'])->update(['sorting' => $sorting['oldIndex']]);
+        $currentCategory->update(['sorting' => $sorting['newIndex']]);
+    }
+
     public function destroy($category): void
     {
         foreach (PortfolioRepository::getPortfolioByCategory($category) as $item) {

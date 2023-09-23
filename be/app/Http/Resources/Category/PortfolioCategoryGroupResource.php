@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Portfolio;
+namespace App\Http\Resources\Category;
 
+use App\Http\Resources\Portfolio\PortfolioCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PortfolioCategoryResource extends JsonResource
+class PortfolioCategoryGroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,10 +15,12 @@ class PortfolioCategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+//        dd($request->all()['limit']);
+
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'category' => $this->name,
             'description' => $this->description,
+            'data' => new PortfolioCollection($this->portfolio),
         ];
     }
 }

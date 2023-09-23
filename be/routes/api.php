@@ -27,6 +27,7 @@ Route::get('about', [AboutController::class, 'show']);
 Route::middleware(['auth:api',])->group(function () {
     Route::get('user', [UserController::class, 'auth']);
     Route::put('user', [UserController::class, 'update']);
+    Route::put('portfolio_category/sort', [PortfolioCategoryController::class, 'sort']);
     Route::resource('portfolio_category', PortfolioCategoryController::class)->only('store', 'update', 'destroy');
     Route::post('portfolio/{portfolio_category}', [PortfolioController::class, 'store']);
     Route::resource('portfolio', PortfolioController::class)->only('update', 'destroy');
