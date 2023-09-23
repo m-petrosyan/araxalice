@@ -10,7 +10,7 @@
       </tr>
       </thead>
       <tbody>
-      <draggable v-model="categories" @change="update">
+      <draggable v-model="categories" @change="updateSorting">
         <transition-group>
           <tr v-for="category in categories" :key="category.id">
             <td>
@@ -105,11 +105,13 @@ export default {
         this.cancel()
       })
     },
-    update(data) {
-
+    updateSorting(data) {
+      this.loading = true
       this.$store.dispatch('updateCategorySorting', {
         'id': this.categories[data.moved.oldIndex].id,
         'sorting': this.categories[data.moved.newIndex].sorting
+      }).then(() => {
+        this.loading = false
       })
     },
     editCategory(category) {
@@ -169,10 +171,7 @@ export default {
       tr {
         td {
           border-bottom: 2px solid #292a2c;
-
-          &:first-child {
-            cursor: move;
-          }
+          cursor: move;
 
           &:first-child, &:nth-child(2) {
             padding-right: 10px;
