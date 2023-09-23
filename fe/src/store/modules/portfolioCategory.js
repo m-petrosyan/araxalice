@@ -46,8 +46,8 @@ export default {
                     return Promise.reject(error)
                 });
         },
-        updateCategorySorting({commit}, data) {
-            return putRequest('/portfolio_category/sort/', {...data})
+        updateCategorySorting({commit}, {id, sorting}) {
+            return putRequest('/portfolio_category/sort/' + id, {sorting})
                 .then(response => commit("setCategory", response.data))
                 .catch(error => {
                     commit('setCategoryError', error.message)

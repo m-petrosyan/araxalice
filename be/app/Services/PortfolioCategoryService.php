@@ -17,9 +17,7 @@ class PortfolioCategoryService
     {
         return PortfolioCategoryRepository::getUserCategories()->create(
             $attributes + [
-                'sorting' => PortfolioCategory::select('sorting')->orderBy('sorting', 'desc')->limit(
-                        1
-                    )->first()->sorting + 1,
+                'sorting' => PortfolioCategoryRepository::getLastCategory()->sorting + 1,
             ]
         );
     }
@@ -35,14 +33,15 @@ class PortfolioCategoryService
     }
 
     /**
+     * @param  object  $category
      * @param  array  $sorting
      * @return void
      */
-    public function sort(array $sorting): void
+    public function sort(object $category, array $sorting): void
     {
-        $currentCategory = PortfolioCategory::where('sorting', $sorting['oldIndex'])->first();
-        PortfolioCategory::where('sorting', $sorting['newIndex'])->update(['sorting' => $sorting['oldIndex']]);
-        $currentCategory->update(['sorting' => $sorting['newIndex']]);
+        PortfolioCategory::where('sorting', $sorting['sorting'])->update(['sorting' => $category->sorting]);
+
+        $category->update($sorting);
     }
 
     public function destroy($category): void

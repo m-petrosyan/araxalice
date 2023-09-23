@@ -92,11 +92,14 @@ class PortfolioCategoryController extends Controller
 
     /**
      * @param  PortfolioCategorySortRequest  $request
+     * @param  PortfolioCategory  $portfolioCategory
      * @return PortfolioCategoryCollection
      */
-    public function sort(PortfolioCategorySortRequest $request): PortfolioCategoryCollection
-    {
-        $this->portfolioCategoryService->sort($request->validated());
+    public function sort(
+        PortfolioCategorySortRequest $request,
+        PortfolioCategory $portfolioCategory
+    ): PortfolioCategoryCollection {
+        $this->portfolioCategoryService->sort($portfolioCategory, $request->validated());
 
         return $this->index();
     }

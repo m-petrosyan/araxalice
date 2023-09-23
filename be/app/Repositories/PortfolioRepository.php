@@ -15,7 +15,4 @@ class PortfolioRepository implements PortfolioRepostiroryInterface
         return $category->portfolio()->get();
     }
 
-    /**
-     * @return mixed
-     */
 }

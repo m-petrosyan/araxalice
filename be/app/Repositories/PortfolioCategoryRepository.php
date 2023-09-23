@@ -18,6 +18,14 @@ class PortfolioCategoryRepository implements PortfolioCategoryInterface
     /**
      * @return mixed
      */
+    public static function getLastCategory(): mixed
+    {
+        return PortfolioCategory::select('sorting')->orderBy('sorting', 'desc')->first();
+    }
+
+    /**
+     * @return mixed
+     */
     public static function getUserCategories(): mixed
     {
         return auth()->user()->portfolioCategory();

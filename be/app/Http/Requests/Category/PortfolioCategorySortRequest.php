@@ -23,8 +23,7 @@ class PortfolioCategorySortRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'newIndex' => ['required', 'numeric'],
-            'oldIndex' => ['required', 'numeric'],
+            'sorting' => ['required', 'numeric'],
         ];
     }
 }
