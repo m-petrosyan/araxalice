@@ -169,8 +169,10 @@ export default {
     tbody {
       tr {
         td {
-          border-bottom: 2px solid #292a2c;
-          cursor: move;
+          &:not(:last-child) {
+            border-bottom: 2px solid #292a2c;
+            cursor: move;
+          }
 
           &:first-child, &:nth-child(2) {
             padding-right: 10px;
