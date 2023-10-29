@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading" class="home-page">
     <section class="header-animation mt-0">
-      <div class="bg-img" ref="flicker"/>
+      <div class="bg-img" ref="flicker" :style="{ backgroundImage: `url(${main_image})` }"/>
       <div class="right-side">
         <img class="animation item1" :src="item1" alt="">
         <img class="animation item2" :src="item2" alt="">
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import main_img from '@/assets/images/header_animation/header.png'
+import main_img2 from '@/assets/images/header_animation/header2.png'
 import item1 from '@/assets/images/header_animation/item1.png'
 import item2 from '@/assets/images/header_animation/item2.png'
 import item3 from '@/assets/images/header_animation/item3.png'
@@ -71,6 +73,7 @@ export default {
   },
   data() {
     return {
+      main_image: window.innerWidth > 1280 ? main_img : main_img2,
       item1: item1,
       item2: item2,
       item3: item3,
@@ -172,7 +175,6 @@ export default {
       top: 130px;
       height: 100%;
       width: 100%;
-      background-image: url("@/assets/images/header_animation/header.png");
       background-repeat: no-repeat;
       background-position: top;
       animation: zoom 3s linear;
@@ -325,7 +327,6 @@ export default {
         left: 0;
         background-size: contain;
         background-position: center;
-        background-image: url("@/assets/images/header_animation/header2.png");
       }
       .animation {
         display: none;
