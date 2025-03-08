@@ -22,7 +22,7 @@ export default {
     },
     actions: {
         signIn({commit}, data) {
-            return postRequest('/oauth/token', {
+            return postRequest('/api/oauth/token', {
                 username: data.username,
                 password: data.password,
                 grant_type: 'password',
