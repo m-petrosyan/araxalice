@@ -1,5 +1,5 @@
 <template>
-  <a class="author" href="https://mpetrosyan.com/" target="_blank">
+  <a class="author" href="https://t.me/mpetrosyan1" target="_blank">
     by Miqayel Petrosyan
   </a>
 </template>
